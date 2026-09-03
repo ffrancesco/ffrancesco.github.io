@@ -340,7 +340,7 @@
           </ul>
         
           
-            <h3>Derived quantities</h3>
+            <h3 class="fragment">Derived quantities</h3>
               <ul>
                 <li class="fragment">Specific weight: \(\gamma=\rho g\)</li>
                 <li class="fragment">Specific volume: \(v=1/\rho\)</li>
@@ -354,7 +354,7 @@
     </div>
   </section>
   <section>
-    <h2 class="fragment">Gases</h2>
+    <h2>Gases</h2>
         <ul>
         <li class="fragment">Density strongly depends on pressure - direct relationship</li>
         <li class="fragment">Density strongly depends on temperature - inverse relationship</li>
@@ -452,13 +452,18 @@
   <section>
     <h2>Viscosity (μ):</h2>
     measure of a fluid's resistance to deformation or flow, often described as "thickness" or "stickiness", [Pa·s].
-
-    
+    Viscosity relates the <em>shear stress</em> to the <em>rate of shear strain</em> in a fluid. Viscosity can be <em>constant</em> or <em>variable</em> with the rate of shear strain, depending on the fluid type.
+    <div class="equation-box fragment"> $$
+      \tau = \mu \frac{du}{dy}
+      $$
+    </div>
 
     <div class="container">
       <div class="col fragment">
         <h4>Shear Stress</h4>
         <h3>Fluid</h3>
+        <p class="fragment">Consider a fluid between two plates ( a force P is applied to the top plate), the fluid layers moves with velocity \(u = Uy/b\)</p>
+        <p class="fragment">The velocy gradient is \(\frac{du}{dy} = \frac{U}{b}\)</p>
         <img src="assets/Lecture_1_1/slide_016_1.png" alt=""style="height: 200px;">
       </div>
       <div class="col">
@@ -480,9 +485,10 @@
     <p class="fragment">
           if the shear stress increases, the rate of shear strain increases, the relation between shear stress and rate of shear strain is called the <em>constitutive relation</em> for the fluid. For a Newtonian fluid, the constitutive relation is linear:  
     </p>
-    <div class="equation-box"> $$
+    <div class="equation-box fragment"> $$
             \tau = f(\frac{du}{dy}) = \mu \frac{du}{dy}
           $$ </div>
+  <aside class="notes">The rate of shear strain defined the rate at which angular deformation occurs in a fluid element.</aside>
 
   </section>
 
@@ -509,14 +515,14 @@
         </ul>
       </div>
     </div>
- <p class="fragment">
-  <div class="equation-box"> $$
-            \mu = \mu(T)
-          $$ </div>
-    example: 
-    water viscosity decreases 40% from 60°C to 100°C
-    water density decreases 2.5% from 60°C to 100°C
-     </p> 
+    <p class="fragment">
+      <div class="equation-box fragment">
+        $$\mu = \mu(T)$$ 
+        example: 
+        water viscosity decreases 40% from 60°C to 100°C
+        water density decreases 2.5% from 60°C to 100°C
+      </div>
+    </p> 
   </section>
   <section>
 
@@ -587,7 +593,7 @@
       </ul>
     </div>
 
-    <div class="col">
+    <div class="col fragment">
       <img src="./assets/Lecture_1_1/slide_023_1.png" alt="" style="height: 300px;">
       <img src="./assets/Lecture_1_1/slide_023_2.png" alt="" style="height: 300px;">
       <img src="./assets/Lecture_1_1/slide_023_3.png" alt="" style="height: 300px;">
