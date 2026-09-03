@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Jacob Andersen">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../custom/theme/haervig.css">
+  <link rel="stylesheet" href="../custom/plugins/highlight/haervig.css">
+</head>
+
+<body>
+
+<div class="reveal">
+  <div style="position: fixed; bottom: 20px; left: 30px; z-index: 1000;">
+    <h2><a href="../" style="color: #222; text-decoration: none;">←</a></h2>
+  </div>
+
+  <div class="slides">
+    <section>
+      <section>
+        <h3><b>Fluid Mechanics Course</b></h3>
+        <h2>Potential Flow</h2>
+
+        <img src="./assets/Lecture_3_2/slide_001_1.png" alt="Potential flow overview" width="700">
+
+        <h4><em>Francesco Ferri</em></h4>
+        <h5><em>AAU BUILD</em></h5>
+      </section>
+
+      <section>
+        <h2>Learning Objectives</h2>
+
+        <ul>
+          <li class="fragment">Understand the assumptions and limitations of potential flow</li>
+          <li class="fragment">See why it is useful in engineering analysis</li>
+          <li class="fragment">Derive the governing equations</li>
+          <li class="fragment">Solve simple 2D potential-flow examples</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Why Potential Flow?</h2>
+
+        <div class="container">
+          <div class="col">
+            <h3>Advantages</h3>
+            <ul>
+              <li class="fragment">Simplifies the governing equations</li>
+              <li class="fragment">Low computational cost</li>
+              <li class="fragment">Good first approximation</li>
+              <li class="fragment">Useful for many practical flows</li>
+            </ul>
+          </div>
+
+          <div class="col">
+            <h3>Key idea</h3>
+            <ul>
+              <li class="fragment">Complex patterns arise from superposition</li>
+              <li class="fragment">Simple flow solutions can be combined</li>
+              <li class="fragment">Useful for ideal flow around bodies</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+          <h1>Mathematical Background</h1>
+        </div>
+      </section>
+
+      <section>
+        <h2>Vector Calculus</h2>
+
+        <p class="fragment">Potential flow relies on vector calculus concepts such as gradients, divergence, and curl.</p>
+        <p class="fragment">The flow is modeled using scalar and vector potentials.</p>
+
+        <img src="./assets/Lecture_3_2/slide_005_1.png" alt="Vector calculus figure" width="900" class="fragment">
+      </section>
+
+      <section>
+        <h2>Governing Equations</h2>
+
+        <div class="container">
+          <div class="col">
+            <h3>Continuity</h3>
+            <p class="fragment">Mass conservation</p>
+          </div>
+
+          <div class="col">
+            <h3>Momentum</h3>
+            <p class="fragment">Euler equation for inviscid flow</p>
+          </div>
+        </div>
+
+        <img src="./assets/Lecture_3_2/slide_005_2.jpg" alt="Momentum and continuity relation" width="900" class="fragment">
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+          <h1>Potential Flow Formulation</h1>
+        </div>
+      </section>
+
+      <section>
+        <h2>Potential and Stream Functions</h2>
+
+        <p class="fragment">For irrotational incompressible flow, the velocity can be written as a gradient of a scalar potential.</p>
+        <p class="fragment">A stream function can also be used in 2D to represent the flow field.</p>
+
+        <ul>
+          <li class="fragment">Irrotational flow: curl(v) = 0</li>
+          <li class="fragment">Velocity potential: v = ∇φ</li>
+          <li class="fragment">Stream function: streamlines are contours of ψ</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Euler Equation and Incompressibility</h2>
+
+        <img src="./assets/Lecture_3_2/slide_006_1.jpg" alt="Potential flow equations" width="900" class="fragment">
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+          <h1>2D Basic Flows</h1>
+        </div>
+      </section>
+
+      <section>
+        <h2>Elementary Solutions</h2>
+
+        <div class="container">
+          <div class="col">
+            <h3>Basic flow types</h3>
+            <ul>
+              <li class="fragment">Uniform flow</li>
+              <li class="fragment">Source and sink</li>
+              <li class="fragment">Vortex</li>
+              <li class="fragment">Doublet</li>
+            </ul>
+          </div>
+
+          <div class="col">
+            <h3>Use</h3>
+            <ul>
+              <li class="fragment">Model idealized flow fields</li>
+              <li class="fragment">Build more complex solutions</li>
+              <li class="fragment">Study body interactions</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Superposition</h2>
+
+        <p class="fragment">The power of potential flow comes from superposition.</p>
+        <p class="fragment">Simple elementary flows are combined to create realistic flow patterns.</p>
+
+        <img src="./assets/Lecture_3_2/slide_012_1.png" alt="Superposition example 1" width="900" class="fragment">
+        <img src="./assets/Lecture_3_2/slide_012_2.png" alt="Superposition example 2" width="900" class="fragment">
+        <img src="./assets/Lecture_3_2/slide_012_3.png" alt="Superposition example 3" width="900" class="fragment">
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+          <h1>Applications and Limits</h1>
+        </div>
+      </section>
+
+      <section>
+        <h2>Why It Is Important</h2>
+
+        <p class="fragment">Potential flow gives insight into flow patterns and lift/drag behavior in idealized settings.</p>
+        <p class="fragment">It is often used as a starting point before including viscosity and separation effects.</p>
+      </section>
+
+      <section>
+        <h2>Limitations</h2>
+
+        <ul>
+          <li class="fragment">Neglects viscosity</li>
+          <li class="fragment">Cannot describe boundary layers or separation accurately</li>
+          <li class="fragment">Less valid near solid walls in real viscous flows</li>
+          <li class="fragment">Useful mainly for preliminary engineering analysis</li>
+        </ul>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h3><b>Fluid Mechanics Course</b></h3>
+        <h2>Summary</h2>
+      </section>
+
+      <section>
+        <h2>Takeaway</h2>
+
+        <p class="fragment">Potential flow provides a simplified but powerful description of inviscid fluid motion.</p>
+        <p class="fragment">It is built from scalar potential and stream-function formulations and relies heavily on superposition.</p>
+        <p class="fragment">It is a crucial conceptual bridge to more complete viscous-flow theory.</p>
+      </section>
+    </section>
+  </div>
+</div>
+
+<script type="module" src="../../main.js"></script>
+</body>
+</html>

@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Jacob Andersen">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../custom/theme/haervig.css">
+  <link rel="stylesheet" href="../custom/plugins/highlight/haervig.css">
+  <style>
+    .reveal .compact { font-size: 0.72em; line-height: 1.25; }
+    .reveal .slide-image { display:block; max-width:88%; max-height:52vh; width:auto; height:auto; object-fit:contain; margin:0.35em auto; }
+    .reveal .small-image { max-height:38vh; }
+    .reveal .mini-image { max-height:25vh; }
+    .reveal .equation-box { border:2px solid #333; padding:0.25em 0.5em; margin:0.5em auto; width:fit-content; }
+    .reveal .assumptions { font-size:0.68em; opacity:0.85; }
+    .reveal .two-column { display:flex; gap:1.1em; align-items:center; }
+    .reveal .two-column > div { flex:1; }
+    .reveal .backup-label { position:absolute; right:0; top:0; font-size:0.45em; opacity:0.55; }
+  </style>
+</head>
+
+<body>
+<!-- ===================================================================== -->
+<!-- FLUID MECHANICS COURSE                                                 -->
+<!-- Fluid Properties and Flow Characteristics                              -->
+<!-- Reveal.js fragment compatible content                                  -->
+<!-- Insert inside <div class="slides"> ... </div>                          -->
+<!-- ===================================================================== -->
+
+  <!--slides-->
+  <div class="reveal">
+    <!-- Back to Slidedecks link -->
+    <div style="position: fixed; bottom: 20px; left: 30px; z-index: 1000;">
+      <h2><a href="../" style="color: #222; text-decoration: none;">←</a></h3>
+    </div>
+
+    <div class="slides">
+
+<style>
+  .reveal .slide-title {
+    font-size: 1.35em;
+    margin-bottom: 0.35em;
+  }
+
+  .reveal .slide-subtitle {
+    font-size: 0.78em;
+    margin-top: 0.15em;
+  }
+
+  .reveal .slide-image {
+    display: block;
+    max-width: 88%;
+    max-height: 54vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    margin: 0.35em auto;
+  }
+
+  .reveal .small-image {
+    max-height: 42vh;
+  }
+
+  .reveal .two-column {
+    display: flex;
+    gap: 1.2em;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .reveal .two-column > div {
+    flex: 1;
+  }
+
+  .reveal .compact {
+    font-size: 0.72em;
+    line-height: 1.25;
+  }
+
+  .reveal .equation {
+    font-size: 1.05em;
+    margin: 0.45em 0;
+  }
+
+  .reveal .takeaway {
+    font-size: 0.82em;
+    line-height: 1.35;
+  }
+
+  .reveal .source-note {
+    font-size: 0.55em;
+    opacity: 0.8;
+  }
+</style>
+
+<section>
+  <section>
+    <h3><b>Fluid Mechanics Course</b></h3>
+    <h2>Introduction to Fluid Statics</h2>
+    <img class="slide-image" src="assets/Lecture_1_2/slide_001_1.png" alt="Fluid mechanics">
+    <h4><em>Francesco Ferri</em></h4>
+    <h5><em>AAU BUILD</em></h5>
+    <p class="slide-subtitle">2025 · ffer@build.aau.dk</p>
+  </section>
+
+  <section>
+    <h2>Learning Objectives</h2>
+    <ul>
+      <li class="fragment">Determine the pressure distribution on a fluid at rest</li>
+      <li class="fragment">Calculate hydrostatic pressure on different objects</li>
+      <li class="fragment">Understand the measuring principle of manometers and the different types</li>
+      <li class="fragment">Calculate buoyant force and stability of floating objects</li>
+    </ul>
+  </section>
+</section>
+
+<!-- ===================================================== -->
+<!-- PRESSURE AT A POINT                                   -->
+<!-- ===================================================== -->
+
+<section>
+  <section>
+    <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+      <h1>Pressure at a Point</h1>
+    </div>
+  </section>
+
+  <section>
+    <h2>Quick Reminder</h2>
+    <h3>Newton's Laws of Motion</h3>
+    <ul class="compact">
+      <li class="fragment"><b>First:</b> An object at rest remains at rest, and an object in motion continues at constant velocity unless acted upon by a net external force.</li>
+      <li class="fragment"><b>Second:</b> The acceleration of an object is directly proportional to the net force and inversely proportional to its mass.</li>
+      <li class="fragment"><b>Third:</b> For every action, there is an equal and opposite reaction.</li>
+    </ul>
+    <aside class="notes">
+      Aristotelian View (Wrong): A force is required to keep an object moving.
+      Interaction with Earth: Earth pulls down on the book. This force acts on the book and belongs on its FBD.
+      Reaction: the book pulls up on Earth; this is not drawn on the book's FBD.
+      Interaction with table: the table pushes up on the book; this normal force belongs on the book's FBD.
+    </aside>
+  </section>
+  <section>
+    <h2>Pascal's Law</h2>
+    <p>The <em>pressure</em> at a point in a fluid at rest, or in motion, is <em>independent of direction</em> as long as there are no shearing stresses.</p>
+    <div class="container">
+      <div class="col">
+        <p class="fragment">no-shear \(\rightarrow\) only gravity and pressure force</p>
+        <p class="fragment">we consider a small triangular wedge of fluid from any location within the fluid</p>
+      </div>
+      <div class="col"><img class="slide-image fragment" src="assets/Lecture_1_2/slide_004_1.png" alt="Pascal's law illustration"></div>
+    </div>
+    <p class="fragment">Applying Newton's second law on the wedge:</p>
+    <div class="equation-box fragment">$$ p_x=p_y=p_z$$</div><p class="fragment">Pressure is isotropic at a point in a static fluid.</p>
+    <div class="footnote fragment" style="position: absolute; bottom: 0; left: 0; font-size: 0.5em; opacity: 0.7;">
+        <p>isotropic: physical property that is independent of direction</p>
+      </div>
+  </section>
+
+  <section>
+    <h2>Pascal's Law</h2>
+    <p>The <em>pressure</em> at a point in a fluid at rest, or in motion, is <em>independent of direction</em> as long as there are no shearing stresses.</p>
+    <div class="container">
+      <div class="col">
+        <p class="fragment">no-shear \(\rightarrow\) only gravity and pressure force</p>
+        <p class="fragment">no-shear \(\rightarrow\) acceleration can be non-zero if fluid move as a rigid body</p>
+        <p class="fragment">From Newton's second law (\(F = ma \)), the equation of motion can be expressed in the y and z directions as:</p>
+        <p class="fragment">  $$\sum F_{y} = p_{y} \delta x \delta z - p_s    sin(\theta)\delta x \delta s = \rho\frac{\delta x \delta y \delta z}{2}  a_{y}$$ </p>
+        <p class="fragment">  $$\sum F_{z} = p_{z} \delta x \delta y - p_s    cos(\theta)\delta x \delta s - \gamma \frac{\delta x \delta y \delta z}{2}= \rho\frac{\delta x \delta y \delta z}{2}  a_{z}$$ </p>
+
+      </div>
+      <div class="col"><p><br></p><img class="slide-image" src="assets/Lecture_1_2/slide_004_1.png" alt="Pascal's law illustration"></div>
+    </div>
+    <p><br></p>
+    <div class="footnote fragment" style="position: absolute; bottom: 0; left: 0; font-size: 0.5em; opacity: 0.7;">
+      <p>$$^1 \gamma = \rho g  \rightarrow \text{specific weight}$$</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Pascal's Law</h2>
+    <p>The <em>pressure</em> at a point in a fluid at rest, or in motion, is <em>independent of direction</em> as long as there are no shearing stresses.</p>
+    <div class="container">
+      <div class="col">
+        <img class="slide-image" src="assets/Lecture_1_2/slide_004_1.png" alt="Pascal's law illustration">
+        <p class="">  $$\sum F_{y} = p_{y} \delta x \delta z - p_s    sin(\theta)\delta x \delta s = \rho\frac{\delta x \delta y \delta z}{2}  a_{y}$$ </p>
+        <p class="">  $$\sum F_{z} = p_{z} \delta x \delta y - p_s    cos(\theta)\delta x \delta s - \gamma \frac{\delta x \delta y \delta z}{2}= \rho\frac{\delta x \delta y \delta z}{2}  a_{z}$$ </p>
+      </div>
+      <div class="col">
+         <p class="fragment">$$\delta_y = \delta_s cos(\theta), \delta_z = \delta_s sin(\theta)$$</p>
+        <p class="fragment">  $$(p_{y} - p_s) \delta x \delta z= \rho\frac{\delta y}{2}  a_{y} \delta x \delta z$$ </p>
+        <p class="fragment">  $$(p_{z} - p_s) \delta x \delta y= (\rho  a_{z}+\gamma) \frac{\delta z}{2} \delta x \delta y$$ </p>
+             <p class="fragment">In the limit of \(\delta x, \delta y, \delta z \to 0\) it follows that <div class="equation-box fragment">$$ p_x=p_y=p_z$$</div></p>
+
+      </div>
+    </div>
+    
+  </section>
+</section>
+
+<!-- ===================================================== -->
+<!-- PRESSURE DISTRIBUTION                                 -->
+<!-- ===================================================== -->
+<section>
+  <section>
+    <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+      <h1>Static Pressure Field</h1>
+    </div>
+  </section>
+  <section>
+    <h2>Differential Fluid Element</h2>
+    <p class="fragment">How does the pressure field in a fluid without shearing stresses vary?</p>
+    <div class="container">
+      <div class="col">
+        <p class="fragment">we consider a small rectangular volume of fluid from any location within the fluid</p>
+        <img style="height: 80%;" class="slide-image small-image fragment" src="assets/Lecture_1_2/slide_005_5.png" alt="Taylor expansion">
+      </div>
+      <div class="col">
+        <p class="fragment">no-shear \(\rightarrow\) only gravity (body) and pressure (surface)  force</p>
+        <p class="fragment"><br><br>Using Newton's second law on the volume of fluid, we obtaine:</p>
+        <div class="equation-box fragment">$$\frac{\partial p}{\partial x} = 0, \quad \frac{\partial p}{\partial y} = 0, \quad \frac{\partial p}{\partial z} = -\gamma$$</div>
+      </div>
+    </div>
+
+    
+  </section>
+
+  <section>
+    <h2>Pressure Field (Taylor Expansion)</h2>
+    <div class="container">
+      
+      <div class="col">
+        <img class="mini-image fragment" src="assets/Lecture_1_2/slide_005_5.png" alt="Taylor expansion">
+        <p class="fragment">The pressure at the point (\(y-\delta y/2\)) can be approximated using a Taylor expansion as:</p>
+        <p class="fragment">$$p(y-\delta y/2) = p(y) - \frac{\partial p}{\partial y} \frac{\delta y}{2}$$</p>
+      </div>
+      <div class="col">
+        <p class="fragment">$$ P(x+\Delta x) = P(x) + \frac{\partial P}{\partial x} \Delta x + \frac{1}{2} \frac{\partial^2 P}{\partial x^2} (\Delta x)^2 + ... $$</p>
+        <p class="fragment">$$ P(x+\Delta x) \approx P(x) + \frac{\partial P}{\partial x} \Delta x $$</p>
+        <img style="height: 300px;" class="slide-image small-image fragment" src="assets/Lecture_1_2/slide_005_4.png" alt="Taylor expansion derivation">
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Surface Forces</h2>
+    <div class="container">
+      <div class="col">
+        <img class="small-image" src="assets/Lecture_1_2/slide_005_5.png" alt="Taylor expansion">
+      </div>
+      <div class="col">
+        <p>Surface force summation at a generic point y, along the y-axis:</p>
+        <p class="fragment">$$ \delta F_y = \left(p(y-\delta y/2) - p(y+\delta y/2)\right)\delta A $$</p>
+        <p class="fragment">$$ = \left(p-\frac{\partial p}{\partial y} \frac{\delta y}{2}\right) \delta z \delta x - \left(p+\frac{\partial p}{\partial y} \frac{\delta y}{2}\right) \delta z \delta x  $$</p>
+        <p class="fragment">simplified to:</p>
+        <p class="fragment">$$ \delta F_y = - \frac{\partial p}{\partial y} \delta y \delta z \delta x $$</p>
+        <p class="fragment">Apply this result in all the directions and the resultant surface force acting on the element can be expressed as:</p>
+        <p class="fragment">$$ \delta \bold{F}_s = \left( - \frac{\partial p}{\partial x} \bold{i} - \frac{\partial p}{\partial y} \bold{j} - \frac{\partial p}{\partial z} \bold{k} \right) \delta x \delta y \delta z = -\nabla p^{(1)} ~ \delta x \delta y \delta z $$</p>
+      </div>
+    </div>
+
+    <p>.</p>
+    <div class="footnote fragment" style="position: absolute; bottom: 0; left: 0; font-size: 0.5em; opacity: 0.7;">
+        <p>$$^1 \left( - \frac{\partial p}{\partial x} \bold{i} - \frac{\partial p}{\partial y} \bold{j} - \frac{\partial p}{\partial z} \bold{k} \right) = -\nabla p  $$</p>
+        <p>$$ \text{Gradient operator:} \nabla() = \frac{\partial}{\partial x} \bold{i} + \frac{\partial}{\partial y} \bold{j} + \frac{\partial}{\partial z} \bold{k} $$</p>
+      </div>
+    </section>
+
+  <section>
+    <h2>Body Forces</h2>
+    <div class="container">
+      <div class="col">
+        <img class="small-image" src="assets/Lecture_1_2/slide_005_5.png" alt="Taylor expansion">
+      </div>
+      <div class="col">
+        <p class="fragment">The only body force acting on the fluid element is it own weight, applied in the negative z-direction.</p>
+        <p class="fragment">$$ - \delta W \bold{k} = -\gamma ~ \delta x \delta y \delta z \bold{k} $$</p>
+      </div>
+    </div>
+
+    
+  </section>
+
+  <section>
+    <h2>Static Pressure Field</h2>
+    <p class="fragment">Using Newton's second law on the volume.</p>
+    <p class="fragment">$$ \sum \delta \bold{F} = \delta \bold{F}_s - \delta W \bold{k} = \delta m \bold{a} $$</p>
+    <p class="fragment">or: $$ -\nabla p ~ \delta x \delta y \delta z - \gamma ~ \delta x \delta y \delta z \bold{k} = \rho ~ \delta x \delta y \delta z \bold{a} \leftrightarrow -\nabla p - \gamma \bold{k} = \rho \bold{a} $$</p>
+    <p class="fragment">If the fluid is at rest, then \(\bold{a} = 0\), and the equation simplifies to:</p>
+    <div class="equation-box fragment">$$ -\nabla p - \gamma \bold{k} = 0 $$ $$\frac{\partial p}{\partial x} = 0, \quad \frac{\partial p}{\partial y} = 0, \quad \frac{\partial p}{\partial z} = -\gamma$$</div>
+  </section>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- HYDROSTATIC PRESSURE                                  -->
+<!-- ===================================================== -->
+
+<section>
+
+  <section>
+    <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+      <h1>Hydrostatic Pressure</h1>
+    </div>
+  </section>
+
+  <section>
+    <h2>Hydrostatic Pressure</h2>
+    <p class="fragment">Hydro = water · statikos = static</p>
+    <div class="container">
+      <div class="col">
+          <p class="fragment">No relative motion between particles; only gravity and external forces act on the fluid.</p>
+      </div>
+      <div class="col">
+            <div class="equation-box fragment">$$\frac{\partial p}{\partial z} = -\gamma$$</div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="col">
+        <p class="fragment">For incompressible fluid.</p>
+        <p class="fragment">$$\int_{p_1}^{p_2} dp = -\gamma \int_{z_1}^{z_2} dz$$</p>
+        <p class="fragment">The hydrostatic pressure distribution is linear with depth. At any depth the pressure can be evaluated as:</p>
+        
+        <div class="equation-box fragment">$$p = p_0 + \gamma h$$</div>
+      </div>
+      <div class="col">
+            <img class="slide-image small-image fragment" src="assets/Lecture_1_2/slide_009_5.png" alt="Compressible hydrostatic pressure">
+
+      </div>
+    </div>
+    <p class="fragment">In a static fluid the pressure is <em>isotropic</em> and <em>only vertical gradient</em> exists.</p>
+  </section>
+
+  <section>
+    <h2>Hydrostatic Pressure</h2>
+    <p class="fragment">For compressible fluids in isothermal conditions:</p>
+    <p class="fragment">$\frac{dp}{dz} = -\rho g \rightarrow \ln(p) = -\frac{g}{RT} z + C \rightarrow p(t) = p_0 e^{-\frac{g}{RT} z}$</p>
+    <div class="footnote fragment" style="position: absolute; bottom: 0; left: 0; font-size: 0.5em; opacity: 0.7;">
+        <p>ideal gas: $p = \rho R T$</p>
+    </div>
+    <p class="fragment">If \(T\) varies with \(z\), the integral needs to be solved based on the function \(T(z)\).</p>
+    <img class="slide-image small-image fragment" src="assets/Lecture_1_2/slide_008_1.png" alt="Compressible hydrostatic pressure">
+
+    
+  </section>
+
+
+</section>
+
+<!-- ===================================================== -->
+<!-- PRESSURE MEASUREMENTS                                  -->
+<!-- ===================================================== -->
+
+<section>
+
+  <section>
+    <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+      <h1>Pressure Measurements</h1>
+    </div>
+  </section>
+
+  <section>
+    <h2>Fluid-Based Systems</h2>
+    <div class="container">
+      <div class="col">
+        <ul>
+          <li class="fragment">Measure the fluid height and estimate pressure</li>
+          <li class="fragment">Subject to fluid dynamics (slow behaviour)</li>
+          <li class="fragment">Limited pressure range</li>
+        </ul>
+        <p class="fragment">Different fluids can be selected depending on the expected pressure value, e.g. mercury, water or oil.</p>
+        <img class="slide-image small-image fragment" src="assets/Lecture_1_2/slide_010_5.png" alt="Precision pressure measurement">
+      </div>
+      <div class="col">
+          <p class="fragment">Piezometer tube, U-tube and inclined types (absolute or gauge).</p>
+          <img style="height: 300px;" class="slide-image small-image fragment" src="assets/Lecture_1_2/slide_010_1.png" alt="Piezometer and manometer types">
+          <img style="height: 300px;" class="slide-image small-image fragment" src="assets/Lecture_1_2/slide_010_2.jpg" alt="Manometer">
+      </div>
+    </div>
+   <div class="footnote fragment" style="position: absolute; bottom: 0; left: 0; font-size: 0.5em; opacity: 0.7;">
+        <p>$$p_{atm} = 760mmHg = 101325Pa \approx 10.33mH_20$$</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Mechanical Pressure Measurement</h2>
+    <div class="container">
+      <div class="col">
+        <p class="fragment">Aneroid: uses mechanical leverage to amplify elastic deformation of a membrane.</p>
+        <img style="height: 300px;" class="slide-image small-image fragment" src="assets/Lecture_1_2/slide_012_1.jpg" alt="Mechanical pressure gauge">
+        <img style="height: 300px;" class="slide-image small-image fragment" src="assets/Lecture_1_2/slide_012_2.jpg" alt="Mechanical pressure gauge">
+      </div>
+      <div class="col">
+        <p class="fragment">Bourdon gauge: measures deformation of a C-shaped pipe with an oval section.</p>
+        <img style="height: 300px;" class="slide-image small-image fragment" src="assets/Lecture_1_2/slide_012_3.jpg" alt="Aneroid gauge">
+        <img style="height: 300px;" class="slide-image small-image fragment" src="assets/Lecture_1_2/slide_012_4.jpg" alt="Bourdon gauge">
+      </div>
+    </div>
+    
+  </section>
+
+  <section>
+    <h2>Electronic Pressure Sensor</h2>
+     <p class="fragment">Analogue voltage signal associated with deformation of strain gauges or a piezoelectric element.</p>
+    <p class="fragment">Calibration is needed to relate voltage to pressure.</p>
+    <div class="container fragment">
+      <div class="col">    <img class="slide-image small-image" src="assets/Lecture_1_2/slide_013_1.png" alt="Electronic pressure sensor">
+</div>
+      <div class="col">    <img class="slide-image small-image" src="assets/Lecture_1_2/slide_013_2.png" alt="Strain gauge Wheatstone bridge">
+</div>
+    </div>
+   
+  </section>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- FORCE ON SUBMERGED SURFACES                            -->
+<!-- ===================================================== -->
+
+<section>
+
+  <section>
+    <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+      <h1>Hydrostatic Load on Structures</h1>
+    </div>
+  </section>
+
+  <section>
+    <h2>Resultant Force on a Plane Surface</h2>
+    <div class="container">
+      <div class="col">
+        <img class="slide-image" src="assets/Lecture_1_2/slide_015_3.png" alt="Hydrostatic force">
+      </div>
+      <div class="col">
+        <p class="">For a plane area in a constant-density static liquid:</p>
+        <img style="height: 200px;" class="slide-image fragment" src="assets/Lecture_1_2/slide_015_1.png" alt="Hydrostatic force on submerged surfaces">
+        <p class="fragment">$$F_R=\int_A p\,dA=\int_A \rho g z \,dA$$</p>
+        <div class="equation-box fragment">$$\text{at the bottom: }F_R=\rho g H A_b$$ $$\text{on the side: }F_R=\rho g h_c A_s$$</div>
+        <p class="fragment">\(h_c\) is the vertical depth of the area centroid.</p>
+      </div>
+    </div>
+    <p class="assumptions fragment"><b>Assumptions:</b> gauge pressure at a free surface open to atmosphere, constant density, plane area.</p>
+    <aside class="notes">Show that the magnitude equals pressure at the centroid times area. Distinguish the area centroid from the center of pressure.</aside>
+  </section>
+
+  <section>
+    <h2>Center of Pressure</h2>
+      <p class="fragment">If we have a rigid wall, the hydrostatic force acts at the center of pressure. Where is the center of pressure located?</p>
+      <p class="fragment" >The center of pressure can be interpreted as the pressure-weighted average depth of the surface.
+         $$h_p = \frac{\int_A p(h) h \,dA}{\int_A p(h) \,dA} = \frac{\text{moment of pressure distribution}}{\text{total pressure force}}$$
+      </p>
+      <div class="container">
+        <div class="col fragment"><img class="slide-image small-image" src="assets/Lecture_1_2/slide_015_1.png" alt="Center of pressure"></div>
+        <div class="col">
+          <div class="equation-box fragment">$$h_p = h_c + \dfrac{I_G}{A h_c}$$</div>
+          <ul>
+            <li class="fragment">\(I_G\): second moment of area about the horizontal axis passing through the centroid.</li>
+            <li class="fragment">The center of pressure is always located below the centroid.</li>
+            
+          </ul>
+
+        
+
+
+        </div>
+        
+      </div>
+
+     <p class="fragment">For a rectangle: \(I_G = bH^3/12\). <em>Where is the center of pressure located?</em></p>
+      
+  </section>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- BUOYANCY AND STABILITY                                 -->
+<!-- ===================================================== -->
+
+<section>
+
+  <section>
+    <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+      <h1>Buoyancy and Stability (Time Dependent)</h1>
+    </div>
+  </section>
+
+  <section>
+    <h2>Buoyant Force</h2>
+    <p class="fragment">An important consequence of the hydrostatic pressure distribution is the buoyant force.</p>
+    <p class="fragment">An object fully or partially immersed in a fluid is subject to a vertical force due to the variation of the hydrostatic pressure field.</p>
+    <div class="container"><div class="col">
+      <img class="slide-image small-image fragment" src="assets/Lecture_1_2/slide_016_2.png" alt="Buoyant force">
+    </div>
+    <div class="col">
+      <p class="fragment">Consider a parallelepiped of water and an arbitrary object (with volume V) inside the parallelepiped.</p>
+      <p class="fragment">If the object is in equilibrium and we apply Newton's second law:</p>
+      <p class="fragment">$$\text{z-axis: }\sum F = ma = 0\rightarrow F_B = F_2 - F_1 -W$$</p>
+      <p class="fragment">the hydrostatic contribution can be defined as:</p>
+      <p class="fragment">$$F_2 - F_1 = \gamma A (h_2-h_1)$$</p>
+      <p class="fragment">the weight of the fluid around the body, can be defined as:</p>
+      <p class="fragment">$$W = \gamma [(h_2-h_1)A - V]$$</p>
+      
+      
+      <p style="border: #222 1px solid;" class="fragment">$$F_B = \rho gV$$</p>
+    </div>
+  </div>
+    
+    <p class="fragment">The buoyant force on a fully submerged object is equal to the <em>weight of the displaced</em> fluid and is directed <em>upwards</em>.</p>
+  </section>
+
+  <section>
+    <h2>Static Stability</h2>
+    <p class="fragment">A fundamental concept associated with the buoyancy is stability.</p>
+    <p class="fragment">A floating body is stable if, when displaced, it returns to its equilibrium position.</p>
+    <img class="slide-image small-image" src="assets/Lecture_1_2/slide_019_1.jpg" alt="Static stability">
+  </section>
+
+  <section>
+    <h2>Static Stability</h2>
+    <p class="fragment">When a floating body is displaced from its equilibrium position, the buoyant force and the weight of the body create a restoring moment if the body is stable.</p>
+    <p class="fragment"><b>CG</b>: center of gravity of the object.</p>
+    <p class="fragment"><b>C</b>: center of buoyancy, the centroid of the submerged volume.</p>
+    <p class="fragment">\(F_B\) is applied at C (C'), while \(W\) is applied at CG.</p>
+    <div class="container fragment">
+      <div class="col">
+        <img class="slide-image small-image" src="assets/Lecture_1_2/slide_019_2.png" alt="Center of gravity and buoyancy">
+      </div>
+      <div class="col">
+        <img class="slide-image small-image" src="assets/Lecture_1_2/slide_019_3.png" alt="Equilibrium stability">
+      </div>
+    </div>
+     <div class="footnote fragment" style="position: absolute; bottom: 0; left: 0; font-size: 0.5em; opacity: 0.7;">
+        <p>At equilibrium CG must be aligned with C.</p>
+      </div>
+   
+  </section>
+
+
+
+  <section>
+    <h2>Metacenter</h2>
+    <div class="container">
+      <div class="col">
+        <img class="slide-image small-image" src="assets/Lecture_1_2/slide_020_1.png" alt="Metacenter">
+        <p class="fragment"><b>G</b>: center of gravity of object.</p>
+        <p class="fragment"><b>B</b>: center of buoyancy, centroid of submerged volume.</p>
+        <p class="fragment"><b>B'</b>: center of buoyancy after displacement.</p>
+        <p class="fragment"><b>M</b>: metacenter, intersection of the line of action of \(F_B\) through B' with the line through passing through G and B.</p>
+      </div>
+      <div class="col">
+        <h3 class="fragment">Stability Condition</h3>
+        <p class="equation fragment">Metacentric height: \(GM = B'M - BG\)</p>
+        <ul>
+          <li class="fragment">\(GM &gt; 0\): Stable</li>
+          <li class="fragment">\(GM = 0\): Neutrally stable</li>
+          <li class="fragment">\(GM &lt; 0\): Unstable</li>
+        </ul>
+        <p class="fragment">The larger the metacentric height, the stiffer is the object (design choice)</p>
+      </div>
+    </div>
+    
+  </section>
+
+    <section>
+    <h2>Metacenter</h2>
+    <div class="container">
+      <div class="col">
+        <img class="slide-image small-image" src="assets/Lecture_1_2/slide_020_1.png" alt="Metacenter">
+        <p class=""><b>G</b>: center of gravity of object.</p>
+        <p class=""><b>B</b>: center of buoyancy, centroid of submerged volume.</p>
+        <p class=""><b>B'</b>: center of buoyancy after displacement.</p>
+        <p class=""><b>M</b>: metacenter, intersection of the line of action of \(F_B\) through B' with the line through passing through G and B.</p>
+      </div>
+      <div class="col">
+        <h3 class="">Stability Condition</h3>
+        <p class="equation ">Metacentric height: \(GM = B'M - BG\)</p>
+        <p class="fragment">\(B'M\), the metacentric radius, can be calculated as \(I/V\), where \(I\) is the second moment of area of the waterplane about the axis of rotation \(y\), and \(V\) is the displaced volume.</p>
+        <p class="fragment">$$I = \int_{A} y^2 dA$$</p>
+      </div>
+    </div>
+    
+  </section>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- SUMMARY                                                -->
+<!-- ===================================================== -->
+
+<section>
+
+  <section>
+    <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+      <h1>Summary</h1>
+    </div>
+  </section>
+
+  <section>
+    <h2>Key Takeaways</h2>
+    <ul class="takeaway">
+      <li class="fragment">The pressure field in a fluid at rest increases with increasing depth.</li>
+      <li class="fragment">The application force on vertical walls is applied at the object centroid.</li>
+      <li class="fragment">Pressure is measured using fluid displacement or mechanical deformation.</li>
+      <li class="fragment">Any object submerged in a fluid is subject to a vertical force equal to the weight of the displaced volume.</li>
+      <li class="fragment">Static stability can be determined using the metacentric height of an arbitrary object.</li>
+    </ul>
+  </section>
+
+</section>
+ </div>
+  </div>
+  <script type="module" src="../../main.js"></script>
+</body>
+
+</html>

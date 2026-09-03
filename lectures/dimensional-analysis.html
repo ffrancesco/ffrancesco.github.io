@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Francesco Ferri">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../custom/theme/haervig.css">
+  <link rel="stylesheet" href="../custom/plugins/highlight/haervig.css">
+  <style>
+    .reveal .compact { font-size: 0.72em; line-height: 1.25; }
+    .reveal .slide-image { display:block; max-width:88%; max-height:52vh; width:auto; height:auto; object-fit:contain; margin:0.35em auto; }
+    .reveal .small-image { max-height:38vh; }
+    .reveal .equation-box { border:2px solid #333; padding:0.25em 0.5em; margin:0.5em auto; width:fit-content; }
+    .reveal .assumptions { font-size:0.68em; opacity:0.85; }
+    .reveal .two-column { display:flex; gap:1.1em; align-items:center; }
+    .reveal .two-column > div { flex:1; }
+    .reveal .backup-label { position:absolute; right:0; top:0; font-size:0.45em; opacity:0.55; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div style="position: fixed; bottom: 20px; left: 30px; z-index: 1000;"><h2><a href="../" style="color:#222;text-decoration:none;">←</a></h2></div>
+  <div class="slides">
+<section>
+ 
+  <section>
+    <h3><b>Fluid Mechanics Course</b></h3>
+    <h2>Dimensional Analysis</h2>
+    <img class="slide-image" src="./assets/Lecture_1_3/applications-dimensional-analysis0.jpg" alt="Dimensional Analysis · Course Support Module">
+    <h4><em>Francesco Ferri</em></h4><h5><em>AAU BUILD</em></h5>
+    <aside class="notes">This is a support deck distributed across Lectures 1 and 3, or used in a tutorial. It is not intended as a full block inside Lecture 1.</aside>
+  </section>
+  <section>
+    <h2>Learning Objectives</h2>
+    <ul><li class="fragment">Check dimensional homogeneity</li><li class="fragment">Interpret Reynolds and Froude numbers as force ratios</li><li class="fragment">Understand model–prototype similarity</li><li class="fragment">Recognize when Buckingham Pi is needed</li></ul>
+    <aside class="notes">Read the outcomes briefly. Emphasize that students will use the concepts in calculations, not only recognize definitions.</aside>
+  </section>
+</section>
+<section>
+  <h2>Dimensions</h2>
+  <div class="container">
+    <div class="col">
+      <h3>Primary Dimensions (quantity)</h3>
+
+      <ul>
+        <li class="fragment">Mass (M)</li>
+        <li class="fragment">Length (L)</li>
+        <li class="fragment">Time (T)</li>
+        <li class="fragment">Temperature (Θ)</li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul>
+        <h4 class="fragment">Secondary Dimensions</h4>
+        <li class="fragment">Velocity (L/T)</li>
+        <li class="fragment">Acceleration (L/T²)</li>
+        <li class="fragment">Force (ML/T²)</li>
+        <li class="fragment">Energy (ML²/T²)</li>
+        <li class="fragment">Pressure: \(ML^{-1}T^{-2}\)</li>
+        <li class="fragment">Dynamic viscosity: \(ML^{-1}T^{-1}\)</li>
+        <li class="fragment">Specific weight: \(ML^{-2}T^{-2}\)</li>
+      </ul>
+    </div>
+  </div>
+          <p class="fragment">Secondary dimensions are derived from a combination of primary dimensions</p>
+
+
+   
+  <aside class="notes">Clarify that SI has seven base quantities, but most mechanical fluid problems use M, L, and T. Specific gravity is dimensionless; specific weight is not.</aside>
+</section>
+<section>
+  <h2>Dimensional Homogeneity</h2>
+    <p>the left side of the equation must have same dimension as the right side, and all additive terms must have the same dimensions</p>
+    <p><em>restricted homogeneous equation</em>: equations valid or restricted to a particular systme of units</p>
+    <p><em>general homogeneous equation</em>: equations valid across all systems of units</p>
+  <div class="equation-box fragment">$$v=v_0+at$$</div><p class="fragment">$$LT^{-1}=LT^{-1}+(LT^{-2})(T)$$</p><p class="fragment">Dimensionally homogeneous.</p>
+  <aside class="notes">Ask students to test p=rho g h and the Bernoulli terms. Emphasize that units may change while dimensions remain the same.</aside>
+</section>
+<section>
+  <h2>Why Dimensionless Groups?</h2>
+  <div class="container">
+    <div class="col">
+    <p>$$\Delta p_l = f(D, V, \rho, \mu)$$</p>
+    <p class="fragment">Instead of changing V, D, and μ independently, we can change the dimensionless groups to evaluate the effect on the dimensionless pressure.</p>
+    <p class="fragment">In general using dimensionless groups:</p>
+    <ul><li class="fragment">Reduce the number of independent variables</li><li class="fragment">Collapse experimental data</li><li class="fragment">Transfer results between model and prototype</li><li class="fragment">Identify dominant physical effects</li></ul>
+    </div>
+    <div class="col"><img class="slide-image" src="./assets/Lecture_1_3/dimanalysis-vary-parameters2.jpg" alt="Reduced parameter study">
+    </div>
+  </div>
+  <p class="fragment">Which dimensionless group are the most important for engineering applications?</p>
+  <aside class="notes">Use the pipe-flow motivation qualitatively. Do not claim that dimensional analysis determines the unknown functional relationship. It reduces the variables but experiments or theory are still required.</aside>
+</section>
+<section>
+  <h2>Reynolds Number</h2>
+  <div class="equation-box">$$Re=\frac{\rho VL}{\mu}=\frac{VL}{\nu}$$</div><p class="fragment">Ratio of inertial effects to viscous effects.</p><ul><li class="fragment">Small \(Re\): viscous effects are comparatively important</li><li class="fragment">Large \(Re\): inertia is comparatively important</li>
+  </ul>
+  <aside class="notes">Connect Reynolds number to the viscosity lesson and later flow regime discussions. Avoid presenting a universal transition value without specifying geometry.</aside>
+</section>
+<section>
+  <h2>Froude Number</h2>
+  <div class="equation-box">$$Fr=\frac{V}{\sqrt{gL}}$$</div><p class="fragment">Ratio associated with inertia relative to gravity effects.</p><ul><li class="fragment">Important in free-surface flows</li><li class="fragment">Used in wave, spillway, ship, and hydraulic-model scaling</li></ul>
+  <aside class="notes">Link this to civil and coastal applications. Explain that matching Froude number is often the main requirement when gravity-driven free-surface behaviour dominates.</aside>
+</section>
+
+<section>
+  <h2>Buckingham Pi Theorem</h2>
+  <h4><b>Theorem</b>: If an equation (read problem) involves <em>$k$</em> variables and is dimensionally
+    homogeneous, it can be
+    re-expressed in terms of a set <br><em>$k - r$</em> dimensionless numbers $\Pi_1, \Pi_2, ..., \Pi_{k-r}$,
+    where <em>$r$</em> is
+    the minimum number of base dimensions required to describe the variables involved.
+  </h4>
+  <div class="container">
+    <div class="col">
+      <p class="bottom-1"></p>
+      <ol>
+        <li class="fragment">Identify number of variables, <em>$k$</em>, involved in the problem:
+        </li>
+        <p class="singleline-math-larger-font fragment">
+          <span>\( x_1 = f(x_2, x_3, \ldots, x_k) \)</span>
+        </p>
+        <p class="bottom-1"></p>
+        <li class="fragment">Count number of base dimensions, <em>$r$</em>, involved in the
+          problem</li>
+        <p class="bottom-1"></p>
+        <li class="fragment">Determine the number of required non-dimensional groups,
+          <em>$k-r$</em> (Buckingham Pi Theorem)
+        </li>
+        <p class="singleline-math-larger-font fragment">
+          <span>\( \Pi_1 = f(\Pi_2, \Pi_3, \ldots, \Pi_{k-r}) \)</span>
+        </p>
+      </ol>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Method of Repeating Variables</h2>
+  <h4><em>Method of Repeating Variables</em> provides a <em>systematic</em> way of constructing the
+    non-dimensional groups for a problem
+  </h4>
+
+  <div class="container">
+    <div class="col">
+      <p class="bottom-1"></p>
+      <ol>
+        <li class="fragment fade-in-then-semi-out" data-fragment-index="1">Identify number of variables,
+          <em>$k$</em>, involved in the problem
+        </li>
+        <li class="fragment fade-in-then-semi-out" data-fragment-index="1">Count number of base dimensions,
+          <em>$r$</em>, involved in the
+          problem
+        </li>
+        <li class="fragment fade-in-then-semi-out" data-fragment-index="1">Determine the number of required
+          non-dimensional groups, <em>$k-r$</em> (Buckingham Pi Theorem)
+        </li>
+        <li class="fragment fade-in-then-semi-out" data-fragment-index="2">Select a number of repeating variables,
+          where the number of repeating variables equals the number of base dimensions <em>$r$</em>
+        </li>
+        <li class="fragment fade-in-then-semi-out" data-fragment-index="3">Construct a non-dimensional group by
+          multiplying one of the non-repeating variables by the product of the repeating variables, each raised to
+          an exponent that will make the group dimensionless
+        </li>
+        <li class="fragment fade-in-then-semi-out" data-fragment-index="4">Repeat step 5 for each of the remaining
+          non-repeating variables
+        </li>
+        <li class="fragment fade-in-then-semi-out" data-fragment-index="5">Check if the numbers formed are
+          actually non-dimensional
+        </li>
+        <li class="fragment fade-in-then-semi-out" data-fragment-index="6">Re-arrange the numbers to more common
+          groups (if such exist)
+        </li>
+        <li class="fragment fade-in-then-semi-out" data-fragment-index="7">Relax and think about the results</li>
+      </ol>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Similitude</h2>
+  <div class="container">
+    <div class="col">
+      <p class="bottom-1"></p>
+      <ul>
+        <li class="fragment fade-in-then-semi-out" data-fragment-index="1">A <em>prototype</em> refers to the real
+          thing
+          (e.g. full-scale aircraft, building, bridge, etc.)
+        </li>
+        <li class="fragment fade-in-then-semi-out" data-fragment-index="2">A <em>model</em> refers to a smaller
+          (or sometimes larger) representation
+          of the prototype (e.g. wind tunnel model of an aircraft, hydraulic model of a dam, etc.)
+        </li>
+      </ul>
+      <p class="fragment fade-in-then-semi-out" data-fragment-index="3">Dimensional analysis gives us the
+        dimensional number</p>
+      <span class="singleline-math-larger-font fragment fade-in-then-semi-out" data-fragment-index="3">
+        <span>\( \Pi_1 = f(\Pi_2, \Pi_3, \ldots, \Pi_5) \)</span>
+      </span>
+      <p class="fragment fade-in-then-semi-out" data-fragment-index="4">.. exact same is valid for the model</p>
+      <span class="singleline-math-larger-font fragment fade-in-then-semi-out" data-fragment-index="4">
+        <span>\( \Pi_{1,m} = f(\Pi_{2,m}, \Pi_{3,m}, \ldots, \Pi_{5,m}) \)</span>
+      </span>
+
+      <p class="fragment fade-in-then-semi-out" data-fragment-index="5">To predict outcome on prototype based on
+        model <br>we use the <em>predictive equation:</em></p>
+      <span class="singleline-math-larger-font fragment fade-in-then-semi-out" data-fragment-index="6">
+        <span>\( \Pi_{1,m} = \Pi_1 \)</span>
+      </span>
+      <p class="fragment fade-in-then-semi-out" data-fragment-index="7">.. which is <em></em>only valid</em> if
+        the so-called <em>similarity conditions</em> <br>(aka model design conditions or modeling laws) are met:
+      </p>
+      <span class="singleline-math-larger-font fragment fade-in-then-semi-out" data-fragment-index="6">
+        <span class="fragment" data-fragment-index="8">\( \Pi_{2,m} = \Pi_2, \)</span>
+        <span>\(~~~~~\)</span>
+        <span class="fragment" data-fragment-index="9">\( \Pi_{3,m} = \Pi_3 \)</span>
+        <span>\(~~~~~\)</span>
+        <span class="fragment" data-fragment-index="10">\( \ldots \)</span>
+        <span>\(~~~~~\)</span>
+        <span class="fragment" data-fragment-index="10">\( \Pi_{5,m} = \Pi_5 \)</span>
+      </span>
+    </div>
+    <div class="col">
+      <div class="">
+        <img class="small-image" src="./assets/Lecture_1_3/dimanalysis-similitude-model.jpg" alt="Model" />
+      </div>
+    </div>
+  </div>
+    <aside class="notes">Explain that complete similarity is often impossible. Select the groups representing the dominant physics and document the resulting scale effects.</aside>
+</section>
+
+<section>
+  <h2>Types of Similarity</h2>
+  <div class="container">
+    <div class="col">
+      <p class="bottom-1"></p>
+      <p class="fragment fade-in-then-semi-out" data-fragment-index="1"><em>Three types</em> of similarity:</p>
+      <ol>
+        <li class="fragment fade-in-then-semi-out bottom-1" data-fragment-index="2"><em>Geometric
+            similarity</em>: All geometric parameters are scaled equally</li>
+        <span class="singleline-math-larger-font fragment fade-in-then-semi-out" data-fragment-index="2">
+          <span>\( \dfrac{L_m}{L_p} = \dfrac{D_m}{D_p} = \dfrac{H_m}{H_p} = \ldots = \text{constant} \)</span>
+        </span>
+        <p class="bottom-1"></p>
+        <li class="fragment fade-in-then-semi-out bottom-1" data-fragment-index="3"><em>Kinematic
+            similarity</em>: Flow fields are scaled equally</li>
+        <span class="singleline-math-larger-font fragment fade-in-then-semi-out" data-fragment-index="3">
+          <span>\( \dfrac{V_m}{V_p} = \dfrac{a_m}{a_p} = \ldots = \text{constant} \)</span>
+        </span>
+        <p class="bottom-1"></p>
+        <li class="fragment fade-in-then-semi-out bottom-1" data-fragment-index="4"><em>Dynamic similarity</em>:
+          Forces are scaled equally</li>
+        <span class="singleline-math-larger-font fragment fade-in-then-semi-out" data-fragment-index="4">
+          <span>\( \dfrac{F_{m,1}}{F_{p,1}} = \dfrac{F_{m,2}}{F_{p,2}} = \ldots = \text{constant} \)</span>
+        </span>
+        <p class="bottom-1"></p>
+      </ol>
+      <p class="fragment fade-in-then-semi-out" data-fragment-index="5"><em>Complete similarity</em> if all three
+        are fulfilled</p>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Distorted models</h2>
+  <div class="container">
+    <div class="col">
+      <p class="bottom-1"></p>
+      <p class="fragment fade-in-then-semi-out" data-fragment-index="1">When similarity conditions are <em>not
+          met</em>, e.g.:</p>
+      <span class="singleline-math-larger-font fragment fade-in-then-semi-out" data-fragment-index="2">
+        <span>\( \Pi_{m,2} \neq \Pi_{p,2} \)</span>
+        <span>\(~~\)</span>
+        <span>or</span>
+        <span>\(~~\)</span>
+        <span>\( \Pi_{m,3} \neq \Pi_{p,3} \)</span>
+        <span>\(~~\)</span>
+        <span>\( \ldots \)</span>
+        <span>\(~~\)</span>
+        <span>or</span>
+        <span>\(~~\)</span>
+        <span>\( \Pi_{m,5} \neq \Pi_{p,5} \)</span>
+      </span>
+      <p class="fragment fade-in-then-semi-out" data-fragment-index="3">Then, the predictive equation <em>is not
+          valid</em></p>
+      <span class="singleline-math-larger-font fragment fade-in-then-semi-out" data-fragment-index="4">
+        <span>\( \Pi_{m,1} \neq \Pi_{p,1} \)</span>
+      </span>
+      <ul>
+        <p class="botom-1"> </p>
+        <li class="fragment fade-in-then-semi-out" data-fragment-index="5"><em>No general rule</em> for when
+          distorted models are accurate <b>(requires experience)</b></li>
+
+      </ul>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Dimensional Analysis Takeaways</h2>
+  <ul><li class="fragment">Homogeneity is a basic validity check</li><li class="fragment">Dimensionless groups express competing physical effects</li><li class="fragment">Dimensional analysis reduces variables but does not supply the unknown function</li><li class="fragment">Similarity requires matching the groups that govern the dominant physics</li></ul>
+  <aside class="notes">Use Lecture 1 for homogeneity and Lecture 3 for Reynolds, Froude, and similarity.</aside>
+</section>
+
+  </div>
+</div>
+<script type="module" src="../../main.js"></script>
+</body>
+</html>

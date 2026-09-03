@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Francesco Ferri">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../custom/theme/haervig.css">
+  <link rel="stylesheet" href="../custom/plugins/highlight/haervig.css">
+  <style>
+    .reveal .compact { font-size: 0.72em; line-height: 1.25; }
+    .reveal .slide-image { display:block; max-width:88%; max-height:52vh; width:auto; height:auto; object-fit:contain; margin:0.35em auto; }
+    .reveal .small-image { max-height:38vh; }
+    .reveal .equation-box { border:2px solid #333; padding:0.25em 0.5em; margin:0.5em auto; width:fit-content; }
+    .reveal .assumptions { font-size:0.68em; opacity:0.85; }
+    .reveal .two-column { display:flex; gap:1.1em; align-items:center; }
+    .reveal .two-column > div { flex:1; }
+    .reveal .backup-label { position:absolute; right:0; top:0; font-size:0.45em; opacity:0.55; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div style="position: fixed; bottom: 20px; left: 30px; z-index: 1000;"><h2><a href="../" style="color:#222;text-decoration:none;">←</a></h2></div>
+  <div class="slides">
+<section>
+  <section>
+    <h3><b>Fluid Mechanics Course</b></h3>
+    <h2>Lecture 3A · Finite Control-Volume Analysis</h2>
+    <img class="slide-image" src="./assets/Lecture_3_1/slide_001_1.jpg" alt="Lecture 3A · Finite Control-Volume Analysis">
+    <h4><em>Francesco Ferri</em></h4><h5><em>AAU BUILD</em></h5>
+    <aside class="notes">Main part of Lecture 3. Target time: 80 minutes including a pipe-bend momentum problem.</aside>
+  </section>
+  <section>
+    <h2>Learning Objectives</h2>
+    <ul><li class="fragment">Use the Reynolds transport theorem to convert system laws to control-volume form</li><li class="fragment">Apply integral mass conservation</li><li class="fragment">Apply the steady linear-momentum equation</li><li class="fragment">Construct a complete fluid free-body diagram</li><li class="fragment">Relate the engineering energy equation to Bernoulli</li></ul>
+    <aside class="notes">Read the outcomes briefly. Emphasize that students will use the concepts in calculations, not only recognize definitions.</aside>
+  </section>
+</section>
+<section>
+  <h2>Why a Control Volume?</h2>
+  <div class="container"><div class="col"><h3>System</h3><p class="fragment">Fixed identity of matter.</p></div><div class="col"><h3>Control volume</h3><p class="fragment">Selected region with mass, momentum, and energy crossing its boundary.</p></div></div><img class="slide-image small-image fragment" src="./assets/Lecture_3_1/slide_004_1.png" alt="Control volume balance">
+  <aside class="notes">Use a pipe bend or nozzle to show why following the same particles is inconvenient. The control volume stays attached to the engineering device.</aside>
+</section>
+<section>
+  <h2>General Balance Pattern</h2>
+  <div class="equation-box">$$\text{Accumulation} + \text{Net outward transport} = \text{Applied source}$$</div><ul><li class="fragment">Mass: source is zero</li><li class="fragment">Linear momentum: source is resultant external force</li><li class="fragment">Energy: sources include heat and work</li></ul>
+  <aside class="notes">Repeat this common pattern throughout the lecture. It reduces the appearance that continuity, momentum, and energy are unrelated formulas.</aside>
+</section>
+<section>
+  <div style="display:flex;justify-content:center;align-items:center;height:80vh;"><h1>Reynolds Transport Theorem</h1></div>
+  <aside class="notes">Connect a law written for a system to a finite control volume.</aside>
+</section>
+<section>
+  <h2>Reynolds Transport Theorem</h2>
+  <p>For extensive property \(B\), with \(b=B/m\):</p><div class="equation-box fragment">$$\frac{dB_{sys}}{dt}=\frac{\partial}{\partial t}\int_{CV}\rho b\,dV+\int_{CS}\rho b(\mathbf{V}\cdot\mathbf{n})\,dA$$</div><ul><li class="fragment">First term: storage inside the control volume</li><li class="fragment">Second term: net outward transport across the control surface</li></ul>
+  <aside class="notes">Define the outward normal. A negative dot product represents inflow. For this course, focus on fixed non-deforming control volumes.</aside>
+</section>
+<section>
+  <div style="display:flex;justify-content:center;align-items:center;height:80vh;"><h1>Mass Conservation</h1></div>
+  <aside class="notes">Set the transported extensive property equal to mass.</aside>
+</section>
+<section>
+  <h2>Integral Continuity Equation</h2>
+  <div class="equation-box">$$\frac{\partial}{\partial t}\int_{CV}\rho\,dV+\int_{CS}\rho\mathbf{V}\cdot\mathbf{n}\,dA=0$$</div><p class="fragment">For steady one-dimensional ports:</p><div class="equation-box fragment">$$\sum_{in}\dot m=\sum_{out}\dot m$$</div><p class="fragment">For constant density, \(\dot m=\rho Q=\rho AV\).</p>
+  <aside class="notes">Connect this general result to A1V1=A2V2 from Lecture 2. Clarify that incompressible does not automatically mean steady.</aside>
+</section>
+<section>
+  <h2>Continuity Check</h2>
+  <img class="slide-image small-image" src="./assets/Lecture_3_1/slide_005_1.png" alt="Continuity"><p class="fragment">At a steady junction, one inlet supplies two outlets:</p><div class="equation-box fragment">$$\rho_1A_1V_1=\rho_2A_2V_2+\rho_3A_3V_3$$</div><p class="fragment">For one incompressible fluid, density cancels.</p>
+  <aside class="notes">Give students a short numerical flow-rate calculation. Require a clearly drawn control volume and arrows.</aside>
+</section>
+<section>
+  <div style="display:flex;justify-content:center;align-items:center;height:80vh;"><h1>Linear Momentum</h1></div>
+  <aside class="notes">Use Newton's second law to calculate fluid-induced forces.</aside>
+</section>
+<section>
+  <h2>Integral Momentum Equation</h2>
+  <div class="equation-box">$$\sum\mathbf{F}_{ext}=\frac{\partial}{\partial t}\int_{CV}\rho\mathbf{V}\,dV+\int_{CS}\rho\mathbf{V}(\mathbf{V}\cdot\mathbf{n})\,dA$$</div><p class="fragment">For steady one-dimensional ports:</p><div class="equation-box fragment">$$\sum\mathbf{F}_{ext}=\sum_{out}\dot m\mathbf{V}-\sum_{in}\dot m\mathbf{V}$$</div>
+  <aside class="notes">Momentum is a vector. Write separate x and y balances. Clearly distinguish the force on the fluid from the equal and opposite force exerted by the fluid on the pipe or support.</aside>
+</section>
+<section>
+  <h2>Force Inventory</h2>
+  <div class="container"><div class="col"><ul><li class="fragment">Pressure forces at ports</li><li class="fragment">Weight of fluid in the control volume</li><li class="fragment">Wall or support reaction</li><li class="fragment">Other applied forces</li></ul></div><div class="col"><img class="slide-image" src="./assets/Lecture_3_1/slide_010_1.png" alt="Momentum free-body diagram"></div></div>
+  <aside class="notes">Do not omit atmospheric pressure inconsistently. Either work with absolute pressure everywhere or use gauge pressure so exposed atmospheric contributions cancel.</aside>
+</section>
+<section>
+  <h2>Worked Example: 90° Pipe Bend</h2>
+  <div class="container"><div class="col"><img class="slide-image" src="./assets/Lecture_3_1/slide_010_2.png" alt="Pipe bend"></div><div class="col"><ol><li class="fragment">Draw the control volume and coordinate axes</li><li class="fragment">Apply continuity to find port velocities</li><li class="fragment">Draw the free-body diagram of the fluid</li><li class="fragment">Include pressure, weight, and wall reaction</li><li class="fragment">Apply x- and y-momentum balances</li><li class="fragment">Reverse the sign to obtain force of fluid on the bend</li></ol></div></div>
+  <aside class="notes">Complete a numerical solution live. Ask students to predict the force direction first. This is the highest-priority structural application in Lecture 3.</aside>
+</section>
+<section>
+  <div style="display:flex;justify-content:center;align-items:center;height:80vh;"><h1>Energy and Bernoulli</h1></div>
+  <aside class="notes">Position Bernoulli as a restricted mechanical-energy relation.</aside>
+</section>
+<section>
+  <h2>Engineering Energy Equation</h2>
+  <div class="equation-box">$$\frac{p_1}{\rho g}+\alpha_1\frac{V_1^2}{2g}+z_1+h_p-h_t-h_L=\frac{p_2}{\rho g}+\alpha_2\frac{V_2^2}{2g}+z_2$$</div><ul><li class="fragment">\(h_p\): pump head added</li><li class="fragment">\(h_t\): turbine head removed</li><li class="fragment">\(h_L\): irreversible head loss</li><li class="fragment">\(\alpha\): kinetic-energy correction factor</li></ul>
+  <aside class="notes">Compare term by term with Bernoulli. Explain that the equation is normally applied between control-volume ports using average velocities.</aside>
+</section>
+<section>
+  <h2>Lecture 3A Takeaways</h2>
+  <ul><li class="fragment">The Reynolds transport theorem supplies one common control-volume structure</li><li class="fragment">Continuity conserves mass</li><li class="fragment">Momentum analysis converts velocity change into resultant external force</li><li class="fragment">A correct fluid free-body diagram is essential</li><li class="fragment">The engineering energy equation extends Bernoulli to real devices</li></ul>
+  <aside class="notes">Transition to dimensionless interpretation and potential flow.</aside>
+</section>
+  </div>
+</div>
+<script type="module" src="../../main.js"></script>
+</body>
+</html>

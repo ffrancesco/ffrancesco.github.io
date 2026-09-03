@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Francesco Ferri">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../custom/theme/haervig.css">
+  <link rel="stylesheet" href="../custom/plugins/highlight/haervig.css">
+  <style>
+    .reveal .compact { font-size: 0.72em; line-height: 1.25; }
+    .reveal .slide-image { display:block; max-width:88%; max-height:52vh; width:auto; height:auto; object-fit:contain; margin:0.35em auto; }
+    .reveal .small-image { max-height:38vh; }
+    .reveal .equation-box { border:2px solid #333; padding:0.25em 0.5em; margin:0.5em auto; width:fit-content; }
+    .reveal .assumptions { font-size:0.68em; opacity:0.85; }
+    .reveal .two-column { display:flex; gap:1.1em; align-items:center; }
+    .reveal .two-column > div { flex:1; }
+    .reveal .backup-label { position:absolute; right:0; top:0; font-size:0.45em; opacity:0.55; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div style="position: fixed; bottom: 20px; left: 30px; z-index: 1000;"><h2><a href="../" style="color:#222;text-decoration:none;">←</a></h2></div>
+  <div class="slides">
+<section>
+  <section>
+    <h3><b>Fluid Mechanics Course</b></h3>
+    <h2>Lecture 2A · Fluid Kinematics</h2>
+    <img class="slide-image" src="./assets/Lecture_2_1/slide_001_1.png" alt="Lecture 2A · Fluid Kinematics">
+    <h4><em>Francesco Ferri</em></h4><h5><em>AAU BUILD</em></h5>
+    <aside class="notes">First half of Lecture 2. Target time: 55 minutes. End with continuity and transition to Bernoulli.</aside>
+  </section>
+  <section>
+    <h2>Learning Objectives</h2>
+    <ul><li class="fragment">Interpret velocity as a field in space and time</li><li class="fragment">Distinguish Eulerian and Lagrangian descriptions</li><li class="fragment">Distinguish streamlines, pathlines, and streaklines</li><li class="fragment">Calculate local and convective acceleration</li><li class="fragment">Use one-dimensional continuity before Bernoulli</li></ul>
+    <aside class="notes">Read the outcomes briefly. Emphasize that students will use the concepts in calculations, not only recognize definitions.</aside>
+  </section>
+</section>
+<section>
+  <h2>From Statics to Motion</h2>
+  <p class="fragment">In Lecture 1, a static fluid satisfied:</p><div class="equation-box fragment">$$-\nabla p+\rho\mathbf{g}=0$$</div><p class="fragment">For moving fluid particles, Newton's second law requires acceleration:</p><div class="equation-box fragment">$$-\nabla p+\rho\mathbf{g}=\rho\mathbf{a}\quad\text{(inviscid model)}$$</div>
+  <aside class="notes">Use this bridge to motivate why acceleration must be defined carefully before deriving Bernoulli.</aside>
+</section>
+<section>
+  <h2>Velocity as a Field</h2>
+  <div class="container"><div class="col"><div class="equation-box">$$\mathbf{V}(x,y,z,t)=u\mathbf{i}+v\mathbf{j}+w\mathbf{k}$$</div><ul><li class="fragment">Velocity: vector field</li><li class="fragment">Pressure and temperature: scalar fields</li><li class="fragment">Steady flow: field values at fixed positions do not change with time</li></ul></div><div class="col"><img class="slide-image" src="./assets/Lecture_2_1/slide_006_1.png" alt="Velocity field"></div></div>
+  <aside class="notes">Distinguish the vector symbol V from the component v. State that steady is an Eulerian definition.</aside>
+</section>
+<section>
+  <h2>Eulerian and Lagrangian Descriptions</h2>
+  <div class="container"><div class="col"><h3>Lagrangian</h3><ul><li class="fragment">Follow identified fluid particles</li><li class="fragment">Position \(\mathbf{x}=\mathbf{x}(\mathbf{X},t)\)</li><li class="fragment">Natural for particle tracking</li></ul><img class="slide-image small-image" src="./assets/Lecture_2_1/slide_007_1.png" alt="Lagrangian"></div><div class="col"><h3>Eulerian</h3><ul><li class="fragment">Observe fixed spatial locations</li><li class="fragment">Fields \(\phi(\mathbf{x},t)\)</li><li class="fragment">Natural for control volumes and CFD</li></ul><img class="slide-image small-image" src="./assets/Lecture_2_1/slide_007_2.png" alt="Eulerian"></div></div>
+  <aside class="notes">Use a drifting buoy versus a fixed current meter as examples. The material derivative connects the two descriptions.</aside>
+</section>
+<section>
+  <h2>System and Control Volume</h2>
+  <div class="container"><div class="col"><h3>System</h3><p class="fragment">A fixed identity of matter followed through time.</p></div><div class="col"><h3>Control volume</h3><p class="fragment">A selected region through which matter may pass.</p></div></div><img class="slide-image small-image fragment" src="./assets/Lecture_2_1/slide_008_1.png" alt="System and control volume">
+  <aside class="notes">Introduce this briefly. The full Reynolds transport theorem comes in Lecture 3.</aside>
+</section>
+<section>
+  <div style="display:flex;justify-content:center;align-items:center;height:80vh;"><h1>Flow Visualization</h1></div>
+  <aside class="notes">Define geometrical descriptions of the velocity field.</aside>
+</section>
+<section>
+  <h2>Streamline, Pathline, and Streakline</h2>
+  <div class="container"><div class="col"><h3>Streamline</h3><p class="fragment">Instantaneously tangent to \(\mathbf{V}\).</p></div><div class="col"><h3>Pathline</h3><p class="fragment">Trajectory of one particle.</p></div><div class="col"><h3>Streakline</h3><p class="fragment">Particles that previously passed through one fixed point.</p></div></div><p class="fragment"><b>Steady flow:</b> streamlines, pathlines, and streaklines coincide.</p><img class="slide-image small-image fragment" src="./assets/Lecture_2_1/slide_010_1.png" alt="Flow lines">
+  <aside class="notes">Use dye injection to explain a streakline. Emphasize that the three can be different in unsteady flow.</aside>
+</section>
+<section>
+  <div style="display:flex;justify-content:center;align-items:center;height:80vh;"><h1>Material Derivative and Acceleration</h1></div>
+  <aside class="notes">This is the mathematical foundation for Euler and Bernoulli equations.</aside>
+</section>
+<section>
+  <h2>Material Derivative of a Field</h2>
+  <p>Following a moving particle through an Eulerian field:</p><div class="equation-box fragment">$$\frac{D\phi}{Dt}=\frac{\partial\phi}{\partial t}+\mathbf{V}\cdot\nabla\phi$$</div><ul><li class="fragment">Local change: \(\partial\phi/\partial t\)</li><li class="fragment">Convective change: \(\mathbf{V}\cdot\nabla\phi\)</li></ul>
+  <aside class="notes">Derive with the chain rule for phi(x(t),y(t),z(t),t). This is the key conceptual bridge between Eulerian fields and particle experience.</aside>
+</section>
+<section>
+  <h2>Acceleration Field</h2>
+  <div class="equation-box">$$\mathbf{a}=\frac{D\mathbf{V}}{Dt}=\frac{\partial\mathbf{V}}{\partial t}+(\mathbf{V}\cdot\nabla)\mathbf{V}$$</div><div class="container"><div class="col"><h3>Local acceleration</h3><p class="fragment">Velocity changes with time at a fixed point.</p></div><div class="col"><h3>Convective acceleration</h3><p class="fragment">A particle enters regions with different velocity.</p></div></div><img class="slide-image small-image fragment" src="./assets/Lecture_2_1/slide_018_1.png" alt="Acceleration field">
+  <aside class="notes">Ask: Can steady flow have acceleration? Yes, through the convective term. This is essential before a nozzle example.</aside>
+</section>
+<section>
+  <h2>Worked Kinematics Example</h2>
+  <p>For steady one-dimensional flow \(u=u(x)\):</p><div class="equation-box fragment">$$a_x=u\frac{du}{dx}$$</div><p class="fragment">If \(u=2x\) m/s with \(x\) in metres:</p><p class="fragment">$$a_x=(2x)(2)=4x\ \mathrm{m/s^2}$$</p><p class="fragment">At \(x=1\,\mathrm{m}\), \(a_x=4\,\mathrm{m/s^2}\).</p>
+  <aside class="notes">Have students identify the zero local term and nonzero convective term. Check units carefully.</aside>
+</section>
+<section>
+  <h2>One-Dimensional Continuity</h2>
+  <p class="fragment">Steady mass flow through a streamtube:</p><div class="equation-box fragment">$$\dot m=\rho AV$$</div><p class="fragment">For constant density:</p><div class="equation-box fragment">$$A_1V_1=A_2V_2$$</div><p class="assumptions fragment"><b>Assumptions for the simplified relation:</b> steady, one-dimensional port averages, constant density.</p>
+  <aside class="notes">Introduce only the restricted result required for Bernoulli applications. Derive the general integral equation in Lecture 3.</aside>
+</section>
+<section>
+  <h2>Lecture 2A Takeaways</h2>
+  <ul><li class="fragment">Eulerian fields describe what happens at fixed locations</li><li class="fragment">The material derivative gives the change experienced by a particle</li><li class="fragment">Steady flows can have convective acceleration</li><li class="fragment">Continuity links area and average velocity</li></ul>
+  <aside class="notes">Transition: apply Newton's second law along a streamline to relate pressure, elevation, and velocity.</aside>
+</section>
+  </div>
+</div>
+<script type="module" src="../../main.js"></script>
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Jacob Andersen">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../custom/theme/haervig.css">
+  <link rel="stylesheet" href="../custom/plugins/highlight/haervig.css">
+  <style>
+    .reveal .compact { font-size: 0.72em; line-height: 1.25; }
+    .reveal .slide-image { display:block; max-width:88%; max-height:52vh; width:auto; height:auto; object-fit:contain; margin:0.35em auto; }
+    .reveal .small-image { max-height:38vh; position: relative; margin-left: 50%;}
+    .reveal .equation-box { border:2px solid #333; padding:0.25em 0.5em; margin:0.5em auto; width:fit-content; }
+    .reveal .assumptions { font-size:0.68em; opacity:0.85; }
+    .reveal .two-column { display:flex; gap:1.1em; align-items:center; }
+    .reveal .two-column > div { flex:1; }
+    .reveal .backup-label { position:absolute; right:0; top:0; font-size:0.45em; opacity:0.55; }
+  </style>
+</head>
+
+<body>
+
+<div class="reveal">
+  <div style="position: fixed; bottom: 20px; left: 30px; z-index: 1000;">
+    <h2><a href="../" style="color: #222; text-decoration: none;">←</a></h2>
+  </div>
+
+  <div class="slides">
+    <section>
+      <section>
+        <h3><b>Fluid Mechanics Course</b></h3>
+        <h2>Fluid Kinematics</h2>
+
+        <img src="./assets/Lecture_2_1/slide_001_1.png" alt="Fluid kinematics overview" width="700">
+
+        <h4><em>Francesco Ferri</em></h4>
+        <h5><em>AAU BUILD</em></h5>
+      </section>
+
+      <section>
+        <h2>Learning Objectives</h2>
+
+        <ul>
+          <li class="fragment">Understand how fluid properties vary in space and time</li>
+          <li class="fragment">Learn how to visualize flow using streamlines, pathlines, and streaklines</li>
+          <li class="fragment">Compare Eulerian and Lagrangian descriptions of motion</li>
+          <li class="fragment">Recognize the role of velocity and acceleration in fluid motion</li>
+          <li class="fragment">Apply these ideas to engineering and environmental problems</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Why Fluid Kinematics?</h2>
+
+        <div class="container">
+          <div class="col">
+            <h3>Core idea</h3>
+            <ul>
+              <li class="fragment">Study motion without focusing on forces</li>
+              <li class="fragment">Describe how a fluid moves</li>
+              <li class="fragment">Track velocities, trajectories, and deformation</li>
+            </ul>
+          </div>
+
+          <div class="col">
+            <h3>Typical applications</h3>
+            <ul>
+              <li class="fragment">CFD simulations</li>
+              <li class="fragment">Flow visualization experiments</li>
+              <li class="fragment">Wind tunnel testing</li>
+              <li class="fragment">River and atmospheric flow analysis</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!--Introduction-->
+    <section>
+      <section>
+        <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+          <h1>Introduction to Kinematics</h1>
+        </div>
+      </section>
+
+      <section>
+        <h2>From Statics to Motion</h2>
+        <p class="fragment">In Lecture 1, a static fluid satisfied:</p><div class="equation-box fragment">$$-\nabla p+\rho\mathbf{g}=0$$</div><p class="fragment">For moving fluid particles, Newton's second law requires acceleration:</p><div class="equation-box fragment">$$-\nabla p+\rho\mathbf{g}=\rho\mathbf{a}\quad\text{(inviscid model)}$$</div>
+        <aside class="notes">Use this bridge to motivate why acceleration must be defined carefully before deriving Bernoulli.</aside>
+      </section>
+
+      <section>
+        <h2>Definition</h2>
+
+        <p class="fragment">Fluid kinematics is the study of fluid motion without reference to the forces that cause it.</p>
+
+        <ul>
+          <li class="fragment">Velocity field</li>
+          <li class="fragment">Acceleration field</li>
+          <li class="fragment">Pressure field</li>
+          <li class="fragment">Particle trajectories and deformation</li>
+          <li class="fragment">...</li>
+        </ul>
+
+        <p class="fragment"><b>field</b> is the representation of fluid parameters as function of the spatial coordinates</p>
+        <p class="fragment"><b>scalar</b> field: each location is defined by a single value of the given parameter </p>
+        <p class="fragment"><b>vector</b> field: each location is defined by more than one value of the given parameter, depending on the number of coordinate.</p>
+        <p class="fragment">vector field can be defined either in vector or <b>magnitude and direction</b> formats</p>
+
+        <aside class="notes">
+          Kinematics describes how a fluid moves; dynamics explains why it moves.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Applications</h2>
+
+        <div class="container">
+          <div class="col">
+            <h3>CFD</h3>
+            <ul>
+              <li class="fragment">Velocity-field visualization</li>
+              <li class="fragment">Flow separation analysis</li>
+              <li class="fragment">Wake and vortex studies</li>
+            </ul>
+          </div>
+
+          <div class="col">
+            <h3>Experiments</h3>
+            <ul>
+              <li class="fragment">PIV measurements</li>
+              <li class="fragment">Dye and smoke visualizations</li>
+              <li class="fragment">Trajectory tracking</li>
+            </ul>
+          </div>
+        </div>
+
+        <img src="./assets/Lecture_2_1/slide_003_1.jpg" alt="Fluid flow application" height="500" class="fragment">
+        <img src="./assets/Lecture_2_1/slide_001_1.png" alt="Fluid flow application" height="500" class="fragment">
+      </section>
+
+      <section>
+        <h2>Kinematics versus Dynamics</h2>
+
+        <div class="container">
+          <div class="col fragment">
+            <h3>Kinematics</h3>
+            <ul>
+              <li class="">Describes motion</li>
+              <li class="">Focuses on position, velocity, acceleration</li>
+              <li class="">Uses streamline and pathline concepts</li>
+            </ul>
+          </div>
+
+          <div class="col fragment">
+            <h3>Dynamics</h3>
+            <ul>
+              <li class="">Considers forces and energy</li>
+              <li class="">Applies Newton's laws and conservation laws</li>
+              <li class="">Links motion to pressure, viscosity, gravity</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      
+    </section>
+
+    <!--Vector and Scalar Field-->
+    <section>
+      <section>
+        <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+          <h1>Velocity Field</h1>
+        </div>
+      </section>
+
+      <section>
+        <h2>Velocity as a Field</h2>
+
+        <div class="container">
+          <div class="col">
+            <p class="fragment">A velocity field describes the fluid velocity at every point in space and time.</p>
+            <p class="fragment">It can be written as:</p>
+            <div class="equation-box fragment">$$\mathbf{V}(x,y,z,t)=u(x,y,z,t)\mathbf{i}+v(x,y,z,t)\mathbf{j}+w(x,y,z,t)\mathbf{k}$$</div>
+            <ul>
+              <li class="fragment">Velocity field is a vector field</li>
+              <li class="fragment">Speed is the magnitude of the velocity vector $$V = \lvert \mathbf{V} \rvert = (u^2+v^2+w^2)^{1/2}$$</li>
+            </ul>
+          </div>
+
+          <div class="col">
+            <img class="small-image fragment" src="./assets/Lecture_2_1/slide_006_3.png" alt="Velocity field example">
+          </div>
+        </div>
+
+        
+      </section>
+
+      <section>
+        <h2>Why the Velocity Field Matters</h2>
+        <div class="container">
+          <div class="col"><img src="./assets/Lecture_2_1/slide_010_1.png" alt="Velocity field visualization" ></div>
+          <div class="col">
+            <ul>
+              <li class="fragment">It tells us where fluid is moving and how fast</li>
+              <li class="fragment">It is the basis for acceleration and deformation</li>
+              <li class="fragment">It is essential for conservation laws and CFD</li>
+              <li class="fragment">It helps identify regions of recirculation, stagnation, and separation</li>
+            </ul>
+          </div>
+        </div>
+        
+
+        
+      </section>
+    </section>
+
+    <!--Euler vs Lagrangian Approach-->
+    <section>
+      <section>
+        <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+          <h1>Descriptions of Motion</h1>
+        </div>
+      </section>
+
+      <section>
+        <h2>Two Distinct Views</h2>
+        <img src="./assets/Lecture_2_1/slide_007_1.png" alt="Velocity field visualization" >
+        <div class="container">
+          <div class="col">
+            <h3>Lagrangian</h3>
+            <ul>
+              <li class="fragment">Follow an individual fluid particle</li>
+              <li class="fragment">Track its position as a function of time</li>
+              <li class="fragment">Useful for particle tracking and pollutant transport</li>
+            </ul>
+          </div>
+
+          <div class="col">
+            <h3>Eulerian</h3>
+            <ul>
+              <li class="fragment">Observe fixed points in space</li>
+              <li class="fragment">Measure properties as time changes</li>
+              <li class="fragment">Most common approach in fluid mechanics</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Lagrangian Viewpoint</h2>
+        <img src="./assets/Lecture_2_1/slide_008_3.png" alt="Lagrangian motion" width="900" class="fragment">
+        <p class="fragment">What happens to this particle as it moves?</p>
+        <p class="fragment">A particle has a time-dependent position vector x(t).</p>
+        <p class="fragment">Example: tracking drifting buoys or dye particles in a current.</p>
+
+        
+      </section>
+
+      <section>
+        <h2>Eulerian Viewpoint</h2>
+        <img src="./assets/Lecture_2_1/slide_007_3.png" alt="Eulerian motion" width="900" class="fragment">
+        <p class="fragment">What happens at this location as time passes?</p>
+        <p class="fragment">Properties are expressed as functions of position and time: φ(x, t).</p>
+        <p class="fragment">Example: weather stations measuring wind velocity at fixed locations.</p>
+
+        
+      </section>
+
+      <section>
+        <h2>System and Control Volume</h2>
+
+        <div class="container">
+          <div class="col">
+            <h3>System approach</h3>
+            <ul>
+              <li class="fragment">Follows a specific mass</li>
+              <li class="fragment">Useful in Lagrangian analysis</li>
+            </ul>
+            <br>
+            <img src="./assets/Lecture_2_1/slide_008_3.png" alt="Eulerian motion" class="fragment">
+          </div>
+
+          <div class="col">
+            <h3>Control volume approach</h3>
+            <ul>
+              <li class="fragment">Fixes a region in space</li>
+              <li class="fragment">Useful in Eulerian analysis</li>
+            </ul>
+            <img src="./assets/Lecture_2_1/slide_008_2.png" alt="Eulerian motion" class="fragment">
+          </div>
+        </div>
+
+        
+      </section>
+    </section>
+    <!--Flow Visualization-->
+    <section>
+      <section>
+        <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+          <h1>Flow Visualization</h1>
+        </div>
+      </section>
+
+      <section>
+        <h2>Streamlines, Pathlines, and Streaklines</h2>
+
+        <div class="container">
+          <div class="col">
+            <h3>Streamline</h3>
+            <p class="fragment">Instantaneous tangent to \( \mathbf{V}\)</p>
+          </div>
+
+          <div class="col">
+            <h3>Pathline</h3>
+            <p class="fragment">Actual trajectory of a fluid particle</p>
+          </div>
+
+          <div class="col">
+            <h3>Streakline</h3>
+            <p class="fragment">Line connecting particles passing through a fixed point</p>
+          </div>
+        </div>
+
+        <p class="fragment" style="margin-top: 1.5rem;"><b>Steady flow:</b> streamlines, pathlines and streaklines coincide.</p>
+      </section>
+
+      <section>
+        <h2>Visualization Examples</h2>
+
+        <img src="./assets/Lecture_2_1/slide_010_1.png" alt="Flow visualization example" width="900" class="fragment">
+      </section>
+
+      <section>
+        <h2>Experimental Methods</h2>
+        <p>The use of kinematics method can be applied also to experiments</p>
+        <div class="container">
+          <div class="col">
+            <ul>
+              <li class="fragment">Smoke</li>
+              <li class="fragment">Dye</li>
+              <li class="fragment">Oil flow</li>
+              <li class="fragment">PIV</li>
+            </ul>
+          </div>
+
+          <div class="col">
+            <ul>
+              <li class="fragment">PTV</li>
+              <li class="fragment">Tufts</li>
+              <li class="fragment">Bubble tracking</li>
+              <li class="fragment">Laser diagnostics</li>
+            </ul>
+          </div>
+        </div>
+
+        <img src="./assets/Lecture_2_1/slide_019_1.jpg" alt="Experimental flow visualization" width="500" class="fragment">
+        <img src="./assets/Lecture_2_1/slide_019_2.png" alt="Experimental flow visualization" width="500" class="fragment">
+        <img src="./assets/Lecture_2_1/slide_019_3.jpg" alt="Experimental flow visualization" width="500" class="fragment">
+        <img src="./assets/Lecture_2_1/slide_019_4.jpg" alt="Experimental flow visualization" width="500" class="fragment">
+        <img src="./assets/Lecture_2_1/slide_019_5.jpg" alt="Experimental flow visualization" width="500" class="fragment">
+      </section>
+
+      
+    </section>
+
+    <section>
+      <section>
+        <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+          <h1>Acceleration and Material Derivative</h1>
+        </div>
+      </section>
+      <section>
+        <h2>Acceleration Field</h2>
+        <p class="fragment">To apply Newton's Second Law, we must be able to estimate the acceleration field.
+        </p>
+        <div class="container">
+          <div class="col">
+<p class="fragment">For the Eulerian description $$\mathbf{a}=\frac{d\mathbf{V}}{dt}=\frac{\partial \mathbf{V}}{\partial t}+\frac{\partial \mathbf{V}}{\partial x}\frac{dx}{dt}+\frac{\partial \mathbf{V}}{\partial y}\frac{dy}{dt}+\frac{\partial \mathbf{V}}{\partial z}\frac{dz}{dt}$$</p>
+        <div class="fragment">$$\mathbf{a}=\frac{\partial \mathbf{V}}{\partial t}+u\frac{\partial \mathbf{V}}{\partial x}+v\frac{\partial \mathbf{V}}{\partial y}+w\frac{\partial \mathbf{V}}{\partial z}$$</div>
+        
+          </div>
+          <div class="col">
+            <p><br></p>
+ <div class="equation-box fragment">$$\mathbf{a}=\frac{D\mathbf{V}}{Dt}$$</div>
+          </div>
+        </div>
+       
+        <div class="container">
+          <div class="col fragment"><h3>Local acceleration \(\frac{\partial \mathbf{V}}{\partial t}\)</h3>
+            <p class=""></p>
+            <p class="fragment">Velocity changes with time at a fixed point.</p></div>
+          <div class="col fragment">
+            <h3>Convective acceleration \(u\frac{\partial \mathbf{V}}{\partial x}+v\frac{\partial \mathbf{V}}{\partial y}+w\frac{\partial \mathbf{V}}{\partial z}\)</h3>
+            <p class="fragment">A particle enters regions with different velocity.</p>
+          </div>
+        </div>
+        <p class="fragment">The convective/advection term \((\mathbf{V}\cdot\nabla)\mathbf{V}\) is <b>non-linear</b>. Describe complex interaction in the flow such as turbulence and instability. Key element of Navier-Stoke equation.</p>
+        <p class="fragment">Implications in turbulence:</p>
+        <ol class="fragment">
+          <li>Small disturbances can grow and interact, producing chaotic motion (instable feed-back the velocity is advecting itself)</li>
+          <li>Energy can cascade from large scales (big eddies) to small scales (tiny vortices). A disturbance at one scale can transfer energy to other scales.</li>
+          <li>As consequence the system predictability decreases — sensitive dependence on initial conditions.</li>
+        </ol>        
+        
+
+        <aside class="notes">Ask: Can steady flow have acceleration? Yes, through the convective term. This is essential before a nozzle example.</aside>
+      </section>
+      <section>
+        <h2>Material Derivative of a Field</h2>
+        <div class="container">
+          <div class="col">
+            <div class="equation-box fragment">$$\mathbf{a}=\frac{D\mathbf{V}}{Dt}$$</div>
+          </div>
+          <div class="col">
+            <div class="equation-box fragment">$$\frac{D}{Dt}=\frac{\partial}{\partial t}+\mathbf{V}\cdot\nabla$$</div>
+          </div>
+        </div>
+         
+
+        
+        <ul>
+          <li class="fragment">\(\frac{D}{Dt} \rightarrow \): how a property change for a moving fluid particle</li>
+          <li class="fragment">\(\partial/\partial t\rightarrow \): local rate of change at a fixed point (Eulerian)</li>
+          <li class="fragment">\(\mathbf{V}\cdot\nabla\rightarrow \): convective<sup>1</sup> property change due to the particle moving to a region with different condition/value </li>
+        </ul>
+        
+        <p class="fragment">Example Time Rate of Change of Temperature in a Candle: $$\frac{DT}{Dt}=\frac{\partial T}{\partial t}+\mathbf{V}\cdot\nabla T$$ This represent the local variation of T in time and the temperature variation due to displacemnet.</p>
+        <p><br><br></p>
+        <div class="footnote fragment" style="position: absolute; bottom: 0; left: 0; font-size: 0.5em; opacity: 0.7;">
+          <p><br><br></p>
+          <p><sup>1</sup>NOTE: Tecnically advection since it is transport of quantity by the bulk of the fluid.<br> Convection is a broader concept: includes advection and diffusion/conduction</p>
+        </div>
+        <aside class="notes">Derive with the chain rule for phi(x(t),y(t),z(t),t). This is the key conceptual bridge between Eulerian fields and particle experience.</aside>
+      </section>
+      
+
+      <section>
+        <h2>Worked Kinematics Example</h2>
+        <p>For steady one-dimensional flow \(u=u(x)\):</p><div class="equation-box fragment">$$a_x=u\frac{du}{dx}$$</div><p class="fragment">If \(u=2x\) m/s with \(x\) in metres:</p><p class="fragment">$$a_x=(2x)(2)=4x\ \mathrm{m/s^2}$$</p><p class="fragment">At \(x=1\,\mathrm{m}\), \(a_x=4\,\mathrm{m/s^2}\).</p>
+        <aside class="notes">Have students identify the zero local term and nonzero convective term. Check units carefully.</aside>
+      </section>
+    </section>
+
+    <section>
+      
+      <section>
+        <h2>Takeaway</h2>
+
+        <p class="fragment">Fluid kinematics provides the language for describing motion in a fluid.</p>
+        <p class="fragment">It connects geometry, velocity, acceleration, and flow visualization.</p>
+        <p class="fragment">This foundation is essential for the dynamics and governing equations that follow.</p>
+      </section>
+    </section>
+  </div>
+</div>
+
+<script type="module" src="../../main.js"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Francesco Ferri">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../custom/theme/haervig.css">
+  <link rel="stylesheet" href="../custom/plugins/highlight/haervig.css">
+  <style>
+    .reveal .compact { font-size: 0.72em; line-height: 1.25; }
+    .reveal .slide-image { display:block; max-width:88%; max-height:52vh; width:auto; height:auto; object-fit:contain; margin:0.35em auto; }
+    .reveal .small-image { max-height:38vh; }
+    .reveal .equation-box { border:2px solid #333; padding:0.25em 0.5em; margin:0.5em auto; width:fit-content; }
+    .reveal .assumptions { font-size:0.68em; opacity:0.85; }
+    .reveal .two-column { display:flex; gap:1.1em; align-items:center; }
+    .reveal .two-column > div { flex:1; }
+    .reveal .backup-label { position:absolute; right:0; top:0; font-size:0.45em; opacity:0.55; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div style="position: fixed; bottom: 20px; left: 30px; z-index: 1000;"><h2><a href="../" style="color:#222;text-decoration:none;">←</a></h2></div>
+  <div class="slides">
+<section>
+  <section>
+    <h3><b>Fluid Mechanics Course</b></h3>
+    <h2>Lecture 1A · Fluids and Essential Properties</h2>
+    <img class="slide-image" src="assets/Lecture_1_1/fluid-ball-flow.png" alt="Lecture 1A · Fluids and Essential Properties">
+    <h4><em>Francesco Ferri</em></h4><h5><em>AAU BUILD</em></h5>
+    <aside class="notes">Opening part of Lecture 1. Target time: 35 minutes. Connect examples to hydraulic, offshore, wind, drainage, and structural loading.</aside>
+  </section>
+  <section>
+    <h2>Learning Objectives</h2>
+    <ul><li class="fragment">Explain the mechanical distinction between a fluid and a solid</li><li class="fragment">Use the continuum assumption to define fluid fields</li><li class="fragment">Define density, specific weight, viscosity, pressure, and compressibility</li><li class="fragment">Distinguish absolute, gauge, and vapor pressure</li><li class="fragment">Prepare the property model used in fluid statics</li></ul>
+    <aside class="notes">Read the outcomes briefly. Emphasize that students will use the concepts in calculations, not only recognize definitions.</aside>
+  </section>
+</section>
+<section>
+  <h2>Why Fluid Mechanics for Structural Engineers?</h2>
+  <div class="container"><div class="col"><ul>
+<li class="fragment">Hydrostatic loads on tanks, gates, and submerged structures</li>
+<li class="fragment">Wind loads and wakes around buildings and bridges</li>
+<li class="fragment">Wave, current, and buoyancy effects offshore</li>
+<li class="fragment">Pipe, drainage, and hydraulic infrastructure</li></ul></div>
+<div class="col"><img class="slide-image" src="./assets/Lecture_1_1/slide_002_1.jpg" alt="Fluid mechanics applications"><img class="slide-image small-image" src="./assets/Lecture_1_1/slide_004_4.png" alt="Engineering flow application"></div></div>
+  <aside class="notes">Ask students to name one fluid load that becomes a structural load. Use their answers to frame the course.</aside>
+</section>
+<section>
+  <div style="display:flex;justify-content:center;align-items:center;height:80vh;"><h1>What Is a Fluid?</h1></div>
+  <aside class="notes">Transition from applications to the constitutive definition.</aside>
+</section>
+<section>
+  <h2>Mechanical Definition</h2>
+  <p class="fragment">A fluid <b>continuously deforms</b> under any applied shear stress.</p>
+<div class="container"><div class="col"><h3>Solid</h3><ul><li class="fragment">Can sustain static shear</li><li class="fragment">Reaches a finite deformation</li></ul></div>
+<div class="col"><h3>Fluid</h3><ul><li class="fragment">Cannot sustain static shear</li><li class="fragment">Deformation continues while shear acts</li></ul></div></div>
+<img class="slide-image small-image fragment" src="./assets/Lecture_1_1/fluid-.jpg" alt="Examples of fluids">
+  <aside class="notes">Stress the word continuously. Do not define a fluid simply as a material that takes the shape of its container.</aside>
+</section>
+<section>
+  <h2>Think–Pair–Share</h2>
+  <h3>Is toothpaste a fluid?</h3><ul><li class="fragment">Yes</li><li class="fragment">No</li><li class="fragment">It depends on the applied stress</li></ul>
+  <aside class="notes">Give students 60 seconds. Return to the answer after introducing Newtonian and non-Newtonian behaviour. Toothpaste has a yield-stress response and can flow after a threshold is exceeded.</aside>
+</section>
+<section>
+  <div style="display:flex;justify-content:center;align-items:center;height:80vh;"><h1>Continuum Assumption</h1></div>
+  <aside class="notes">Explain why macroscopic fields are possible although fluids are molecular.</aside>
+</section>
+<section>
+  <h2>From Molecules to Fields</h2>
+  <div class="container"><div class="col"><img class="slide-image" src="./assets/Lecture_1_1/fluid-molecules.jpg" alt="Fluid molecules"></div>
+<div class="col"><p class="fragment">Average microscopic behaviour over a small material volume.</p><p class="fragment">The volume must be:</p><ul><li class="fragment">Large compared with molecular spacing</li><li class="fragment">Small compared with the engineering length scale</li></ul><img class="slide-image small-image fragment" src="assets/Lecture_1_1/Parameter_continuum.png" alt="Continuum averaging"></div></div>
+  <aside class="notes">Define a fluid particle as a material volume element, not a single molecule. Link this to fields p(x,t), rho(x,t), and V(x,t).</aside>
+</section>
+<section>
+  <h2>Continuum Validity</h2>
+  <div class="equation-box">$$Kn=\frac{\lambda}{L}$$</div><ul><li class="fragment">\(\lambda\): molecular mean free path</li><li class="fragment">\(L\): characteristic engineering length</li><li class="fragment">For \(Kn\ll 1\), continuum modelling is appropriate</li></ul>
+  <aside class="notes">Mention Knudsen number only as a validity check. For ordinary water and air problems at civil-engineering scales, the continuum assumption is normally excellent.</aside>
+</section>
+<section>
+  <div style="display:flex;justify-content:center;align-items:center;height:80vh;"><h1>Essential Fluid Properties</h1></div>
+  <aside class="notes">Focus on properties required immediately in statics and later in dynamics.</aside>
+</section>
+<section>
+  <h2>Mass-Related Properties</h2>
+  <div class="container"><div class="col"><h3>Density</h3>$$\rho=\frac{m}{V}$$<p class="fragment">Units: kg/m³</p></div><div class="col"><h3>Derived quantities</h3><ul><li class="fragment">Specific weight: \(\gamma=\rho g\)</li><li class="fragment">Specific volume: \(v=1/\rho\)</li><li class="fragment">Specific gravity: \(SG=\rho/\rho_{ref}\)</li></ul></div></div><img class="slide-image small-image fragment" src="assets/Lecture_1_1/slide_011_1.png" alt="Density data">
+  <aside class="notes">Explicitly distinguish specific weight from specific gravity. For water near room temperature, use about 1000 kg/m3 when an engineering approximation is sufficient.</aside>
+</section>
+<section>
+  <h2>Viscosity: Resistance to Deformation Rate</h2>
+  <div class="container"><div class="col"><img class="slide-image" src="assets/Lecture_1_1/slide_016_1.png" alt="Shearing fluid"></div><div class="col"><p class="fragment">For a Newtonian fluid:</p><div class="equation-box fragment">$$\tau=\mu\frac{du}{dy}$$</div><ul><li class="fragment">\(\mu\): dynamic viscosity [Pa·s]</li><li class="fragment">\(\nu=\mu/\rho\): kinematic viscosity [m²/s]</li></ul></div></div>
+  <aside class="notes">Explain that stress is related to deformation rate, not deformation. Use the picture to identify the velocity gradient. Return briefly to toothpaste as a non-Newtonian yield-stress material.</aside>
+</section>
+<section>
+  <h2>Pressure</h2>
+  <div class="container"><div class="col"><div class="equation-box">$$p=\frac{F_n}{A}$$</div><ul><li class="fragment">Scalar field</li><li class="fragment">Pressure force acts normal to a surface</li><li class="fragment">SI unit: Pa = N/m²</li></ul></div><div class="col"><img class="slide-image" src="assets/Lecture_1_1/slide_013_1.jpg" alt="Pressure force"></div></div>
+  <aside class="notes">Clarify that the formula is an average definition over a finite area. At a point, pressure is the limiting normal stress in a fluid at rest.</aside>
+</section>
+<section>
+  <h2>Absolute and Gauge Pressure</h2>
+  <img class="slide-image" src="./assets/Lecture_1_1/absolute-gauge-diagram.png" alt="Absolute and gauge pressure"><div class="equation-box fragment">$$p_{abs}=p_{atm}+p_g$$</div><p class="fragment"><b>Quick check:</b> If \(p_g=-20\,\mathrm{kPa}\) and \(p_{atm}=101\,\mathrm{kPa}\), find \(p_{abs}\).</p>
+  <aside class="notes">Give students 30 seconds. Answer: approximately 81 kPa absolute. Emphasize that negative gauge pressure is not negative absolute pressure.</aside>
+</section>
+<section>
+  <h2>Compressibility and Vapor Pressure</h2>
+  <div class="container"><div class="col"><h3>Bulk modulus</h3>$$K=-V\frac{dp}{dV}$$<h3 class="fragment">Compressibility</h3><p class="fragment">$$\beta=-\frac{1}{V}\frac{dV}{dp}=\frac{1}{K}$$</p></div><div class="col"><h3>Vapor pressure</h3><p class="fragment">Equilibrium vapor pressure at a given temperature.</p><img class="slide-image small-image fragment" src="./assets/Lecture_1_1/slide_014_1.gif" alt="Vapor pressure"><p class="fragment">If local absolute pressure approaches vapor pressure, cavitation may occur.</p></div></div>
+  <aside class="notes">Keep this brief. Correct the usual confusion between bulk modulus and compressibility. Link vapor pressure to a future Bernoulli application.</aside>
+</section>
+<section>
+  <h2>Lecture 1A Takeaways</h2>
+  <ul><li class="fragment">Fluids deform continuously under shear</li><li class="fragment">Continuum fields replace molecular tracking</li><li class="fragment">Density and specific weight control hydrostatic loading</li><li class="fragment">Viscosity relates shear stress to deformation rate</li><li class="fragment">Gauge and absolute pressure use different references</li></ul>
+  <aside class="notes">Use this as the transition to fluid statics. The next question is how pressure varies when the fluid is at rest.</aside>
+</section>
+  </div>
+</div>
+<script type="module" src="../../main.js"></script>
+</body>
+</html>

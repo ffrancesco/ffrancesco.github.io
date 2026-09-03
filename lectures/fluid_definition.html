@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Jacob Andersen">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../custom/theme/haervig.css">
+  <link rel="stylesheet" href="../custom/plugins/highlight/haervig.css">
+  <style>
+    .reveal .compact { font-size: 0.72em; line-height: 1.25; }
+    .reveal .slide-image { display:block; max-width:88%; max-height:52vh; width:auto; height:auto; object-fit:contain; margin:0.35em auto; }
+    .reveal .small-image { max-height:38vh; }
+    .reveal .equation-box { border:2px solid #333; padding:0.25em 0.5em; margin:0.5em auto; width:fit-content; }
+    .reveal .assumptions { font-size:0.68em; opacity:0.85; }
+    .reveal .two-column { display:flex; gap:1.1em; align-items:center; }
+    .reveal .two-column > div { flex:1; }
+    .reveal .backup-label { position:absolute; right:0; top:0; font-size:0.45em; opacity:0.55; }
+  </style>
+</head>
+
+<body>
+<!-- ===================================================================== -->
+<!-- FLUID MECHANICS COURSE                                                 -->
+<!-- Fluid Properties and Flow Characteristics                              -->
+<!-- Reveal.js fragment compatible content                                  -->
+<!-- Insert inside <div class="slides"> ... </div>                          -->
+<!-- ===================================================================== -->
+
+  <!--slides-->
+  <div class="reveal">
+    <!-- Back to Slidedecks link -->
+    <div style="position: fixed; bottom: 20px; left: 30px; z-index: 1000;">
+      <h2><a href="../" style="color: #222; text-decoration: none;">←</a></h3>
+    </div>
+
+    <div class="slides">
+<section>
+
+  <section>
+    <h3><b>Fluid Mechanics Course</b></h3>
+    <h2>Fluid Properties and Flow Characteristics</h2>
+
+    <img src="assets/Lecture_1_1/fluid-ball-flow.png" alt="Fluid flow" width="700">
+
+    <h4><em>Francesco Ferri</em></h4>
+    <h5><em>AAU BUILD</em></h5>
+
+    <aside class="notes">
+      First lecture.
+      Explain that fluid properties are the building blocks
+      for Bernoulli and Navier-Stokes equations.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Learning Objectives</h2>
+
+    <ul>
+      <li class="fragment">Understand fluid properties</li>
+      <li class="fragment">Explore how fluids behave</li>
+      <li class="fragment">Recognize assumptions and limitations</li>
+      <li class="fragment">Prepare for Bernoulli and Navier-Stokes equations</li>
+      <li class="fragment">Apply concepts to engineering problems</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Why Fluid Mechanics?</h2>
+      <div class="container">
+        <div class="col">
+          <h3>Engineering Applications</h3>
+          <ul>
+            <li class="fragment">Hydrostatic loads on tanks, gates, and submerged structures</li>
+            <li class="fragment">Wind loads and wakes around buildings and bridges</li>
+            <li class="fragment">Wave, current, and buoyancy effects offshore</li>
+            <li class="fragment">Pipe, drainage, and hydraulic infrastructure</li>
+          </ul>
+          <h3>Other Applications</h3>
+          <ul>
+            <li class="fragment">Biological flows</li>
+            <li class="fragment">Geophysical flows</li>
+            <li class="fragment">Climate modeling</li>
+            <li class="fragment">Human physiology</li>
+          </ul>
+
+        </div>
+        <div class="col">
+          <img class="fragment" src="./assets/Lecture_1_1/slide_002_1.jpg" alt="Fluid mechanics applications"
+          style="max-height: 200px">
+          <img class="fragment" src="./assets/Lecture_1_1/slide_004_1.jpg" alt="Fluid mechanics applications"
+          style="max-height: 200px">
+          <img class="fragment"  src="./assets/Lecture_1_1/slide_004_4.png" alt="Fluid mechanics applications"
+          style="max-height: 200px">
+          <img class="fragment"  src="./assets/Lecture_1_1/slide_002_3" alt="Fluid mechanics applications"
+          style="max-height: 200px">
+        </div>
+      </div>  
+  </section>
+
+  <section>
+    <h2>Roadmap</h2>
+
+    <p class="fragment">What is a Fluid?</p>
+    <p class="fragment">↓</p>
+
+    <p class="fragment">Fluid Properties</p>
+    <p class="fragment">↓</p>
+
+    <p class="fragment">Flow Characteristics</p>
+    <p class="fragment">↓</p>
+
+    <p class="fragment" style="border: 1px solid;">The rest of the course will build upon these fundamentals</p>
+
+  </section>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- WHAT IS A FLUID                                       -->
+<!-- ===================================================== -->
+
+<section>
+
+  <section>
+    <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+      <h1>What is a Fluid?</h1>
+    </div>
+  </section>
+
+  <section>
+    <h2>Mechanical Definition</h2>
+
+    <p class="fragment">A fluid <b>continuously deforms</b> under any applied shear stress.</p>
+
+    <p class="fragment">Examples: Liquids, Gases, no-fixed shape</p>
+    <div class="container">
+      <div class="col">
+        <h3>Solid</h3>
+
+        <ul>
+          <li class="fragment">Finite deformation</li>
+          <li class="fragment">Can sustain shear stress up to material failure</li>
+          <img class="fragment" src="assets/Lecture_1_1/slide_015_1.png" alt="" style="height: 200px;">
+        </ul>
+      </div>
+
+      <div class="col">
+        <h3>Fluid</h3>
+
+        <ul>
+          <li class="fragment">Continuous deformation</li>
+          <li class="fragment">Cannot sustain static shear stress</li>
+          <img class="fragment" src="assets/Lecture_1_1/slide_016_1.png" alt="" style="height: 200px;">
+        </ul>
+      </div>
+
+    </div>
+
+
+    <aside class="notes">
+      Stress the word continuously.
+      This definition distinguishes fluids from solids.
+    </aside>
+  </section>
+
+  <section>
+
+    <h2>Examples</h2>
+
+    <img src="./assets/Lecture_1_1/slide_010_10.png" alt="Examples of fluids">
+
+  </section>
+
+  <section>
+
+    <h2>Think-Pair-Share</h2>
+
+    <p>Is toothpaste a fluid?</p>
+
+    <ul>
+      <li class="fragment">Yes</li>
+      <li class="fragment">No</li>
+      <li class="fragment">Depends on applied stress</li>
+    </ul>
+
+    <aside class="notes">
+      Do not answer yet.
+      Return to this question during the viscosity section.
+    </aside>
+
+  </section>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- CONTINUUM ASSUMPTION                                  -->
+<!-- ===================================================== -->
+
+<section>
+
+  <section>
+    <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+      <h1>Continuum Assumption</h1>
+    </div>
+  </section>
+
+  <section>
+    <h2>Microscopic View</h2>
+    <div class="container">
+      <div class="col"><img style="padding-left: 50%;" src="./assets/Lecture_1_1/fluid-molecules.jpg" alt="Fluid molecules"></div>
+      <div class="col">
+        <ul>
+          <li class="fragment">Fluid consists of molecules</li>
+          <li class="fragment">Properties fluctuate microscopically</li>
+          <li class="fragment">Tracking molecules is impractical</li>
+        </ul>
+      </div>
+    </div>
+  
+  <aside class="notes">Define a fluid particle as a material volume element, not a single molecule. Link this to fields p(x,t), rho(x,t), and V(x,t).</aside>
+  </section>
+
+  <section>
+
+    <h2>Engineering Model</h2>
+
+    <p class="fragment">Molecules</p>
+    <p class="fragment">↓</p>
+
+    <p class="fragment">Averaging Volume</p>
+    <p class="fragment">↓</p>
+
+    <p class="fragment">Fluid Particle</p>
+    <p class="fragment">↓</p>
+
+    <p class="fragment">Continuum Field</p>
+    <br>
+    <h3 class="fragment" style="text-align: center;">How can we verify the continuum assumption?</h3>
+  </section>
+
+  <section>
+
+    <h2>Knudsen Number</h2>
+    <div class="equation-box">  
+      $$
+      Kn = \frac{\lambda}{L}
+      $$
+    </div>
+    <ul>
+      <li class="fragment">\(\lambda\): molecular mean free path</li>
+      <li class="fragment">\(L\): characteristic engineeringlength</li>
+      <li class="fragment">\(Kn < 0.01\): continuum modelling is appropriate</li>
+      <li class="fragment">\(Kn > 10\): continuum is not valid - rarefied gas</li>
+    </ul>
+
+  </section>
+
+  <section>
+
+    <h2>Fluid Particle (Material Volume Element)</h2>
+
+    <p>A <em>fluid particle</em> is a very <em>small volume (δV)</em> that includes a number of molecules. </p>
+    <p>This volume must be:</p>
+    <br>
+    <ul>
+      <li class="fragment">Large enough to contain a vast number of molecules, so that the statistical average is smooth and stable (eliminating random molecular fluctuations)</li>
+      <li class="fragment">Small enough to be infinitesimal compared to the macroscopic scale of the system (e.g., the size of an airplane wing or a pipe diameter), so that it can be considered a "point" in our differential equations</li>
+    </ul>
+    <br>
+    <br>
+
+    <p class="fragment">The fluid properties are estimated from the statistical average of the molecules within δV.</p>
+        <img class="slide-image small-image fragment" src="assets/Lecture_1_1/Parameter_continuum.png" alt="Continuum averaging">
+
+  </section>
+
+</section>
+<!-- ===================================================== -->
+<!-- FUNDAMENTAL PROPERTIES                                -->
+<!-- ===================================================== -->
+
+<section>
+
+  <section>
+  <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+  <h1>Fundamental Fluid Properties</h1>
+  </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="col">
+        <em>Intrinsic (Transport) Properties</em>
+        <p class="fragment"> fundamental characteristics of the fluid material itself that are independent of the flow's motion or the amount of fluid.</p>
+        <ul>
+          <li class="fragment">Density (ρ)</li>
+          <li class="fragment">Viscosity (μ)</li>
+          <li class="fragment">Surface Tension (σ)</li>
+        </ul>
+      </div>
+
+      <div class="col">
+        <em>Thermodynamic State Properties</em>
+        <p class="fragment"> describe the state of the fluid and can change based on external conditions like volume, applied forces, etc.</p>
+        <ul>
+          <li class="fragment">Pressure (p)</li>
+          <li class="fragment">Temperature (T)</li>
+          <li class="fragment">Compressibility (β)</li>
+        </ul>
+
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- DENSITY -->
+<section>
+  <section>
+    <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+    <h1>Density</h1>
+    </div>
+  </section>
+  <section>
+    Density (ρ): mass per unit volume of a fluid  [kg/m³].
+
+    $$
+    \rho=\frac{m}{V}
+    $$
+
+    <div class="container">
+      <div class="col">
+        <h2 class="fragment">Liquids</h2>
+
+          <ul>
+          <li class="fragment">Small density changes</li>
+          <li class="fragment">Weak pressure dependence</li>
+          <li class="fragment">Weak temperature dependence</li>
+          </ul>
+        
+          
+            <h3>Derived quantities</h3>
+              <ul>
+                <li class="fragment">Specific weight: \(\gamma=\rho g\)</li>
+                <li class="fragment">Specific volume: \(v=1/\rho\)</li>
+                <li class="fragment">Specific gravity: \(SG=\rho/\rho_{ref}\)</li>
+              </ul>
+          
+      </div>
+      <div class="col">
+        <img src="assets/Lecture_1_1/slide_011_1.png" alt="">
+        
+    </div>
+  </section>
+  <section>
+    <h2 class="fragment">Gases</h2>
+        <ul>
+        <li class="fragment">Density strongly depends on pressure - direct relationship</li>
+        <li class="fragment">Density strongly depends on temperature - inverse relationship</li>
+        </ul>
+    
+    <div class="container fragment">
+      <h2>Ideal Gas Law</h2>
+      <div class="col">
+          $$
+            pV=nRT
+          $$
+
+          $$
+            \rho=\frac{pM}{RT}
+          $$
+
+          <p>\(p\): pressure, \(V\): volume, \(n\): number of moles, </p>
+          <p>\(R\): universal gas constant (8.314 J/(mol·K))</p>
+          <p>\(T\): temperature, \(\rho\): density, \(M\): molar mass</p>
+          <p>1 mole: 6.022 × 10²³ molecules</p>
+      </div>
+      <div class="col">
+                <img src="assets/Lecture_1_1/slide_012_1.png" alt="" style="height: 400px;">
+
+      </div>
+    </div>
+  </section>
+
+</section>
+
+<!-- PRESSURE -->
+<section>
+  <section>
+    <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+    <h1>Pressure</h1>
+    </div>
+  </section>
+  <section>
+    
+    <div class="container">
+      <div class="col">
+        <h2>Pressure (p):</h2>
+        force per unit area exerted by a fluid, [Pa].
+
+        $$
+        p =\frac{F}{A}
+        $$
+        <ul>
+          <li class="fragment">Scalar field</li>
+          <li class="fragment">The force associated with pressure acts normal to surfaces</li>
+        </ul>
+        <img src="assets/Lecture_1_1/slide_013_1.jpg" alt="" style="padding-left: 30%;" class="fragment">
+        
+      </div>
+      <div class="col fragment">
+        <h3>Vapor Pressure</h3>
+        <p>The vapor pressure of a liquid is the pressure exerted by its vapor in equilibrium with the liquid at a given temperature.</p>
+        <p class="fragment">Equilibrium condition between molecules leaving and returning to the liquid surface</p>
+        <img class="fragment" src="./assets/Lecture_1_1/slide_014_1.gif" alt="Vapor pressure">
+
+        <p class="fragment">
+          Depends strongly on temperature and fluid type
+        </p>
+        <p class="fragment">Important in certain fluid processes, such as cavitation.</p>
+      </div>
+    </div>
+    
+  </section>
+  <section>
+      <h2>Absolute and Gauge Pressure</h2>
+      
+    <img src="./assets/Lecture_1_1/absolute-gauge-diagram.png" alt="Absolute and gauge pressure reference">
+
+      <p class="fragment">Absolute pressure: measured relative to a perfect vacuum</p>
+      <p class="fragment">Gauge pressure<sup>1</sup>: measured relative to the ambient (local) atmospheric pressure</p>
+      <div class="footnote fragment" style="position: absolute; bottom: 0; left: 0; font-size: 0.5em; opacity: 0.7;">
+        <p><sup>1</sup> Measurements always done in gauge pressure unless otherwise specified.</p>
+      </div>
+      <h2 class="fragment">Quick Quiz</h2>
+
+      <p class="fragment">Gauge pressure = -20 kPa <br>
+      Absolute pressure?
+      </p>
+      
+    </section>
+</section>
+
+<!-- VISCOSITY -->
+<section>
+  <section>
+  <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+  <h1>Viscosity</h1>
+  </div>
+  </section>
+  <section>
+    <h2>Viscosity (μ):</h2>
+    measure of a fluid's resistance to deformation or flow, often described as "thickness" or "stickiness", [Pa·s].
+
+    
+
+    <div class="container">
+      <div class="col fragment">
+        <h4>Shear Stress</h4>
+        <h3>Fluid</h3>
+        <img src="assets/Lecture_1_1/slide_016_1.png" alt=""style="height: 200px;">
+      </div>
+      <div class="col">
+        <p class="fragment">
+        for small time interval \(\delta t\), the fluid layer moves a distance \(\delta a = U \delta t\)</p> 
+        <p class="fragment"><em>shear strain</em> is defined as
+        $$
+          \delta \beta \approx tan(\delta \beta) = \frac{ \delta a}{b} = \frac{U \delta t}{b} 
+        $$
+        <p class="fragment"> <em>rate of shear strain</em> is defined as
+        $$
+          \frac{d\beta}{dt} = \frac{U}{b} = \frac{du}{dy}
+        $$
+        
+        </p>
+      </div>
+    </div>
+  
+    <p class="fragment">
+          if the shear stress increases, the rate of shear strain increases, the relation between shear stress and rate of shear strain is called the <em>constitutive relation</em> for the fluid. For a Newtonian fluid, the constitutive relation is linear:  
+    </p>
+    <div class="equation-box"> $$
+            \tau = f(\frac{du}{dy}) = \mu \frac{du}{dy}
+          $$ </div>
+
+  </section>
+
+  
+
+  <section>
+
+    <h2>Type of fluids (based on viscosity)</h2>
+    <div class="container">
+      <div class="col fragment">
+         <h3>Newtonian Fluids</h3>
+
+          <img src="./assets/Lecture_1_1/slide_019_1.png" alt="Newtonian fluid behaviour">
+          
+      </div>
+      <div class="col fragment">
+        <h3>Non-Newtonian Fluids</h3>
+
+        <img src="./assets/Lecture_1_1/slide_020_1.png" alt="Non-Newtonian fluid behaviour">
+        <ul>
+          <li class="fragment">Shear thinning: viscosity decreases with increasing shear rate</li>
+          <li class="fragment">Shear thickening: viscosity increases with increasing shear rate</li>
+          <li class="fragment">Bingham plastic: requires a minimum stress to initiate flow</li>
+        </ul>
+      </div>
+    </div>
+ <p class="fragment">
+  <div class="equation-box"> $$
+            \mu = \mu(T)
+          $$ </div>
+    example: 
+    water viscosity decreases 40% from 60°C to 100°C
+    water density decreases 2.5% from 60°C to 100°C
+     </p> 
+  </section>
+  <section>
+
+    <img style="height: 700px;" src="./assets/Lecture_1_1/slide_020_20.png" alt="Non-Newtonian fluid behaviour">
+    <h3>Question: Why doesn't paint drip from the brush?</h3>
+
+  </section>
+
+  <section>
+
+  <h2>Why Is Viscosity Important?</h2>
+
+    <ul>
+    <li class="fragment">Flow resistance</li>
+    <li class="fragment">Energy dissipation</li>
+    <li class="fragment">Laminar/turbulent transition</li>
+    <li class="fragment">Appears (complicates) in Navier-Stokes equations</li>
+    </ul>
+   
+  </section>
+
+</section>
+
+<!-- TEMPERATURE -->
+<section>
+
+  <section>
+    <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+  <h1>Temperature</h1></div>
+  </section>
+
+  <section>
+    <h2>Temperature (K):</h2>
+    <p>measure of the average kinetic energy of the molecules in a fluid.
+    </p>
+    <div class="container">
+      <div class="col">
+        <img src="assets/Lecture_1_1/slide_022_1.gif" alt="">
+      </div>
+      <div class="col">
+        <ul class="fragment">
+          <li >Celsius °C</li>
+          <li >Fahrenheit °F</li>
+          <li >Kelvin K</li>
+          <li >Rankine °R</li>
+        </ul>
+      </div>
+    </div>
+    
+  
+    
+
+  </section>
+
+  <section>
+
+  <h2>Why Temperature Matters</h2>
+  <div class="container">
+    <div class="col">
+      <p class="fragment">Temperature affects several important fluid properties:</p>
+      <ul>
+        <li class="fragment">Density</li>
+        <li class="fragment">Viscosity</li>
+        <li class="fragment">(Vapor) Pressure</li>
+        <li class="fragment">Phase change</li>
+        <li class="fragment">Heat transfer</li>
+        <li class="fragment">Expansion and Contraction</li>
+      </ul>
+    </div>
+
+    <div class="col">
+      <img src="./assets/Lecture_1_1/slide_023_1.png" alt="" style="height: 300px;">
+      <img src="./assets/Lecture_1_1/slide_023_2.png" alt="" style="height: 300px;">
+      <img src="./assets/Lecture_1_1/slide_023_3.png" alt="" style="height: 300px;">
+    </div>
+
+  </section>
+
+</section>
+
+<!-- SURFACE TENSION -->
+<section>
+
+  <section><div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+ <h1>Surface Tension</h1></div>
+  
+  </section>
+
+  <section>
+    <h2>Surface tension (σ):</h2>
+    <p>measure the energy required to increase the surface area of a liquid due to cohesive forces between molecules, [N/m].
+  </p><p class="fragment">
+    or tendency of liquid surfaces to minimize their area*, behaving like a stretched elastic membrane.
+</p>
+    <img src="./assets/Lecture_1_1/slide_024_1.png" alt="Surface tension" class="fragment" style="height: 300px;">
+    <img src="./assets/Lecture_1_1/slide_024_2.jpg" alt="Surface tension" class="fragment" style="height: 300px;">
+
+  </section>
+
+</section>
+
+<!-- COMPRESSIBILITY -->
+<section>
+
+  <section>
+    <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+ <h1>Compressibility</h1></div>
+
+  </section>
+
+  <section>
+    <h2>Compressibility [\(Pa^-1\)]:</h2>
+    <p>measured via bulk modulus also referred as bulk modulus of elasticity</p>
+
+    <div class="container">
+      <div class="col">
+        <h3>Bulk modulus</h3>
+        $$K=-V\frac{dp}{dV}$$
+        <h3 class="fragment">Compressibility</h3>
+        <p class="fragment">$$\beta=-\frac{1}{V}\frac{dV}{dp}=\frac{1}{K}$$</p>
+      </div>
+      <div class="col">
+        <img src="assets/Lecture_1_1/slide_028_1.png" alt="">
+      </div>
+    </div>
+  <aside class="notes">Keep this brief. Correct the usual confusion between bulk modulus and compressibility. Link vapor pressure to a future Bernoulli application.</aside>
+
+
+
+
+
+  </section>
+
+</section>
+
+<!-- FLOW TYPES -->
+<section>
+
+  <section>
+    <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+      <h1>Flow Characteristics</h1>
+    </div>
+  </section>
+
+  <section>
+    <h2>Flow classes and why they matter</h2>
+    <table style="font-size: 0.7em; width: 100%; border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th style="border: 1px solid #666; padding: 0.5rem;">Flow type</th>
+          <th style="border: 1px solid #666; padding: 0.5rem;">Short definition</th>
+          <th style="border: 1px solid #666; padding: 0.5rem;">Engineering benefit / justification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="fragment">
+          <td style="border: 1px solid #666; padding: 0.5rem;">Steady / Unsteady</td>
+          <td style="border: 1px solid #666; padding: 0.5rem;">Properties at a fixed point do or do not change with time.</td>
+          <td style="border: 1px solid #666; padding: 0.5rem;">Simplifies design and control for pumps, pipelines, and turbines; unsteady effects matter in startup, shutdown, and wave loading.</td>
+        </tr>
+        <tr class="fragment">
+          <td style="border: 1px solid #666; padding: 0.5rem;">Compressible / Incompressible</td>
+          <td style="border: 1px solid #666; padding: 0.5rem;">Density changes noticeably or remains nearly constant.</td>
+          <td style="border: 1px solid #666; padding: 0.5rem;">For liquids, incompressibility allows simpler flow-energy calculations; for gases, compressibility is necessary to predict pressure and speed changes.</td>
+        </tr>
+        <tr class="fragment">
+          <td style="border: 1px solid #666; padding: 0.5rem;">Laminar / Turbulent</td>
+          <td style="border: 1px solid #666; padding: 0.5rem;">Fluid motion is smooth and layered, or chaotic and mixed.</td>
+          <td style="border: 1px solid #666; padding: 0.5rem;">Helps predict drag, mixing, heat transfer, and pressure losses in pipes, reactors, and aircraft flows.</td>
+        </tr>
+        <tr class="fragment">
+          <td style="border: 1px solid #666; padding: 0.5rem;">Rotational / Irrotational</td>
+          <td style="border: 1px solid #666; padding: 0.5rem;">Fluid particles do or do not spin as they move.</td>
+          <td style="border: 1px solid #666; padding: 0.5rem;">Irrotational models give elegant analytical solutions for ideal flow; rotational flows are needed for vortex generation and wake analysis.</td>
+        </tr>
+        <tr class="fragment">
+          <td style="border: 1px solid #666; padding: 0.5rem;">Viscous / Inviscid</td>
+          <td style="border: 1px solid #666; padding: 0.5rem;">Shear stresses are important or negligible.</td>
+          <td style="border: 1px solid #666; padding: 0.5rem;">Inviscid models are useful for first estimates and streamline theory; viscous effects are essential for drag, losses, and boundary layers.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Steady vs Unsteady</h2>
+    <div class="container">
+      <div class="col">
+        <p class="fragment"><b>Steady</b>: no change with time at a fixed point</p>
+        <div class="equation-box fragment">$$\frac{\partial}{\partial t} = 0$$</div>
+        <p class="fragment">Useful for routine design calculations in pipelines and channels.</p>
+      </div>
+      <div class="col">
+        <p class="fragment"><b>Unsteady</b>: the flow field changes with time</p>
+        <div class="equation-box fragment">$$\frac{\partial}{\partial t} \neq 0$$</div>
+        <p class="fragment">Important for valve operations, waves, startup/shutdown, and transient loads.</p>
+      </div>
+    </div>
+    <img src="assets/Lecture_1_1/slide_030_1.png" alt="Steady and unsteady flow" class="fragment" style="max-height: 260px; margin-top: 1rem;">
+  </section>
+
+  <section>
+    <h2>Compressible vs Incompressible</h2>
+    <div class="container">
+      <div class="col">
+        <p class="fragment"><b>Compressible</b>: density changes significantly with pressure/temperature.</p>
+        <p class="fragment"><b>Incompressible</b>: density is nearly constant.</p>
+      </div>
+      <div class="col">
+        <p class="fragment">Why it matters:</p>
+        <ul>
+          <li class="fragment">Gas pipelines and nozzles are often compressible</li>
+          <li class="fragment">Water flows are usually treated as incompressible</li>
+          <li class="fragment">The choice determines the governing equations and design assumptions</li>
+        </ul>
+      </div>
+    </div>
+    <img src="assets/Lecture_1_1/slide_033_2.png" alt="Compressible and incompressible flow" style="height: 380px;" class="fragment">
+  </section>
+
+  <section>
+    <h2>Laminar vs Turbulent</h2>
+    <div class="container">
+      <div class="col">
+        <p class="fragment"><b>Laminar</b>: smooth, ordered layers</p>
+        <p class="fragment"><b>Turbulent</b>: chaotic mixing and eddies</p>
+      </div>
+      <div class="col">
+        <p class="fragment">Why it matters:</p>
+        <ul>
+          <li class="fragment">Affects drag and pressure loss</li>
+          <li class="fragment">Affects mixing, heat transfer, and reaction rates</li>
+          <li class="fragment">Changes the design of pipes, vessels, and aerodynamics</li>
+        </ul>
+      </div>
+    </div>
+    <img src="./assets/Lecture_1_1/slide_034_1.png" alt="Laminar and turbulent flow" width="900" class="fragment">
+  </section>
+
+  <section>
+    <h2>Classification Challenge</h2>
+    <table style="font-size: 0.8em; width: 100%; border-collapse: collapse;">
+      <tr class="fragment">
+        <td style="border: 1px solid #666; padding: 0.5rem;">Blood vessel</td>
+        <td style="border: 1px solid #666; padding: 0.5rem;">Usually laminar in small vessels, but pulsatile and unsteady</td>
+      </tr>
+      <tr class="fragment">
+        <td style="border: 1px solid #666; padding: 0.5rem;">River</td>
+        <td style="border: 1px solid #666; padding: 0.5rem;">Often turbulent, with free-surface effects and variable discharge</td>
+      </tr>
+      <tr class="fragment">
+        <td style="border: 1px solid #666; padding: 0.5rem;">Aircraft wake</td>
+        <td style="border: 1px solid #666; padding: 0.5rem;">Typically turbulent and unsteady, requiring aerodynamic optimization</td>
+      </tr>
+      <tr class="fragment">
+        <td style="border: 1px solid #666; padding: 0.5rem;">Groundwater flow</td>
+        <td style="border: 1px solid #666; padding: 0.5rem;">Slow, incompressible, often treated as porous-media flow</td>
+      </tr>
+    </table>
+  </section>
+
+</section>
+<!-- SUMMARY -->
+
+<section>
+
+<section>
+
+<h2>Key Takeaways</h2>
+
+<ul>
+<li class="fragment">Fluid deforms continuously under shear stress</li>
+<li class="fragment">Continuum assumption is fundamental to replace molecular tracking</li>
+<li class="fragment">Viscosity is a key fluid property in dynamic analysis, but density is key in static conditions</li>
+<li class="fragment">Temperature affects fluid behavior significantly</li>
+<li class="fragment">Flow classifications can be used to simplify analysis</li>
+</ul>
+
+<aside class="notes">Use this as the transition to fluid statics. The next question is how pressure varies when the fluid is at rest.</aside>
+
+
+</section>
+
+</section>
+ </div>
+  </div>
+  <script type="module" src="../../main.js"></script>
+</body>
+
+</html>

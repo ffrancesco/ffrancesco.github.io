@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Francesco Ferri">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../custom/theme/haervig.css">
+  <link rel="stylesheet" href="../custom/plugins/highlight/haervig.css">
+  <style>
+    .reveal .compact { font-size: 0.72em; line-height: 1.25; }
+    .reveal .slide-image { display:block; max-width:88%; max-height:52vh; width:auto; height:auto; object-fit:contain; margin:0.35em auto; }
+    .reveal .small-image { max-height:38vh; }
+    .reveal .equation-box { border:2px solid #333; padding:0.25em 0.5em; margin:0.5em auto; width:fit-content; }
+    .reveal .assumptions { font-size:0.68em; opacity:0.85; }
+    .reveal .two-column { display:flex; gap:1.1em; align-items:center; }
+    .reveal .two-column > div { flex:1; }
+    .reveal .backup-label { position:absolute; right:0; top:0; font-size:0.45em; opacity:0.55; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div style="position: fixed; bottom: 20px; left: 30px; z-index: 1000;"><h2><a href="../" style="color:#222;text-decoration:none;">←</a></h2></div>
+  <div class="slides">
+<section>
+  <section>
+    <h3><b>Fluid Mechanics Course</b></h3>
+    <h2>Lecture 3B · Introduction to Potential Flow</h2>
+    <img class="slide-image" src="./assets/Lecture_3_2/slide_001_1.png" alt="Lecture 3B · Introduction to Potential Flow">
+    <h4><em>Francesco Ferri</em></h4><h5><em>AAU BUILD</em></h5>
+    <aside class="notes">Closing 25 to 30 minutes of Lecture 3. This is an introduction, not a complete potential-flow course.</aside>
+  </section>
+  <section>
+    <h2>Learning Objectives</h2>
+    <ul><li class="fragment">Define irrotational flow and velocity potential</li><li class="fragment">Derive Laplace's equation from incompressibility</li><li class="fragment">Define a two-dimensional stream function</li><li class="fragment">Use superposition to construct simple ideal flows</li><li class="fragment">State the limitations of potential-flow modelling</li></ul>
+    <aside class="notes">Read the outcomes briefly. Emphasize that students will use the concepts in calculations, not only recognize definitions.</aside>
+  </section>
+</section>
+<section>
+  <h2>Why Potential Flow?</h2>
+  <div class="container"><div class="col"><ul><li class="fragment">Provides analytical velocity fields</li><li class="fragment">Useful for outer flows where viscous effects are confined to thin regions</li><li class="fragment">Supports rapid preliminary analysis</li><li class="fragment">Allows superposition of elementary solutions</li></ul></div><div class="col"><img class="slide-image" src="./assets/Lecture_3_2/slide_005_1.png" alt="Vector field"></div></div>
+  <aside class="notes">State clearly that real fluids remain viscous. Potential flow is an ideal-region model, not a claim that viscosity is physically zero everywhere.</aside>
+</section>
+<section>
+  <h2>Irrotational Velocity Field</h2>
+  <p class="fragment">Irrotational condition:</p><div class="equation-box fragment">$$\nabla\times\mathbf{V}=0$$</div><p class="fragment">In a simply connected region, a scalar velocity potential exists:</p><div class="equation-box fragment">$$\mathbf{V}=\nabla\phi$$</div>
+  <aside class="notes">Explain curl as local rotation of a fluid element. Note that sign conventions sometimes use V = -grad phi; the course must use one convention consistently.</aside>
+</section>
+<section>
+  <h2>Incompressibility Leads to Laplace’s Equation</h2>
+  <p class="fragment">For an incompressible velocity field:</p><div class="equation-box fragment">$$\nabla\cdot\mathbf{V}=0$$</div><p class="fragment">With \(\mathbf{V}=\nabla\phi\):</p><div class="equation-box fragment">$$\nabla^2\phi=0$$</div><img class="slide-image small-image fragment" src="./assets/Lecture_3_2/slide_006_1.jpg" alt="Potential flow equations">
+  <aside class="notes">This is the core derivation. Explain that Laplace's equation is linear, enabling superposition. Boundary conditions determine the solution.</aside>
+</section>
+<section>
+  <h2>Two-Dimensional Stream Function</h2>
+  <p>One common convention is:</p><div class="equation-box fragment">$$u=\frac{\partial\psi}{\partial y},\qquad v=-\frac{\partial\psi}{\partial x}$$</div><ul><li class="fragment">Contours \(\psi=\text{constant}\) are streamlines</li><li class="fragment">The definition automatically satisfies 2D incompressible continuity</li><li class="fragment">For irrotational flow, \(\psi\) also satisfies Laplace's equation</li></ul>
+  <aside class="notes">Mention that an alternative sign convention exists. State the adopted convention on all later slides and exercises.</aside>
+</section>
+<section>
+  <h2>Elementary Solutions and Superposition</h2>
+  <div class="container"><div class="col"><ul><li class="fragment">Uniform flow</li><li class="fragment">Source or sink</li><li class="fragment">Vortex</li><li class="fragment">Doublet</li></ul><p class="fragment">Because Laplace's equation is linear, sums of solutions remain solutions.</p></div><div class="col"><img class="slide-image" src="./assets/Lecture_3_2/slide_012_1.png" alt="Superposition"><img class="slide-image small-image fragment" src="./assets/Lecture_3_2/slide_012_2.png" alt="Combined potential flows"></div></div>
+  <aside class="notes">Use only uniform flow plus a doublet as the main example if time is short. Keep source, vortex, and other combinations as reading.</aside>
+</section>
+<section>
+  <h2>Ideal Flow Around a Cylinder</h2>
+  <img class="slide-image" src="./assets/Lecture_3_2/slide_012_3.png" alt="Ideal flow around a body"><p class="fragment">Uniform flow + doublet produces an ideal cylinder flow.</p><p class="fragment">Once \(\mathbf{V}(x,y)\) is known, Bernoulli gives the pressure field in an irrotational region.</p>
+  <aside class="notes">Connect all three lectures: kinematics gives velocity, Bernoulli gives pressure, and integration of pressure gives force.</aside>
+</section>
+<section>
+  <h2>Limitations</h2>
+  <ul><li class="fragment">Does not resolve viscous boundary layers</li><li class="fragment">Cannot predict real separation accurately</li><li class="fragment">A non-circulating ideal cylinder has zero drag, d'Alembert's paradox</li><li class="fragment">Most useful as an outer-flow or preliminary model</li></ul>
+  <aside class="notes">Do not say simply that potential flow is invalid near every wall. It can approximate outer flow while a thin viscous boundary layer enforces no slip.</aside>
+</section>
+<section>
+  <h2>Three-Lecture Synthesis</h2>
+  <p class="fragment"><b>Lecture 1:</b> properties + static pressure → hydrostatic structural loads</p><p class="fragment"><b>Lecture 2:</b> velocity + material acceleration → Euler and Bernoulli</p><p class="fragment"><b>Lecture 3:</b> control-volume conservation → flow rates, reactions, and energy transfer</p><p class="fragment"><b>Potential flow:</b> construct ideal velocity fields, then obtain pressure using Bernoulli</p>
+  <aside class="notes">Finish by asking students to trace the chain from assumptions to velocity, pressure, and force for one engineering example.</aside>
+</section>
+  </div>
+</div>
+<script type="module" src="../../main.js"></script>
+</body>
+</html>

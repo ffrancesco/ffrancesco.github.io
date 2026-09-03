@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Francesco Ferri">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../custom/theme/haervig.css">
+  <link rel="stylesheet" href="../custom/plugins/highlight/haervig.css">
+  <style>
+    .reveal .compact { font-size: 0.72em; line-height: 1.25; }
+    .reveal .slide-image { display:block; max-width:88%; max-height:52vh; width:auto; height:auto; object-fit:contain; margin:0.35em auto; }
+    .reveal .small-image { max-height:38vh; }
+    .reveal .equation-box { border:2px solid #333; padding:0.25em 0.5em; margin:0.5em auto; width:fit-content; }
+    .reveal .assumptions { font-size:0.68em; opacity:0.85; }
+    .reveal .two-column { display:flex; gap:1.1em; align-items:center; }
+    .reveal .two-column > div { flex:1; }
+    .reveal .backup-label { position:absolute; right:0; top:0; font-size:0.45em; opacity:0.55; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div style="position: fixed; bottom: 20px; left: 30px; z-index: 1000;"><h2><a href="../" style="color:#222;text-decoration:none;">←</a></h2></div>
+  <div class="slides">
+<section>
+  <section>
+    <h3><b>Fluid Mechanics Course</b></h3>
+    <h2>Lecture 1B · Fluid Statics and Structural Loading</h2>
+    <img class="slide-image" src="assets/Lecture_1_2/slide_001_1.png" alt="Lecture 1B · Fluid Statics and Structural Loading">
+    <h4><em>Francesco Ferri</em></h4><h5><em>AAU BUILD</em></h5>
+    <aside class="notes">Second part of Lecture 1. Target time: 70 minutes including a worked gate problem.</aside>
+  </section>
+  <section>
+    <h2>Learning Objectives</h2>
+    <ul><li class="fragment">Derive the pressure distribution in a static fluid</li><li class="fragment">Use gauge and absolute pressure consistently</li><li class="fragment">Solve a multi-fluid manometer problem</li><li class="fragment">Calculate hydrostatic resultant force and center of pressure</li><li class="fragment">Interpret hydrostatic pressure as a structural distributed load</li></ul>
+    <aside class="notes">Read the outcomes briefly. Emphasize that students will use the concepts in calculations, not only recognize definitions.</aside>
+  </section>
+</section>
+<section>
+  <h2>Pressure at a Point</h2>
+  <div class="container"><div class="col"><p class="fragment">A static fluid has no shear stress.</p><p class="fragment">A shrinking fluid wedge gives:</p><div class="equation-box fragment">$$p_x=p_y=p_z$$</div><p class="fragment">Pressure is isotropic at a point in a static fluid.</p></div><div class="col"><img class="slide-image" src="assets/Lecture_1_2/slide_004_1.png" alt="Pressure wedge"></div></div>
+  <aside class="notes">Use this as a concise Pascal-wedge argument. Do not spend time on all intermediate algebra unless students ask. Isotropic means independent of direction at a point.</aside>
+</section>
+<section>
+  <div style="display:flex;justify-content:center;align-items:center;height:80vh;"><h1>Static Pressure Field</h1></div>
+  <aside class="notes">Move from pressure at a point to pressure variation in space.</aside>
+</section>
+<section>
+  <h2>Differential Fluid Element</h2>
+  <div class="container"><div class="col"><img class="slide-image" src="assets/Lecture_1_2/slide_005_5.png" alt="Differential element"></div><div class="col"><p class="fragment">Net pressure force per unit volume:</p><div class="equation-box fragment">$$-\nabla p$$</div><p class="fragment">Body force per unit volume:</p><div class="equation-box fragment">$$\rho\mathbf{g}$$</div></div></div>
+  <aside class="notes">Point out the minus sign: pressure force acts from high toward low pressure. This corrects the sign inconsistency in the original deck.</aside>
+</section>
+<section>
+  <h2>Hydrostatic Equilibrium</h2>
+  <p class="fragment">Newton's second law for a fluid at rest:</p><div class="equation-box fragment">$$-\nabla p+\rho\mathbf{g}=0$$</div><p class="fragment">With \(z\) positive upward and \(\mathbf{g}=-g\mathbf{k}\):</p><div class="equation-box fragment">$$\frac{\partial p}{\partial x}=0,\qquad\frac{\partial p}{\partial y}=0,\qquad\frac{dp}{dz}=-\rho g$$</div>
+  <aside class="notes">Relate this directly to structural equilibrium: sum of forces equals zero. Pressure is constant horizontally in a connected fluid at rest when gravity is the only body force.</aside>
+</section>
+<section>
+  <h2>Constant-Density Fluid</h2>
+  <div class="container"><div class="col"><p class="fragment">Integrating between two elevations:</p>$$p_2-p_1=\rho g(z_1-z_2)$$<div class="equation-box fragment">$$p=p_0+\rho gh$$</div></div><div class="col"><img class="slide-image" src="assets/Lecture_1_2/slide_009_5.png" alt="Hydrostatic pressure distribution"></div></div><p class="assumptions fragment"><b>Assumptions:</b> static fluid, constant density, uniform gravity.</p>
+  <aside class="notes">Define h as positive depth below the reference free surface. Ask whether pressure changes with tank shape. It does not, if depth and fluid are the same.</aside>
+</section>
+<section>
+  <div style="display:flex;justify-content:center;align-items:center;height:80vh;"><h1>Pressure Measurement</h1></div>
+  <aside class="notes">Apply the hydrostatic relation along connected fluid columns.</aside>
+</section>
+<section>
+  <h2>Manometer Procedure</h2>
+  <div class="container"><div class="col"><ol><li class="fragment">Start from a known pressure</li><li class="fragment">Add \(\rho g\Delta h\) when moving downward</li><li class="fragment">Subtract \(\rho g\Delta h\) when moving upward</li><li class="fragment">Pressure is continuous across an interface</li><li class="fragment">Equal elevations in the same connected static fluid have equal pressure</li></ol></div><div class="col"><img class="slide-image" src="assets/Lecture_1_2/slide_010_1.png" alt="Manometer types"></div></div>
+  <aside class="notes">Work one two-fluid U-tube example on the board. Require units at every stage. Avoid memorized sign conventions disconnected from the physical path.</aside>
+</section>
+<section>
+  <h2>Quick Manometer Check</h2>
+  <img class="slide-image small-image" src="assets/Lecture_1_2/slide_010_2.jpg" alt="Manometer"><p class="fragment">If the right fluid column rises, which side initially had the larger pressure?</p><p class="fragment"><b>Answer:</b> the pressure was larger on the side that depressed its adjacent column.</p>
+  <aside class="notes">Use this conceptual question before calculation. Students should infer direction before substituting numbers.</aside>
+</section>
+<section>
+  <div style="display:flex;justify-content:center;align-items:center;height:80vh;"><h1>Hydrostatic Loads on Structures</h1></div>
+  <aside class="notes">Connect the pressure field to distributed loading and statically equivalent resultants.</aside>
+</section>
+<section>
+  <h2>Resultant Force on a Plane Surface</h2>
+  <div class="container"><div class="col"><img class="slide-image" src="assets/Lecture_1_2/slide_015_3.png" alt="Hydrostatic force"></div><div class="col"><p class="fragment">For a plane area in a constant-density static liquid:</p><div class="equation-box fragment">$$F_R=\int_A p\,dA=\rho g h_c A$$</div><p class="fragment">\(h_c\) is the vertical depth of the area centroid.</p></div></div><p class="assumptions fragment"><b>Assumptions:</b> gauge pressure at a free surface open to atmosphere, constant density, plane area.</p>
+  <aside class="notes">Show that the magnitude equals pressure at the centroid times area. Distinguish the area centroid from the center of pressure.</aside>
+</section>
+<section>
+  <h2>Center of Pressure</h2>
+  <div class="container"><div class="col"><p class="fragment">For a vertical plane surface:</p><div class="equation-box fragment">$$h_p=h_c+\frac{I_G}{A h_c}$$</div><ul><li class="fragment">\(I_G\): second moment of area about the horizontal centroidal axis</li><li class="fragment">For a vertical rectangle: \(I_G=bH^3/12\)</li><li class="fragment">Usually \(h_p>h_c\)</li></ul></div><div class="col"><img class="slide-image" src="assets/Lecture_1_2/slide_015_1.png" alt="Center of pressure"></div></div>
+  <aside class="notes">Explain physically why the resultant acts below the centroid: pressure is larger at greater depth. Mention that inclined surfaces require the general inclination form.</aside>
+</section>
+<section>
+  <h2>Worked Structural Example: Vertical Gate</h2>
+  <div class="container"><div class="col"><img class="slide-image" src="assets/Lecture_1_2/slide_015_1.png" alt="Vertical gate"></div><div class="col"><ol><li class="fragment">Draw the pressure diagram</li><li class="fragment">Locate the area centroid and determine \(h_c\)</li><li class="fragment">Calculate \(F_R=\rho g h_c A\)</li><li class="fragment">Calculate \(h_p\)</li><li class="fragment">Replace the distributed load by \(F_R\) at \(h_p\)</li><li class="fragment">Use structural equilibrium to find support reactions</li></ol></div></div>
+  <aside class="notes">Complete a numerical example live. Suggested geometry: a 2 m wide by 3 m high vertical gate with its top 1 m below the free surface. Ask students to predict whether the force location is above or below the centroid before calculating.</aside>
+</section>
+<section>
+  <h2>Dimensional Homogeneity Check</h2>
+  <p>Check the dimensions of the hydrostatic force relation:</p><div class="equation-box fragment">$$F_R=\rho g h_c A$$</div><p class="fragment">$$[F_R]=(ML^{-3})(LT^{-2})(L)(L^2)=MLT^{-2}$$</p><p class="fragment">The relation is dimensionally homogeneous.</p>
+  <aside class="notes">Use this as the dimensional-analysis component of Lecture 1. Emphasize that dimensional consistency is necessary but does not prove physical correctness.</aside>
+</section>
+<section>
+  <h2>Lecture 1 Takeaways</h2>
+  <ul><li class="fragment">Static pressure is isotropic at a point</li><li class="fragment">Pressure increases linearly with depth for constant density</li><li class="fragment">Manometers apply the same hydrostatic relation through connected columns</li><li class="fragment">Hydrostatic pressure is a distributed structural load</li><li class="fragment">The center of pressure is generally below the area centroid</li></ul>
+  <aside class="notes">Exit question: A vertical gate is fully submerged. Is the resultant located at its centroid? Require a physical explanation, not only a formula.</aside>
+</section>
+<section data-visibility="uncounted"><span class="backup-label">BACKUP</span><h2>Buoyancy</h2><div class="container"><div class="col"><img class="slide-image" src="assets/Lecture_1_2/slide_016_2.png" alt="Buoyancy"></div><div class="col"><div class="equation-box">$$F_B=\rho gV_{displaced}$$</div><p class="fragment">The buoyant force acts through the centroid of the displaced volume.</p></div></div><aside class="notes">Backup slide. Use only if time permits or assign as reading. Floating-body stability and metacenters should be handled in a specialist tutorial.</aside></section>
+  </div>
+</div>
+<script type="module" src="../../main.js"></script>
+</body>
+</html>

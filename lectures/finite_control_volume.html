@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Jacob Andersen">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../custom/theme/haervig.css">
+  <link rel="stylesheet" href="../custom/plugins/highlight/haervig.css">
+</head>
+
+<body>
+
+<div class="reveal">
+  <div style="position: fixed; bottom: 20px; left: 30px; z-index: 1000;">
+    <h2><a href="../" style="color: #222; text-decoration: none;">←</a></h2>
+  </div>
+
+  <div class="slides">
+    <section>
+      <section>
+        <h3><b>Fluid Mechanics Course</b></h3>
+        <h2>Finite Control Volume Analysis</h2>
+
+        <img src="./assets/Lecture_3_1/slide_001_1.jpg" alt="Finite control volume overview" width="700">
+
+        <h4><em>Francesco Ferri</em></h4>
+        <h5><em>AAU BUILD</em></h5>
+      </section>
+
+      <section>
+        <h2>Learning Objectives</h2>
+
+        <ul>
+          <li class="fragment">Understand the physical meaning of continuity, momentum, and energy equations</li>
+          <li class="fragment">Derive local and integral forms</li>
+          <li class="fragment">Apply control-volume analysis to incompressible and compressible flows</li>
+          <li class="fragment">Use the method for real engineering applications</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Why Control Volume Analysis?</h2>
+
+        <div class="container">
+          <div class="col">
+            <h3>System versus control volume</h3>
+            <ul>
+              <li class="fragment">System: fixed mass</li>
+              <li class="fragment">Control volume: fixed region in space</li>
+              <li class="fragment">Useful for inlet/outlet flows</li>
+            </ul>
+          </div>
+
+          <div class="col">
+            <h3>Typical problems</h3>
+            <ul>
+              <li class="fragment">Pipe flows</li>
+              <li class="fragment">Nozzles and diffusers</li>
+              <li class="fragment">Jet forces</li>
+              <li class="fragment">Turbomachinery</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+          <h1>Reynolds Transport Theorem</h1>
+        </div>
+      </section>
+
+      <section>
+        <h2>System and Control Volume</h2>
+
+        <p class="fragment">A system is a collection of matter of fixed identity.</p>
+        <p class="fragment">A control volume is a chosen region of space through which fluid passes.</p>
+
+        <ul>
+          <li class="fragment">Mass can cross the boundary</li>
+          <li class="fragment">Momentum and energy may be exchanged</li>
+          <li class="fragment">The Reynolds transport theorem connects the two viewpoints</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Integral Balance</h2>
+
+        <p class="fragment">The control-volume formulation expresses the rate of change of a property as:</p>
+        <p class="fragment">accumulation + flux out - flux in = sources and sinks</p>
+
+        <img src="./assets/Lecture_3_1/slide_004_1.png" alt="Control volume balance" width="900" class="fragment">
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+          <h1>Continuity Equation</h1>
+        </div>
+      </section>
+
+      <section>
+        <h2>Mass Conservation</h2>
+
+        <p class="fragment">The continuity equation states that mass is conserved.</p>
+        <p class="fragment">In integral form, it gives the balance between inflow and outflow.</p>
+
+        <img src="./assets/Lecture_3_1/slide_005_1.png" alt="Continuity equation" width="900" class="fragment">
+      </section>
+
+      <section>
+        <h2>General and Integral Forms</h2>
+
+        <div class="container">
+          <div class="col">
+            <h3>Integral form</h3>
+            <ul>
+              <li class="fragment">Global, control-volume based</li>
+              <li class="fragment">Useful for devices and systems</li>
+              <li class="fragment">Typical engineering design calculations</li>
+            </ul>
+          </div>
+
+          <div class="col">
+            <h3>Differential form</h3>
+            <ul>
+              <li class="fragment">Local, pointwise form</li>
+              <li class="fragment">Used in theory and CFD</li>
+              <li class="fragment">Leads to the Navier–Stokes equations</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Incompressible Flow Special Case</h2>
+
+        <p class="fragment">For incompressible flow with constant density, continuity simplifies substantially.</p>
+        <p class="fragment">This is commonly used when analyzing nozzles, pipes, and ducts of varying area.</p>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+          <h1>Linear Momentum Equation</h1>
+        </div>
+      </section>
+
+      <section>
+        <h2>Newton's Second Law for a Control Volume</h2>
+
+        <p class="fragment">The time rate of change of momentum equals the net force acting on the control volume.</p>
+        <p class="fragment">For a fluid, this includes pressure forces, body forces, and momentum fluxes across the boundary.</p>
+
+        <img src="./assets/Lecture_3_1/slide_010_1.png" alt="Momentum equation diagram" width="900" class="fragment">
+      </section>
+
+      <section>
+        <h2>Momentum Balance</h2>
+
+        <div class="container">
+          <div class="col">
+            <h3>What it includes</h3>
+            <ul>
+              <li class="fragment">Change of momentum in the volume</li>
+              <li class="fragment">Flux of momentum through inlets/outlets</li>
+              <li class="fragment">Net external forces</li>
+            </ul>
+          </div>
+
+          <div class="col">
+            <h3>Applications</h3>
+            <ul>
+              <li class="fragment">Jet impact on plates</li>
+              <li class="fragment">Pipe bends and elbows</li>
+              <li class="fragment">Nozzle reaction force</li>
+              <li class="fragment">Pump and turbine forces</li>
+            </ul>
+          </div>
+        </div>
+
+        <img src="./assets/Lecture_3_1/slide_010_2.png" alt="Momentum application figure" width="900" class="fragment">
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
+          <h1>Energy Equation</h1>
+        </div>
+      </section>
+
+      <section>
+        <h2>First Law for a Control Volume</h2>
+
+        <p class="fragment">The energy equation accounts for work, heat transfer, and changes in internal, kinetic, and potential energy.</p>
+        <p class="fragment">It is essential in pumps, turbines, nozzles, and pipe flows.</p>
+      </section>
+
+      <section>
+        <h2>Engineering Uses</h2>
+
+        <div class="container">
+          <div class="col">
+            <h3>Hydraulic systems</h3>
+            <ul>
+              <li class="fragment">Pumps and turbines</li>
+              <li class="fragment">Pipe losses</li>
+              <li class="fragment">Nozzle behavior</li>
+            </ul>
+          </div>
+
+          <div class="col">
+            <h3>Thermal systems</h3>
+            <ul>
+              <li class="fragment">Heat exchangers</li>
+              <li class="fragment">Compressors</li>
+              <li class="fragment">Flow with temperature change</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h3><b>Fluid Mechanics Course</b></h3>
+        <h2>Applications and Summary</h2>
+      </section>
+
+      <section>
+        <h2>Applications</h2>
+
+        <ul>
+          <li class="fragment">Pipe flow design and diameter changes</li>
+          <li class="fragment">Nozzle and diffuser calculations</li>
+          <li class="fragment">Ventilation and channel flow</li>
+          <li class="fragment">Hydraulic machines and blood-flow analogies</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Takeaway</h2>
+
+        <p class="fragment">Finite control volume analysis gives a powerful way to relate global flow quantities to local behavior.</p>
+        <p class="fragment">It is the basis for continuity, momentum, and energy balances in practical fluid engineering.</p>
+      </section>
+    </section>
+  </div>
+</div>
+
+<script type="module" src="../../main.js"></script>
+</body>
+</html>

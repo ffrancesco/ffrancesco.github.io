@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Francesco Ferri">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../custom/theme/haervig.css">
+  <link rel="stylesheet" href="../custom/plugins/highlight/haervig.css">
+  <style>
+    .reveal .compact { font-size: 0.72em; line-height: 1.25; }
+    .reveal .slide-image { display:block; max-width:88%; max-height:52vh; width:auto; height:auto; object-fit:contain; margin:0.35em auto; }
+    .reveal .small-image { max-height:38vh; }
+    .reveal .equation-box { border:2px solid #333; padding:0.25em 0.5em; margin:0.5em auto; width:fit-content; }
+    .reveal .assumptions { font-size:0.68em; opacity:0.85; }
+    .reveal .two-column { display:flex; gap:1.1em; align-items:center; }
+    .reveal .two-column > div { flex:1; }
+    .reveal .backup-label { position:absolute; right:0; top:0; font-size:0.45em; opacity:0.55; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div style="position: fixed; bottom: 20px; left: 30px; z-index: 1000;"><h2><a href="../" style="color:#222;text-decoration:none;">←</a></h2></div>
+  <div class="slides">
+<section>
+  <section>
+    <h3><b>Fluid Mechanics Course</b></h3>
+    <h2>Lecture 2B · Euler and Bernoulli Equations</h2>
+    <img class="slide-image" src="./assets/Lecture_2_2/slide_007_1.png" alt="Lecture 2B · Euler and Bernoulli Equations">
+    <h4><em>Francesco Ferri</em></h4><h5><em>AAU BUILD</em></h5>
+    <aside class="notes">Second half of Lecture 2. Target time: 55 minutes including one complete worked example.</aside>
+  </section>
+  <section>
+    <h2>Learning Objectives</h2>
+    <ul><li class="fragment">Derive Bernoulli from Newton's second law along a streamline</li><li class="fragment">Interpret pressure, velocity, and elevation head</li><li class="fragment">Apply continuity and Bernoulli to an engineering problem</li><li class="fragment">State assumptions and recognize invalid applications</li></ul>
+    <aside class="notes">Read the outcomes briefly. Emphasize that students will use the concepts in calculations, not only recognize definitions.</aside>
+  </section>
+</section>
+<section>
+  <h2>Inviscid Particle Balance Along a Streamline</h2>
+  <div class="container"><div class="col"><p class="fragment">Tangential acceleration in steady flow:</p>$$a_s=V\frac{dV}{ds}$$<p class="fragment">Pressure and gravity forces per unit mass give:</p><div class="equation-box fragment">$$V\frac{dV}{ds}=-\frac{1}{\rho}\frac{dp}{ds}-g\frac{dz}{ds}$$</div></div><div class="col"><img class="slide-image" src="./assets/Lecture_2_2/slide_007_1.png" alt="Bernoulli energy diagram"></div></div>
+  <aside class="notes">Identify the streamline coordinate s. Explain why viscous shear is neglected in Euler's equation. Connect V dV/ds to the convective acceleration from the previous part.</aside>
+</section>
+<section>
+  <h2>Integrating Euler Along a Streamline</h2>
+  <p class="fragment">For constant density:</p><p class="fragment">$$\frac{dp}{\rho}+V\,dV+g\,dz=0$$</p><div class="equation-box fragment">$$\frac{p}{\rho}+\frac{V^2}{2}+gz=C$$</div><p class="fragment">Between points 1 and 2:</p>$$\frac{p_1}{\rho}+\frac{V_1^2}{2}+gz_1=\frac{p_2}{\rho}+\frac{V_2^2}{2}+gz_2$$
+  <aside class="notes">Show the three elementary integrals. State that the constant is generally different on different streamlines in rotational flow.</aside>
+</section>
+<section>
+  <h2>Head Form and Physical Interpretation</h2>
+  <div class="equation-box">$$H=\frac{p}{\rho g}+\frac{V^2}{2g}+z$$</div><div class="container"><div class="col"><h3>Pressure head</h3><p class="fragment">\(p/(\rho g)\)</p></div><div class="col"><h3>Velocity head</h3><p class="fragment">\(V^2/(2g)\)</p></div><div class="col"><h3>Elevation head</h3><p class="fragment">\(z\)</p></div></div><p class="fragment">Every term has dimensions of length and represents mechanical energy per unit weight.</p>
+  <aside class="notes">Use dimensional homogeneity as a quick check. Distinguish pressure head from pressure energy language if students are uncomfortable with the latter.</aside>
+</section>
+<section>
+  <h2>Assumptions and Scope</h2>
+  <ul><li class="fragment">Steady flow</li><li class="fragment">Constant density</li><li class="fragment">Negligible viscous work along the selected streamline</li><li class="fragment">Gravity is the relevant conservative body force</li><li class="fragment">No pump or turbine work in the basic form</li><li class="fragment">Applied between points on the same streamline unless the flow is irrotational</li></ul>
+  <aside class="notes">Require students to list assumptions before calculating. Clarify that Bernoulli is exact for the ideal model, not a universal formula for every flow.</aside>
+</section>
+<section>
+  <h2>Interpret Carefully</h2>
+  <p class="fragment">A higher velocity does <b>not automatically</b> imply lower pressure in every flow.</p><p class="fragment">Along the same streamline, under Bernoulli assumptions and at controlled elevation:</p><div class="equation-box fragment">$$V\uparrow\quad\Rightarrow\quad p\downarrow$$</div>
+  <aside class="notes">Give counter-context: pressure may be raised by a pump, elevation may change, losses may occur, or the compared points may be on different streamlines.</aside>
+</section>
+<section>
+  <div style="display:flex;justify-content:center;align-items:center;height:80vh;"><h1>Worked Application</h1></div>
+  <aside class="notes">Combine continuity, boundary conditions, and Bernoulli.</aside>
+</section>
+<section>
+  <h2>Reservoir Discharge Through a Nozzle</h2>
+  <div class="container"><div class="col"><img class="slide-image" src="./assets/Lecture_2_2/slide_007_2.png" alt="Bernoulli application"></div><div class="col"><ol><li class="fragment">Choose point 1 at the reservoir free surface</li><li class="fragment">Choose point 2 at the nozzle exit</li><li class="fragment">Use gauge pressure: \(p_1=p_2=0\)</li><li class="fragment">For a large reservoir: \(V_1\approx0\)</li><li class="fragment">Set the elevation difference \(z_1-z_2=h\)</li></ol></div></div>
+  <aside class="notes">Draw the datum and point labels. Make explicit why atmospheric pressure cancels when using gauge pressure.</aside>
+</section>
+<section>
+  <h2>Reservoir Discharge Solution</h2>
+  <p class="fragment">Bernoulli from the free surface to the exit:</p>$$0+0+z_1=0+\frac{V_2^2}{2g}+z_2$$<div class="equation-box fragment">$$V_2=\sqrt{2gh}$$</div><p class="fragment">Flow rate:</p><div class="equation-box fragment">$$Q=A_2V_2$$</div><p class="assumptions fragment"><b>Check:</b> ideal discharge. Real flows require a discharge coefficient or loss term.</p>
+  <aside class="notes">This is Torricelli's result. Ask which assumptions are most questionable near a real nozzle. Mention contraction and viscous loss without deriving coefficients.</aside>
+</section>
+<section>
+  <h2>Flow Measurement Examples</h2>
+  <div class="container"><div class="col"><ul><li class="fragment">Venturi meter: continuity plus pressure difference</li><li class="fragment">Pitot-static tube: stagnation and static pressure</li><li class="fragment">Siphon: pressure and elevation along a connected streamline</li></ul></div><div class="col"><img class="slide-image" src="./assets/Lecture_2_2/slide_007_3.jpg" alt="Bernoulli example"></div></div>
+  <aside class="notes">Select only one additional example if time remains. Do not treat a list of devices as equivalent to worked problem practice.</aside>
+</section>
+<section>
+  <h2>From Bernoulli to the Engineering Energy Equation</h2>
+  <p class="fragment">Real systems may include pumps, turbines, and losses:</p><div class="equation-box fragment">$$\frac{p_1}{\rho g}+\alpha_1\frac{V_1^2}{2g}+z_1+h_p-h_t-h_L=\frac{p_2}{\rho g}+\alpha_2\frac{V_2^2}{2g}+z_2$$</div><p class="fragment">The control-volume basis is developed in Lecture 3.</p>
+  <aside class="notes">Preview only. Define pump head, turbine head, head loss, and kinetic-energy correction factor. Do not derive them yet.</aside>
+</section>
+<section>
+  <h2>Lecture 2 Takeaways</h2>
+  <ul><li class="fragment">Material acceleration connects kinematics to dynamics</li><li class="fragment">Euler's equation is Newton's second law for an inviscid fluid</li><li class="fragment">Bernoulli is the streamline integral under stated assumptions</li><li class="fragment">Continuity and Bernoulli are normally used together</li><li class="fragment">Always select points, datum, pressure reference, and assumptions explicitly</li></ul>
+  <aside class="notes">Exit question: Can Bernoulli be used across a pump without modification? Answer: not in the basic form; shaft work must be included.</aside>
+</section>
+  </div>
+</div>
+<script type="module" src="../../main.js"></script>
+</body>
+</html>
