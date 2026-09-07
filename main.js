@@ -16,8 +16,8 @@ const isPrintPDF = /print-pdf/gi.test( window.location.search );
 // Print-friendly overrides (only applied when ?print-pdf is present)
 const printOverrides = isPrintPDF ? {
     view: 'print',
-    pdfSeparateFragments: true,
-    // Use a printable resolution that works well for most PDF generators
+    // Keep the whole section on one PDF page; do not split each .fragment into its own page.
+    pdfSeparateFragments: false,
     width: 1024,
     height: 768,
     margin: 0
