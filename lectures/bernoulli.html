@@ -54,27 +54,13 @@
 
       <section>
         <h2>Why Bernoulli Matters</h2>
+        <img
+        src="./assets/Lecture_2_1/contracting_nozzle.png"
+        alt="Fluid accelerating through a contracting nozzle"
+        class="slide-image">
+        <p class="fragment">The velocity increases through the contraction. What pressure difference is required to produce this acceleration?<br>from kinematics to dynamics</p>
+               <p class="fragment">Bernoulli's equation relates the acceleration to the accompanying pressure change.</p>
 
-        <div class="container">
-          <div class="col">
-            <h3>Applications</h3>
-            <ul>
-              <li class="fragment">Flow measurement</li>
-              <li class="fragment">Nozzles and orifices</li>
-              <li class="fragment">Aerodynamics</li>
-              <li class="fragment">Hydraulic systems</li>
-            </ul>
-          </div>
-
-          <div class="col">
-            <h3>Core idea</h3>
-            <ul>
-              <li class="fragment">Pressure, velocity, and elevation are linked</li>
-              <li class="fragment">Energy is conserved along a streamline</li>
-              <li class="fragment">Useful for idealized inviscid flow</li>
-            </ul>
-          </div>
-        </div>
       </section>
     </section>
 
@@ -171,12 +157,35 @@
             <p class="fragment"> $$\sum \delta F_s = \delta F_{ps} + \delta W_s = \left( -\gamma sin \theta - \frac{\partial p}{\partial s} \right) \delta \forall$$ </b></p>
 
             <p class="fragment"> which gives: $$-\gamma sin \theta - \frac{\partial p}{\partial s} = \rho V \frac{\partial V}{\partial s}$$</b></p>
-            <p class="fragment"> along a streamline \( dn=0 \rightarrow p(s,n) = p(s) \rightarrow \frac{\partial p}{\partial s} = \frac{d p}{d s}\)</p>
+            <p class="fragment"> along a streamline the dispalcement has no normal component \( dn=0 \)
+              $$\rightarrow dV = \frac{\partial V}{\partial s} ds +  \frac{\partial V}{\partial n} dn= \frac{\partial V}{\partial s} ds$$
+              same apply with p.</p>
             <p class="fragment"> and \( sin \theta = \frac{dz}{ds} \) </p>
 
-            <div class="equation-box fragment">$$dp/\rho + V d(V) + g dz = 0$$</div>
+            <div class=" fragment">$$-\gamma \frac{dz}{ds} - \frac{dp}{ds} = \rho V \frac{dV}{ds}$$</div>
+           
+          </div>
+        </div>
+
+        
+      </section>
+
+       <section>
+        <h2>Small Fluid Particle Along a Streamline</h2>
+        <div class="container">
+          <div class="col">
+            <img src="./assets/Lecture_2_2/slide_003_1.png" alt="Bernoulli energy diagram" width="900" class="">
+          </div>
+          <div class="col">
+            <div class="">$$-\gamma \frac{dz}{ds} - \frac{dp}{ds} = \rho V \frac{dV}{ds}$$</div>
+
+            <p class="fragment">removing ds and diving by \(\rho\):</p>
+            <div class=" fragment">$$gdz+\frac{dp}{\rho}+VdV=0$$</div>
+
             <p class="fragment">Integrating along the streamline and assuming incompressible flow (constant \( \rho \) ) to simplify the pressure integral.</p>
+
             <div class="equation-box fragment">$$\frac{p}{\rho}+\frac{V^2}{2}+gz=C$$</div>
+
 
           </div>
         </div>
@@ -190,19 +199,26 @@
 
         <div class="container">
           <div class="col">
-            <h3>Energy form</h3>
-            <p class="fragment"><b>p/ρ + V²/2 + gz = constant</b></p>
+            <h3>Energy per unit volume, <br>or pressure form</h3>
+            <p class="fragment"><b>p + ρ V²/2 + ρgz = C</b>
+            <br><i>Unit: Pa</i></p>
           </div>
-
           <div class="col">
-            <h3>Head form</h3>
-            <p class="fragment"><b>H = z + p/γ + V²/(2g)</b></p>
+            <h3>Energy per unit mass</h3>
+            <p class="fragment"><b>p/ρ + V²/2 + gz = C</b>
+            <br><i>Unit: J/kg</i></p>
+          </div>
+          <div class="col">
+            <h3>Energy per unit weight, or head form</h3>
+            <p class="fragment"><b>z + p/γ + V²/(2g)=C</b><br><i>Unit: m</i></p>
+
           </div>
         </div>
       </section>
     </section>
 
     <section>
+
       <section>
         <div style="display:flex;justify-content:center;align-items:center;height:80vh;">
           <h1>Physical Interpretation</h1>
@@ -210,35 +226,140 @@
       </section>
 
       <section>
-        <h2>Pressure, Velocity, and Elevation</h2>
+  <h2>Physical Interpretation of Bernoulli’s Equation</h2>
 
-        <div class="container">
-          <div class="col">
-            <h3>Pressure head</h3>
-            <p class="fragment">Represents static pressure energy.</p>
-          </div>
+  <div class="equation-box fragment">
+    $$\frac{p}{\rho g}+\frac{V^2}{2g}+z=H$$
+  </div>
 
-          <div class="col">
-            <h3>Velocity head</h3>
-            <p class="fragment">Represents kinetic energy per unit weight.</p>
-          </div>
+  <p class="fragment">
+    Each term represents mechanical energy per unit weight of fluid
+    and therefore has units of length.
+  </p>
 
-          <div class="col">
-            <h3>Elevation head</h3>
-            <p class="fragment">Represents potential energy per unit weight.</p>
-          </div>
-        </div>
-      </section>
+  <div class="container">
 
+    <div class="col fragment">
+      <h3>Pressure head</h3>
+
+      <div class="equation-box">
+        $$\frac{p}{\rho g}$$
+      </div>
+
+      <p>
+        Capacity of pressure forces to do work on the fluid.
+      </p>
+    </div>
+
+    <div class="col fragment">
+      <h3>Velocity head</h3>
+
+      <div class="equation-box">
+        $$\frac{V^2}{2g}$$
+      </div>
+
+      <p>
+        Kinetic energy associated with fluid motion.
+      </p>
+    </div>
+
+    <div class="col fragment">
+      <h3>Elevation head</h3>
+
+      <div class="equation-box">
+        $$z$$
+      </div>
+
+      <p>
+        Gravitational potential energy associated with elevation.
+      </p>
+    </div>
+
+  </div>
+
+  <p class="fragment">
+    <b>Along a streamline, these contributions can change,
+    but their sum remains constant for ideal flow.</b>
+  </p>
+
+  <aside class="notes">
+    Each term has units of metres and represents mechanical energy
+    per unit weight.
+
+    Return to the contracting nozzle. If the nozzle is horizontal,
+    elevation does not change. As velocity increases, the velocity
+    head increases. Consequently, the pressure head must decrease
+    to maintain the same total head.
+
+    Emphasize that Bernoulli does not say that high velocity always
+    causes low pressure. It states that pressure, velocity and
+    elevation are linked along a streamline under the stated
+    assumptions.
+  </aside>
+</section>
+
+<section>
+  <h2>Bernoulli’s Equation Between Two Points</h2>
+
+  <p class="fragment">
+    Because the total head remains constant along a streamline,
+    Bernoulli’s equation can be applied between two points:
+  </p>
+
+  <div class="equation-box fragment">
+    $$
+    \frac{p_1}{\rho g}
+    +\frac{V_1^2}{2g}
+    +z_1
+    =
+    \frac{p_2}{\rho g}
+    +\frac{V_2^2}{2g}
+    +z_2
+    $$
+  </div>
+
+  <div class="container">
+    <div class="col fragment">
+      <h3>Point 1</h3>
+      <ul>
+        <li>Pressure: \(p_1\)</li>
+        <li>Velocity: \(V_1\)</li>
+        <li>Elevation: \(z_1\)</li>
+      </ul>
+    </div>
+
+    <div class="col fragment">
+      <h3>Point 2</h3>
+      <ul>
+        <li>Pressure: \(p_2\)</li>
+        <li>Velocity: \(V_2\)</li>
+        <li>Elevation: \(z_2\)</li>
+      </ul>
+    </div>
+  </div>
+
+  <aside class="notes">
+    Return to the contracting-nozzle example.
+
+    Point 1 is placed upstream and point 2 in the narrower section.
+    Since the nozzle is horizontal, the elevation terms cancel.
+    The increased velocity head at point 2 must be accompanied by
+    a reduction in pressure head.
+
+    Emphasize that both points must lie on the same streamline under
+    the assumptions used here.
+  </aside>
+</section>
       <section>
-        <h2>Energy Conservation Along a Streamline</h2>
-
-        <p class="fragment">If the flow is ideal, the total head remains constant.</p>
-        <p class="fragment">When velocity increases, pressure tends to decrease.</p>
-        <p class="fragment">This is the basis for many engineering devices and flow measurements.</p>
-
-        <img src="./assets/Lecture_2_2/slide_007_1.png" alt="Bernoulli energy diagram" width="900" class="fragment">
+        <h2>Contracting Nozzle</h2>
+        <img
+        src="./assets/Lecture_2_1/contracting_nozzle.png"
+        alt="Fluid accelerating through a contracting nozzle"
+        class="slide-image">
+        
       </section>
+
+      
     </section>
 
     <section>
@@ -249,36 +370,153 @@
       </section>
 
       <section>
-        <h2>Common Uses</h2>
+        <h2>Application 1: Flow Through a Contraction</h2>
 
-        <div class="container">
-          <div class="col">
-            <h3>Flow measurement</h3>
-            <ul>
-              <li class="fragment">Venturi meter</li>
-              <li class="fragment">Pitot tube</li>
-              <li class="fragment">Orifice flow</li>
-            </ul>
+          <div class="container">
+            <div class="col">
+              <p>Apply Bernoulli between sections 1 and 2:</p>
+
+              <div class="equation-box fragment">
+                $$\frac{p_1}{\rho g}+\frac{V_1^2}{2g}+z_1
+                =
+                \frac{p_2}{\rho g}+\frac{V_2^2}{2g}+z_2$$
+              </div>
+
+              <p class="fragment">For a horizontal pipe:</p>
+
+              <div class="equation-box fragment">
+                $$p_1-p_2=\frac{\rho}{2}\left(V_2^2-V_1^2\right)$$
+              </div>
+
+              <ul>
+                <li class="fragment">Continuity gives \(A_1V_1=A_2V_2\)</li>
+                <li class="fragment">Smaller area produces higher velocity</li>
+                <li class="fragment">Higher velocity corresponds to lower pressure</li>
+              </ul>
+            </div>
+
+            <div class="col">
+              <img src="./assets/Lecture_2_1/contracting_nozzle.png"
+                  alt="Fluid accelerating through a contracting nozzle"
+                  class="slide-image">
+            </div>
           </div>
 
-          <div class="col">
-            <h3>Fluid systems</h3>
-            <ul>
-              <li class="fragment">Nozzles</li>
-              <li class="fragment">Siphons</li>
-              <li class="fragment">Aerofoils</li>
-            </ul>
-          </div>
-        </div>
-
-        <img src="./assets/Lecture_2_2/slide_007_2.png" alt="Bernoulli application figure" width="900" class="fragment">
+        <p class="fragment">
+          <b>Engineering use:</b> determine flow rate from a measured pressure difference.
+        </p>
       </section>
 
       <section>
-        <h2>Examples</h2>
+        <h2>Application 2: Discharge from a Tank</h2>
 
-        <img src="./assets/Lecture_2_2/slide_007_3.jpg" alt="Bernoulli example image" width="900" class="fragment">
+        <div class="container">
+          <div class="col">
+            <p>Apply Bernoulli between the free surface and the outlet:</p>
+
+            <div class="equation-box fragment">
+              $$\frac{p_1}{\rho g}+\frac{V_1^2}{2g}+z_1
+              =
+              \frac{p_2}{\rho g}+\frac{V_2^2}{2g}+z_2$$
+            </div>
+
+            <p class="fragment">For a large tank open to the atmosphere:</p>
+
+            <ul>
+              <li class="fragment">\(p_1=p_2=p_{\mathrm{atm}}\)</li>
+              <li class="fragment">\(V_1\approx0\)</li>
+              <li class="fragment">\(z_1-z_2=h\)</li>
+            </ul>
+
+            <div class="equation-box fragment">
+              $$V_2=\sqrt{2gh}$$
+            </div>
+
+            <p class="fragment">The ideal discharge is \(Q_{\mathrm{ideal}}=A_2\sqrt{2gh}\).      </p>
+          </div>
+
+          <div class="col">
+            <img src="./assets/Lecture_2_1/open_tank.png"
+                alt="Water discharging from a tank"
+                class="slide-image">
+          </div>
+        </div>
+
+          <p class="fragment">
+          <b>Engineering use:</b> estimate outlet velocity, discharge,
+          and tank emptying time.
+        </p>
+
+        <aside class="notes">
+          Point 1 is located at the free surface and point 2 at the outlet.
+
+          Because both points are exposed to atmospheric pressure,
+          the pressure terms cancel. For a tank much wider than the outlet,
+          the free-surface velocity is negligible compared with the outlet
+          velocity.
+
+          The elevation difference h is therefore converted into velocity head,
+          giving Torricelli's result: V_2 = sqrt(2gh).
+
+          Emphasize that this is an ideal result. A real outlet produces a lower
+          discharge because of contraction and viscous losses.
+        </aside>
       </section>
+
+      <section>
+        <h2>Common Engineering Uses of Bernoulli’s Equation</h2>
+
+        <div class="container">
+
+          <div class="col">
+            <h3>Flow Measurement</h3>
+            <ul>
+              <li class="fragment">Venturi meters</li>
+              <li class="fragment">Pitot tubes</li>
+              <li class="fragment">Orifice meters</li>
+            </ul>
+          </div>
+
+          <div class="col">
+            <h3>Fluid Systems</h3>
+            <ul>
+              <li class="fragment">Tank discharge</li>
+              <li class="fragment">Nozzles and contractions</li>
+              <li class="fragment">Siphons</li>
+            </ul>
+          </div>
+
+          <div class="col">
+            <h3>Building Engineering</h3>
+            <ul>
+              <li class="fragment">Airflow through ducts</li>
+              <li class="fragment">Wind-pressure measurements</li>
+              <li class="fragment">Ventilation openings</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <p class="fragment">
+          <b>Common principle:</b> use changes in pressure, velocity,
+          and elevation to determine an unknown flow quantity.
+        </p>
+
+        <aside class="notes">
+          Bernoulli's equation is useful whenever pressure, velocity,
+          and elevation must be related.
+
+          In measurement devices, a pressure difference is used to estimate
+          velocity or discharge. In tanks and siphons, elevation differences
+          drive the flow. In ducts and ventilation openings, pressure
+          differences generate airflow.
+
+          Remind students that the ideal Bernoulli equation neglects losses.
+          Real systems may require loss coefficients or the extended energy
+          equation.
+        </aside>
+      </section>
+
     </section>
 
     <section>
@@ -298,26 +536,222 @@
           <li class="fragment">Rotational flows need careful interpretation along streamlines</li>
         </ul>
       </section>
+      <section>
+        <h2>Extension to Real Flows: Energy Losses</h2>
+
+        <p class="fragment">
+          Real flows: viscosity and fittings dissipate mechanical energy.
+          Extended Bernoulli’s equation - added head-loss term.
+        </p>
+
+        <div class="equation-box fragment">
+          $$
+          \frac{p_1}{\rho g}+\frac{V_1^2}{2g}+z_1
+          =
+          \frac{p_2}{\rho g}+\frac{V_2^2}{2g}+z_2+h_L
+          $$
+        </div>
+
+        <div class="container">
+
+          <div class="col fragment">
+            <h3>Pipe friction</h3>
+
+            <div class="equation-box">
+              $$h_f=f\frac{L}{D}\frac{V^2}{2g}$$
+            </div>
+
+            <p>
+              Energy loss along a straight pipe.
+            </p>
+          </div>
+
+          <div class="col fragment">
+            <h3>Fittings and components</h3>
+
+            <div class="equation-box">
+              $$h_m=K\frac{V^2}{2g}$$
+            </div>
+
+            <p>
+              Losses from bends, valves, entrances and contractions.
+            </p>
+          </div>
+
+        </div>
+
+        <p class="fragment">
+          A fitting can be represented by an equivalent pipe length:
+        </p>
+
+        <div class="equation-box fragment">
+          $$L_{\mathrm{eq}}=\frac{KD}{f}$$
+        </div>
+
+        <p class="fragment">
+          <b>Total effective length:</b>
+          \(L_{\mathrm{total}}=L+\sum L_{\mathrm{eq}}\)
+        </p>
+
+        <aside class="notes">
+          The ideal Bernoulli equation assumes that mechanical energy is conserved.
+          In a real pipe, some mechanical energy is converted into thermal energy
+          by friction and turbulence.
+
+          Minor losses caused by fittings can be described using a loss coefficient K
+          or converted into an equivalent length of straight pipe.
+
+          Emphasize that equivalent length does not represent the physical length
+          of the fitting. It represents a straight-pipe length producing the same
+          head loss.
+        </aside>
+      </section>
 
       <section>
-        <h2>Practical Note</h2>
+        <h2>Extended Bernoulli Equation: Pumps and Fittings</h2>
 
-        <p class="fragment">Bernoulli is a very powerful approximation, but real-world systems often need corrections for friction, compressibility, and unsteadiness.</p>
+        <p class="fragment">
+          A pump adds mechanical energy to the fluid, while pipes and fittings
+          remove mechanical energy through losses.
+        </p>
+
+        <div class="equation-box fragment">
+          $$
+          \frac{p_1}{\rho g}
+          +\frac{V_1^2}{2g}
+          +z_1
+          +h_p
+          =
+          \frac{p_2}{\rho g}
+          +\frac{V_2^2}{2g}
+          +z_2
+          +h_L
+          $$
+        </div>
+
+        <div class="container">
+
+          <div class="col fragment">
+            <h3>Pump head</h3>
+
+            <div class="equation-box">
+              $$h_p>0$$
+            </div>
+
+            <p>
+              Mechanical energy added to the fluid by the pump.
+            </p>
+          </div>
+
+          <div class="col fragment">
+            <h3>Pipe and fitting losses</h3>
+
+            <div class="equation-box">
+              $$
+              h_L=
+              f\frac{L}{D}\frac{V^2}{2g}
+              +\sum K\frac{V^2}{2g}
+              $$
+            </div>
+
+            <p>
+              Energy dissipated by straight pipes, bends, valves and other fittings.
+            </p>
+          </div>
+
+        </div>
+
+        <p class="fragment">
+          <b>The pump must provide enough head to overcome elevation,
+          pressure differences and energy losses.</b>
+        </p>
+
+        <aside class="notes">
+          In the ideal Bernoulli equation, mechanical energy is conserved.
+
+          A pump transfers mechanical energy to the fluid, so pump head is
+          added on the upstream side of the equation. Pipe friction and fittings
+          dissipate mechanical energy, so the total head loss appears on the
+          downstream side.
+
+          Ask the students what happens when the pump head increases.
+          For a given system, the available pressure difference, elevation rise
+          or flow rate can increase.
+
+          Emphasize that pump head is energy added per unit weight of fluid
+          and therefore has units of metres.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Extension to Unsteady Flow</h2>
+
+        <p class="fragment">
+          In unsteady flow, velocity at a fixed location changes with time:
+          
+        </p>
+
+        <div class=" fragment">
+          $$\frac{\partial V}{\partial t}\neq0 \Longrightarrow a_s=
+          \frac{\partial V}{\partial t}
+          +V\frac{\partial V}{\partial s}$$
+        </div>
+
+        <p class="fragment">
+          The acceleration along a streamline contains both local and
+          convective contributions. <br>As a consequence, Newton’s second law along a streamline gives:
+        </p>
+
+        <div class="equation-box fragment">
+          $$\rho \frac{\partial V}{\partial t}ds + dp + \frac{1}{2} \rho d(V^2) + \gamma dz = 0$$
+        </div>
+
+        <p class="fragment">
+          Integrating Newton’s second law along the streamline gives:
+        </p>
+
+        <div class=" fragment">
+          $$
+          \int_1^2\frac{\partial V}{\partial t}\,ds
+          +
+          \frac{V_2^2-V_1^2}{2}
+          +
+          \frac{p_2-p_1}{\rho}
+          +
+          g(z_2-z_1)=0
+          $$
+        </div>
+
+        <p class="fragment">
+          <b>The additional integral represents the effect of local,
+          time-dependent acceleration.</b> Used in:
+          Water Hammer effect and other transient flows, rivers surge, wave propagation and free surface flows (sloshing)
+
+        </p>
+
+        <aside class="notes">
+          The steady Bernoulli equation neglects local acceleration because
+          partial V over partial t is zero.
+
+          When flow changes with time, such as during valve opening,
+          pump start-up or pressure surges, the local-acceleration term
+          must be retained.
+
+          This is an introduction only. Rapid transients may require the
+          full unsteady momentum and continuity equations rather than a
+          simple Bernoulli analysis.
+        </aside>
       </section>
     </section>
 
     <section>
       <section>
-        <h3><b>Fluid Mechanics Course</b></h3>
         <h2>Summary</h2>
-      </section>
-
-      <section>
-        <h2>Takeaway</h2>
-
         <p class="fragment">Bernoulli’s equation is derived from conservation of energy for an inviscid, steady, incompressible flow.</p>
         <p class="fragment">It is widely used in hydraulics, aerodynamics, and flow measurement.</p>
         <p class="fragment">Its main limitations are viscosity, compressibility, unsteadiness, and rotational effects.</p>
+        <p class="fragment">Extensions to the Bernoulli's equation are possible, but they limit the usability of the equation.</p>
+
       </section>
     </section>
   </div>
