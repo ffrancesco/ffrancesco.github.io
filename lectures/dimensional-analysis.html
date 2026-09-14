@@ -34,6 +34,14 @@
     <aside class="notes">This is a support deck distributed across Lectures 1 and 3, or used in a tutorial. It is not intended as a full block inside Lecture 1.</aside>
   </section>
   <section>
+    <img class="slide-image" src="./assets/Lecture_1_3/applications-dimensional-analysis0.jpg" alt="Dimensional Analysis · Course Support Module">
+    <p class="fragment">Check for consistency in dimensions</p>
+    <p class="fragment">Help to derive or verify formulas</p>
+    <p class="fragment">Aid in unit conversion</p>
+    <p class="fragment">Simplify complex problems</p>
+    <aside class="notes">This is a support deck distributed across Lectures 1 and 3, or used in a tutorial. It is not intended as a full block inside Lecture 1.</aside>
+  </section>
+  <section>
     <h2>Learning Objectives</h2>
     <ul><li class="fragment">Check dimensional homogeneity</li><li class="fragment">Interpret Reynolds and Froude numbers as force ratios</li><li class="fragment">Understand model–prototype similarity</li><li class="fragment">Recognize when Buckingham Pi is needed</li></ul>
     <aside class="notes">Read the outcomes briefly. Emphasize that students will use the concepts in calculations, not only recognize definitions.</aside>
@@ -85,7 +93,20 @@
     <div class="col">
     <p>$$\Delta p_l = f(D, V, \rho, \mu)$$</p>
     <p class="fragment">Instead of changing V, D, and μ independently, we can change the dimensionless groups to evaluate the effect on the dimensionless pressure.</p>
-    <p class="fragment">In general using dimensionless groups:</p>
+   
+    </div>
+    <div class="col"><img class="slide-image" src="./assets/Lecture_1_3/complex rpoblem.png" alt="Reduced parameter study">
+    </div>
+  </div>
+  <aside class="notes">Use the pipe-flow motivation qualitatively. Do not claim that dimensional analysis determines the unknown functional relationship. It reduces the variables but experiments or theory are still required.</aside>
+</section>
+<section>
+  <h2>Why Dimensionless Groups?</h2>
+  <div class="container">
+    <div class="col">
+    <p>$$\Delta p_l = f(D, V, \rho, \mu)$$</p>
+    <p class="">Instead of changing V, D, and μ independently, we can change the dimensionless groups to evaluate the effect on the dimensionless pressure.</p>
+    <p class="">In general using dimensionless groups:</p>
     <ul><li class="fragment">Reduce the number of independent variables</li><li class="fragment">Collapse experimental data</li><li class="fragment">Transfer results between model and prototype</li><li class="fragment">Identify dominant physical effects</li></ul>
     </div>
     <div class="col"><img class="slide-image" src="./assets/Lecture_1_3/dimanalysis-vary-parameters2.jpg" alt="Reduced parameter study">
@@ -97,12 +118,21 @@
 <section>
   <h2>Reynolds Number</h2>
   <div class="equation-box">$$Re=\frac{\rho VL}{\mu}=\frac{VL}{\nu}$$</div><p class="fragment">Ratio of inertial effects to viscous effects.</p><ul><li class="fragment">Small \(Re\): viscous effects are comparatively important</li><li class="fragment">Large \(Re\): inertia is comparatively important</li>
+    <li class="fragment">V: velocity</li>
+    <li class="fragment">L: characteristic length</li>
+    <li class="fragment">μ: dynamic viscosity</li>
+    <li class="fragment">ν: kinematic viscosity</li>
   </ul>
   <aside class="notes">Connect Reynolds number to the viscosity lesson and later flow regime discussions. Avoid presenting a universal transition value without specifying geometry.</aside>
 </section>
 <section>
   <h2>Froude Number</h2>
-  <div class="equation-box">$$Fr=\frac{V}{\sqrt{gL}}$$</div><p class="fragment">Ratio associated with inertia relative to gravity effects.</p><ul><li class="fragment">Important in free-surface flows</li><li class="fragment">Used in wave, spillway, ship, and hydraulic-model scaling</li></ul>
+  <div class="equation-box">$$Fr=\frac{V}{\sqrt{gL}}$$</div><p class="fragment">Ratio associated with inertia relative to gravity effects.</p><ul><li class="fragment">Important in free-surface flows</li><li class="fragment">Used in wave, spillway, ship, and hydraulic-model scaling.</li>
+    <li class="fragment">Subcritical flow: \(Fr < 1\)</li>
+    <li class="fragment">Supercritical flow: \(Fr > 1\)</li>
+      <li class="fragment">V: velocity</li>
+    <li class="fragment">L: characteristic length</li>
+  </ul>
   <aside class="notes">Link this to civil and coastal applications. Explain that matching Froude number is often the main requirement when gravity-driven free-surface behaviour dominates.</aside>
 </section>
 
