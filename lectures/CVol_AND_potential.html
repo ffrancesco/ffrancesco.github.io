@@ -1,0 +1,2411 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="Francesco Ferri" name="author"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Fluid Mechanics — Lecture 3
+  </title>
+  <link href="../reveal.js/dist/reset.css" rel="stylesheet"/>
+  <link href="../reveal.js/dist/reveal.css" rel="stylesheet"/>
+  <link href="../custom/theme/haervig.css" rel="stylesheet"/>
+  <link href="../custom/plugins/highlight/haervig.css" rel="stylesheet"/>
+  <style>
+   .reveal .compact { font-size: 0.72em; line-height: 1.22; }
+    .reveal .small { font-size: 0.62em; line-height: 1.18; }
+    .reveal .tiny { font-size: 0.52em; line-height: 1.15; }
+    .reveal .equation-box {
+      border: 2px solid #333; padding: 0.25em 0.55em;
+      margin: 0.45em auto; width: fit-content;
+    }
+    .reveal .two-column {
+      display:flex; gap:1.1em; align-items:center;
+    }
+    .reveal .two-column > div { flex:1; }
+    .reveal .three-column {
+      display:flex; gap:0.7em; align-items:stretch;
+    }
+    .reveal .three-column > div { flex:1; }
+    .reveal .card {
+      border:1px solid #777; border-radius:8px; padding:0.45em 0.65em;
+      height:100%; box-sizing:border-box;
+    }
+    .reveal .note {
+      font-size:0.48em; opacity:0.65; margin-top:0.4em;
+    }
+    .reveal .timing {
+      position:absolute; right:0; bottom:0;
+      font-size:0.42em; opacity:0.45;
+    }
+    .reveal .flowchart {
+      display:flex; align-items:center; justify-content:center; gap:0.35em;
+      margin-top:0.5em;
+    }
+    .reveal .flowbox {
+      border:2px solid #333; border-radius:10px; padding:0.45em 0.55em;
+      min-width:2.6em; font-size:0.65em;
+    }
+    .reveal .arrow { font-size:1.3em; }
+    .reveal .question {
+      border-left:5px solid #555; padding-left:0.6em; text-align:left;
+      margin-top:0.45em;
+    }
+    .reveal svg text { font-family: inherit; }
+  
+    .reveal .image-placeholder {
+      border:2px dashed #777; border-radius:8px;
+      padding:0.55em 0.75em; margin:0.45em auto;
+      font-size:0.50em; line-height:1.2; text-align:center;
+      opacity:0.75; max-width:92%;
+    }
+    .reveal .result-box {
+      border:2px solid #333; border-radius:8px;
+      padding:0.35em 0.55em; margin:0.45em auto;
+      width:fit-content;
+    }
+  </style>
+ </head>
+ <body>
+  <div class="reveal">
+   <div style="position:fixed;bottom:20px;left:30px;z-index:1000;">
+    <h2>
+     <a href="../" style="color:#222;text-decoration:none;">
+      ←
+     </a>
+    </h2>
+   </div>
+   <div class="slides">
+    <!-- ========================================================= -->
+    <!-- OPENING / CONNECTION                                      -->
+    <!-- ========================================================= -->
+    <section>
+     <section>
+      <h3>
+       <b>
+        Fluid Mechanics Course
+       </b>
+      </h3>
+      <h2>
+       Lecture 3 · Control-Volume Analysis &amp; Potential Flow
+      </h2>
+      <p>
+       <em>
+        Finite control volumes → conservation laws → ideal flow models
+       </em>
+      </p>
+      <h4>
+       <em>
+        Francesco Ferri
+       </em>
+      </h4>
+      <h5>
+       <em>
+        AAU BUILD
+       </em>
+      </h5>
+      <aside class="notes">
+       150 min: about 110 min for control volumes, 30 min for potential flow and 10 min for questions.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Today: where are we going?
+      </h2>
+      <div class="flowchart">
+       <div class="flowbox">
+        Fluid
+        <br/>
+        <small>
+         What is it?
+        </small>
+       </div>
+       <div class="arrow">
+        →
+       </div>
+       <div class="flowbox">
+        Static
+        <br/>
+        <small>
+         Pressure &amp; forces
+        </small>
+       </div>
+       <div class="arrow">
+        →
+       </div>
+       <div class="flowbox">
+        Dimensional
+        <br/>
+        analysis
+       </div>
+       <div class="arrow">
+        →
+       </div>
+       <div class="flowbox">
+        Kinematics
+        <br/>
+        <small>
+         How does it move?
+        </small>
+       </div>
+      </div>
+      <div class="flowchart fragment">
+       <div class="flowbox">
+        Bernoulli
+        <br/>
+        <small>
+         Energy along a flow
+        </small>
+       </div>
+       <div class="arrow">
+        →
+       </div>
+       <div class="flowbox">
+        <b>
+         Control volume
+        </b>
+        <br/>
+        <small>
+         Mass, momentum, energy
+        </small>
+       </div>
+       <div class="arrow">
+        →
+       </div>
+       <div class="flowbox">
+        <b>
+         Potential flow
+        </b>
+        <br/>
+        <small>
+         Idealised velocity field
+        </small>
+       </div>
+      </div>
+      <p class="fragment question">
+       The central question today:
+       <b>
+        How can we turn local flow descriptions into simplified engineering balances?
+       </b>
+      </p>
+      <aside class="notes">
+       Last time: Bernoulli and flow kinematics. Today: mass, momentum and energy balances, then an ideal velocity field from potential flow.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Why use a control volume?
+      </h2>
+      <img alt="Water discharging from a tank" class="slide-image" src="./assets/Lecture_3_1/contracting_nozzle.png"/>
+      <div class="two-column compact">
+       <div>
+        <p>
+         A full
+         <b>
+          field description
+         </b>
+         gives the most general picture of the flow:
+        </p>
+        <p class="equation-box fragment">
+         $\mathbf V(x,y,z,t),\ p(x,y,z,t),\ldots$
+        </p>
+        <p class="fragment">
+         But it can be more information than we need for a quick engineering calculation.
+        </p>
+       </div>
+       <div>
+        <p class="fragment">
+         <b>
+          Start with a pipe restriction:
+         </b>
+        </p>
+        <ul>
+         <li class="fragment">
+          fluid enters and leaves;
+         </li>
+         <li class="fragment">
+          we care about flow rate, pressure and force;
+         </li>
+         <li class="fragment">
+          we do not want to follow each fluid particle.
+         </li>
+        </ul>
+       </div>
+      </div>
+      <p class="fragment equation-box">
+       <b>
+        Control volume = conservation laws applied to the region of interest.
+       </b>
+      </p>
+      <aside class="notes">
+       Ask: do we need the whole flow field, or just the flow rate and force on the pipe? Choose a control volume around the restriction.
+      </aside>
+     </section>
+
+     <section>
+  <h2>Finite control volume and differential analysis</h2>
+
+  <p>
+    The same conservation laws, applied at different spatial scales.
+  </p>
+
+  <div class="two-column compact">
+
+    <div>
+      <div>
+        <h3>Finite control volume (This Lecture)</h3>
+
+        <p class="fragment">
+          Examines a <b>finite region</b>, such as a pipe bend,
+          pump or tank.
+        </p>
+      </div>
+      <ul>
+        <li class="fragment">
+          Balances what accumulates inside the region and what
+          crosses its boundary.
+        </li>
+        <li class="fragment">
+          Uses <b>integral equations</b>, often simplified using
+          average inlet and outlet quantities.
+        </li>
+        <li class="fragment">
+          Finds overall quantities such as flow rate,
+          resultant force or required pump power.
+        </li>
+      </ul>
+
+    </div>
+
+    <div>
+      <div>
+        <h3>Differential analysis (Next Lectures)</h3>
+
+        <p class="fragment">
+          Examines an <b>infinitesimal fluid element</b>
+          at each position in the flow.
+        </p>
+      </div>
+      <ul>
+        <li class="fragment">
+          Expresses conservation locally, using spatial and
+          time derivatives.
+        </li>
+        <li class="fragment">
+          Uses <b>differential equations</b>, with boundary
+          conditions and, for unsteady problems, initial conditions.
+        </li>
+        <li class="fragment">
+          Finds fields such as velocity
+          \(\mathbf V(\mathbf x,t)\) and pressure \(p(\mathbf x,t)\).
+        </li>
+      </ul>
+
+    
+    </div>
+
+  </div>
+
+  <div class="fragment">
+    <img src="./assets/Lecture_3_2/CV_diff.png"
+                alt="Water discharging from a tank"
+                class="slide-image" height="400px">
+  </div>
+
+  <aside class="notes">
+       Same conservation laws. Integral balances give overall quantities; differential equations describe the local field. Potential flow is our first example of differential analysis.
+      </aside>
+</section>
+
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- CONTROL VOLUME                                            -->
+    <!-- ========================================================= -->
+    <section>
+     <section>
+      <h1>
+       Finite Control Volume
+      </h1>
+      <p>
+       From laws for a system to engineering balances
+      </p>
+      <aside class="notes">
+       Apply the conservation laws to a chosen region while fluid passes through it.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       System versus control volume
+      </h2>
+      <div class="two-column">
+       <div>
+        <h3>
+         System
+        </h3>
+        <ul>
+         <li class="fragment">
+          A fixed mass of fluid
+         </li>
+         <li class="fragment">
+          Follow the same material as it moves
+         </li>
+         <li class="fragment">
+          The basic conservation laws apply directly
+         </li>
+        </ul>
+       </div>
+       <div>
+        <h3>
+         Control volume
+        </h3>
+        <ul>
+         <li class="fragment">
+          A chosen region in space
+         </li>
+         <li class="fragment">
+          Fluid may cross its boundary
+         </li>
+         <li class="fragment">
+          Natural for pipes, pumps, turbines and nozzles
+         </li>
+        </ul>
+       </div>
+      </div>
+      <p class="fragment equation-box">
+       Same physics — different bookkeeping.
+      </p>
+      <img alt="Water discharging from a tank" class="slide-image fragment" src="./assets/Lecture_3_1/contro_volume_system.png" height="500px"/>
+      <aside class="notes">
+       A system follows the same fluid particles. A control volume follows a chosen boundary, with fluid entering and leaving.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Conservation laws for a system
+      </h2>
+      <div class="two-column compact">
+       <div>
+        <p>
+         <b>
+          Mass
+         </b>
+        </p>
+        <div class="equation-box fragment">
+         $$\frac{dM_{\rm sys}}{dt}=0$$
+        </div>
+        <p>
+         <b>
+          Linear momentum
+         </b>
+        </p>
+        <div class="equation-box fragment">
+         $$\frac{d\mathbf P_{\rm sys}}{dt}=\sum\mathbf F_{\rm ext}$$
+        </div>
+       </div>
+       <div>
+        <p>
+         <b>
+          Angular momentum
+         </b>
+        </p>
+        <div class="fragment">
+         $$\frac{d\mathbf H_{\rm sys}}{dt}=\sum\mathbf M_{\rm ext}$$
+         <p><br></p>
+        </div>
+        <p>
+         <b>
+          Energy
+         </b>
+        </p>
+        <div class="equation-box fragment">
+         $$\frac{dE_{\rm sys}}{dt}=\dot Q-\dot W$$
+        </div>
+       </div>
+      </div>
+      <p class="fragment question">
+       Even if these laws are relative simple to state, solving them for each fluid particle is impractical (unless we use a CFD method)
+      </p>
+      <aside class="notes">
+       Mass is conserved. Forces change momentum; heat and work change energy. RTT lets us apply these system laws to a control volume.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       One notation for mass, momentum and energy
+      </h2>
+      <p>
+       Let \(B\) be an
+       <b>
+        extensive property
+       </b>
+       and define the corresponding <b>specific property</b>
+      </p>
+      <div class="equation-box fragment">
+       $$b=\frac{B}{m}$$
+      </div>
+      <div class="three-column compact">
+       <div class="card fragment">
+        <h3>
+         Mass
+        </h3>
+        <p>
+         \(B=M\)
+        </p>
+        <p>
+         \(b=1\)
+        </p>
+       </div>
+       <div class="card fragment">
+        <h3>
+         Momentum
+        </h3>
+        <p>
+         \(B=\mathbf P = m \mathbf V\)
+        </p>
+        <p>
+         \(b=\mathbf V\)
+        </p>
+       </div>
+       <div class="card fragment">
+        <h3>
+         Energy
+        </h3>
+        <p>
+         \(B=E\)
+        </p>
+        <p>
+         \(b=e\)
+        </p>
+       </div>
+      </div>
+      <div class="equation-box fragment">
+       $$B_{\rm sys}=\int_{\rm sys}b\,dm=\int_{\rm sys}\rho b\,dV$$
+      </div>
+      <aside class="notes">
+       Extensive means total; specific means per unit mass. Choose b = 1 for mass, velocity for momentum, or specific energy for energy. Locally, dm = rho dV.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Control-volume balance
+      </h2>
+
+
+
+
+
+      <div class="equation-box">
+        $$
+        \boxed{ \underbrace{\text{Rate of change inside volume}}_{\text{accumulation}} + \underbrace{\text{net flux OUT through volume opening}}_{\text{transport}} = \underbrace{\text{external generation/input}}_{\text{source}} }
+        $$
+      </div>
+      <ul>
+       <li class="fragment">
+        <b>
+         Mass:
+        </b>
+        sources = 0
+       </li>
+       <li class="fragment">
+        <b>
+         Momentum:
+        </b>
+        source = resultant external force
+       </li>
+       <li class="fragment">
+        <b>
+         Energy:
+        </b>
+        sources include heat and work
+       </li>
+      </ul>
+      <aside class="notes">
+       Accumulation plus net outward transport equals the external input. No mass source; force supplies momentum; heat and work transfer energy.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Reynolds Transport Theorem
+      </h2>
+      <p>
+       For an extensive property
+       <i>
+        B
+       </i>
+       , with specific property
+       <i>
+        b = B/m
+       </i>
+       :
+      </p>
+      <div class="equation-box fragment">
+       $$
+      \frac{dB_{\rm sys}}{dt}
+      =
+      \frac{\partial}{\partial t}\int_{CV}\rho b\,dV
+      +
+      \int_{CS}\rho b(\mathbf V\cdot\mathbf n)\,dA
+    $$
+      </div>
+      <ul class="compact">
+       <li class="fragment">
+        First term → rate of change
+        <b>
+         inside
+        </b>
+        the control volume
+       </li>
+       <li class="fragment">
+        Second term → net transport
+        <b>
+         through
+        </b>
+        the control surface
+       </li>
+       <li class="fragment">
+        For a fixed control volume,
+        <b>
+         n
+        </b>
+        points outward
+       </li>
+      </ul>
+      <aside class="notes">
+       Fixed control volume here. Read the two terms as storage inside the volume and transport across its surface.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       RTT: how to read the surface integral
+      </h2>
+    
+     
+      <div class="two-column compact">
+       <div>
+         <img src="./assets/Lecture_3_1/control_volume.png"
+                alt="Water discharging from a tank"
+                />
+        <p class="fragment">
+         <b>
+          Outflow:
+         </b>
+         \(\mathbf V\cdot\mathbf n = \left\| V \right\| \cos( \theta ) >0\), if \(\theta < \pi/2\).
+        </p>
+        <p class="fragment">
+         <b>
+          Inflow:
+         </b>
+         \(\mathbf V\cdot\mathbf n= \left\| V \right\| \cos( \theta ) <0\), if \(\theta > \pi/2\).
+        </p>
+       </div>
+       <div>
+         
+
+        <p class="">
+         Mass flux:
+
+         \(\dot m=\int_A\rho(\mathbf V\cdot\mathbf n)\,dA\)
+        </p><br><br>
+        
+        <p class="equation-box">
+       $$\rho b(\mathbf V\cdot\mathbf n)$$
+        </p>
+       </div>
+      </div>
+      <p class="fragment question">
+       The sign convention is built into the dot product.
+      </p>
+     
+        
+      <aside class="notes">
+       Draw the outward normal first. Outflow gives a positive dot product; inflow gives a negative one.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       What if the control volume is moving?
+      </h2>
+      <p>
+       A control volume may <b>translate</b> or <u>deform</u> rather than remain fixed.
+      </p>
+      <div class="two-column">
+        <div>
+          <div class="equation-box fragment">
+            $$
+              \frac{dB_{\rm sys}}{dt}
+              =
+              \frac{\partial}{\partial t}\int_{CV}\rho b\,dV
+              +
+              \int_{CS}\rho b\left[(\mathbf V-\mathbf V_{CS})\cdot\mathbf n\right]\,dA
+              $$
+            </div>
+            <ul class="compact">
+            <li class="fragment">
+              \(\mathbf V\): fluid velocity
+            </li>
+            <li class="fragment">
+              \(\mathbf V_{CS}\): velocity of the control surface
+            </li>
+            <li class="fragment">
+              Crossing is determined by the
+              <b>
+              relative velocity
+              </b>
+              \(\mathbf V-\mathbf V_{CS}\).
+            </li>
+            </ul>
+            <p class="fragment equation-box">
+            Fixed CV: \(\mathbf V_{CS}=0\) → the previous RTT is recovered.
+            </p>
+        </div>
+        <div>
+          <img src="./assets/Lecture_3_1/control_volume_types.png"
+                alt="Water discharging from a tank"
+                class="slide-image">
+        </div>
+
+      </div>
+
+      
+        
+
+      <aside class="notes">
+       Use velocity relative to the boundary to calculate transport. If fluid and boundary have the same normal velocity, no fluid crosses.
+      </aside>
+     </section>
+     <section>
+      <h1>
+       1 · Mass conservation
+      </h1>
+      <aside class="notes">
+       About 15–20 min, including the pipe-junction example.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Continuity from RTT
+      </h2>
+      <p>
+       Set the extensive property to mass:
+      </p>
+      <div class="equation-box fragment">
+       $$B=m,\qquad b=1$$
+      </div>
+      <p class="fragment">
+       Mass conservation says \(dm_{\rm sys}/dt=0\).
+      </p>
+      <div class=" fragment">
+       \[
+        \underbrace{
+        \frac{\partial}{\partial t}\int_{CV}\rho\,dV
+        }_{\text{rate of mass accumulation inside CV}}
+        +
+        \underbrace{
+        \int_{CS}\rho \mathbf{V}\cdot\mathbf{n}\,dA
+        }_{\text{net mass flow OUT through the surface}}
+        =0
+        \]
+      </div>
+     
+      <aside class="notes">
+       Set b = 1 in RTT. The system mass is constant, so accumulation plus net outward mass flow equals zero.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       <b>Steady one</b>-dimensional flow
+      </h2>
+      <div class="two-column">
+        <div>
+           <p class="fragment">For steady flow, there is no accumulation of mass inside the control volume:
+              $$ \frac{\partial}{\partial t}\int_{CV}\rho\,dV=0. $$</p>
+        </div>
+        <div>
+          <p class="fragment">
+        Therefore,
+              $$ \int_{CS}\rho \mathbf{V}\cdot\mathbf{n}\,dA=0. $$
+              </p>
+        </div>
+      </div>
+      <div class="">
+        
+       
+        <p class="fragment">
+        Split the control surface into inlets and outlets:
+              $$ \sum_{\text{out}}\int_A \rho V_n\,dA - \sum_{\text{in}}\int_A \rho V_n\,dA =0. $$
+        If the flow is treated as 1-D at each inlet/outlet, so that velocity and density are uniform over each section,
+                </p>
+      </div>
+      <div class="equation-box fragment">
+       $$
+        \sum_{\rm in}\dot m=\sum_{\rm out}\dot m \quad\text{or}\quad
+        \sum_{\rm in} \rho_{i} V_{n,i} A_{i} = \sum_{\rm out} \rho_{j} V_{n,j} A_{j}
+      $$
+      </div>
+      <p class="fragment">
+      for an incompressible fluid with constant density, \(\rho\) cancels:
+        $$ \boxed{ \sum_{\text{in}} A_iV_i = \sum_{\text{out}} A_jV_j } $$
+      </p>
+     
+  
+      
+      <aside class="notes">
+       Steady flow removes accumulation. Uniform section properties give mass flow rate rho A V. For equal density, A1 V1 = A2 V2.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Mini-example · Pipe junction
+      </h2>
+      <p><b>Assumptions:</b> Incompressible and steady flow with uniform velocity at each section.</p>
+      <div class="two-column">
+       <div>
+         <div class="equation-box">
+       $$
+      {\sum_{\rm in}AV=\sum_{\rm out}AV}
+    $$
+      </div>
+        <p class="fragment">
+         One inlet, two outlets:
+        </p>
+        <div class="equation-box fragment">
+         $$
+          \rho_1A_1V_1
+          =
+          \rho_2A_2V_2+\rho_3A_3V_3
+        $$
+        </div>
+       </div>
+       <div>
+        <svg viewbox="0 0 500 260" width="100%">
+         <line stroke="#333" stroke-width="7" x1="40" x2="230" y1="130" y2="130">
+         </line>
+         <line stroke="#333" stroke-width="7" x1="230" x2="430" y1="130" y2="55">
+         </line>
+         <line stroke="#333" stroke-width="7" x1="230" x2="430" y1="130" y2="205">
+         </line>
+         <polygon fill="#333" points="205,118 230,130 205,142">
+         </polygon>
+         <polygon fill="#333" points="425,45 450,50 430,65">
+         </polygon>
+         <polygon fill="#333" points="432,195 450,212 425,215">
+         </polygon>
+         <text font-size="22" x="55" y="112">
+          1
+         </text>
+         <text font-size="22" x="410" y="42">
+          2
+         </text>
+         <text font-size="22" x="410" y="238">
+          3
+         </text>
+        </svg>
+       </div>
+      </div>
+
+      <aside class="notes">
+       Choose the inlets and outlets before calculating. One inlet can supply several outlets; total mass flow in equals total mass flow out.
+      </aside>
+     </section>
+     <section>
+      <h1>
+       2 · Linear momentum
+      </h1>
+      <aside class="notes">
+       About 30–35 min, including the bend example.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Newton's second law + RTT
+      </h2>
+      <p>
+       For linear momentum, \(B=\mathbf P\) and \(b=\mathbf V\).
+      </p>
+      <div class="equation-box fragment">
+       $$
+      \boxed{
+      \sum\mathbf F_{\rm ext}
+      =
+      \frac{\partial}{\partial t}\int_{CV}\rho\mathbf V\,dV
+      +
+      \int_{CS}\rho\mathbf V(\mathbf V\cdot\mathbf n)\,dA
+      }
+    $$
+      </div>
+      <ul class="compact">
+       <li class="fragment">
+        Momentum is a
+        <b>
+         vector
+        </b>
+        → write x and y equations separately.
+       </li>
+       <li class="fragment">
+        Forces are also vectors → signs matter.
+       </li>
+      </ul>
+      <aside class="notes">
+       Set b equal to velocity in RTT and use Newton’s second law. The forces act on the fluid inside the control volume.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Steady one-dimensional momentum
+      </h2>
+      <p>Using steady flow, the accumulation term vanishes and the momentum equation reduces to</p>
+      <p class="fragment">$$\sum\mathbf F_{\rm ext}=\int_{CS}\rho \mathbf V(\mathbf V\cdot\mathbf n)\,dA $$</p>
+      <p class="fragment">split the CS into individual inlet and outlet areas (sum of integrals).</p>
+      <p class="fragment">With the 1-D assumption, \(\rho\) and \(\mathbf V\) are taken as uniform (or represented by average values) over each \(A_i\). Therefore,</p>
+      <p class="fragment">$$\int_{A_i}\rho \mathbf V(\mathbf V\cdot\mathbf n)\,dA
+      \approx
+      \mathbf V_i
+      \int_{A_i}\rho(\mathbf V\cdot\mathbf n)\,dA.$$</p>
+      <p class="fragment">
+      where that last integral is the mass flow rate (sign determined by direction). Hence
+            \[
+      \int_{CS}\rho \mathbf V(\mathbf V\cdot\mathbf n)\,dA
+      =
+      \sum_{\rm out}\dot m\,\mathbf V
+      -
+      \sum_{\rm in}\dot m\,\mathbf V
+      \]
+      </p>
+
+      <div class="equation-box fragment">
+       $$
+      \boxed{
+      \sum\mathbf F_{\rm ext}
+      =
+      \sum_{\rm out}\dot m\mathbf V
+      -
+      \sum_{\rm in}\dot m\mathbf V
+      }
+    $$
+      </div>
+      
+      <aside class="notes">
+       Draw axes and velocity arrows first. Resolve the momentum balance into components and include every external force.
+      </aside>
+     </section>
+     <section>
+      <div class="equation-box">
+       $$
+      \boxed{
+      \sum\mathbf F_{\rm ext}
+      =
+      \sum_{\rm out}\dot m\mathbf V
+      -
+      \sum_{\rm in}\dot m\mathbf V
+      }
+    $$
+      </div>
+      <div class="two-column compact">
+       <div>
+        <h3>
+         Left side: forces
+        </h3>
+        <ul>
+         <li class="fragment">
+          Pressure
+         </li>
+         <li class="fragment">
+          Weight
+         </li>
+         <li class="fragment">
+          Wall/support reaction
+         </li>
+         <li class="fragment">
+          Other applied forces
+         </li>
+        </ul>
+       </div>
+       <div>
+        <h3>
+         Right side: momentum flux
+        </h3>
+        <ul>
+         <li class="fragment">
+          Mass flow rate × velocity
+         </li>
+         <li class="fragment">
+          Direction is essential
+         </li>
+        </ul>
+       </div>
+      </div>
+      <aside class="notes">
+       Left: pressure, weight and wall forces on the fluid. Right: outgoing minus incoming momentum flux. Keep the velocity directions.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Pressure forces
+      </h2>
+      <div class="equation-box">
+       $$\mathbf F_p=-\int_A p\,\mathbf n\,dA$$
+      </div>
+      <ul class="compact">
+       <li class="fragment">
+        \(\mathbf n\) is the
+        <b>
+         outward normal
+        </b>
+        of the control surface.
+       </li>
+       <li class="fragment">
+        Pressure pushes
+        <b>
+         inward
+        </b>
+        , opposite to \(\mathbf n\).
+       </li>
+       <li class="fragment">
+        For uniform pressure on a flat port: \(\mathbf F_p=-pA\mathbf n\).
+       </li>
+      </ul>
+      <aside class="notes">
+       Pressure pushes inward: its force is opposite to the outward normal. At the bend inlet it points right; at the upward outlet it points down.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Absolute or gauge pressure?
+      </h2>
+      <div class="equation-box">
+       $$p_g=p_{\rm abs}-p_{\rm atm}$$
+      </div>
+      <ul>
+       <li class="fragment">
+        Either absolute or gauge pressure can be used in the force balance.
+       </li>
+       <li class="fragment">
+        Gauge pressure is often simpler when atmospheric pressure acts on the surrounding exposed surfaces.
+       </li>
+       <li class="fragment">
+        <b>
+         Use one pressure reference consistently.
+        </b>
+       </li>
+      </ul>
+      <p class="fragment question">
+       In the following bend example, the stated pressures are gauge pressures.
+      </p>
+      <aside class="notes">
+       Use one pressure reference throughout. Gauge pressure is convenient when the surrounding atmospheric pressure cancels from the force balance.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Worked example · 90° pipe bend
+      </h2>
+      <div class="two-column compact">
+       <div>
+        <ul>
+         <li>
+          Water: \(\rho=1000\ {\rm kg/m^3}\)
+         </li>
+         <li>
+          \(D_1=0.10\ {\rm m}\), \(D_2=0.05\ {\rm m}\)
+         </li>
+         <li>
+          \(Q=0.020\ {\rm m^3/s}\)
+         </li>
+         <li>
+          \(p_1=200\ {\rm kPa}\), \(p_2=100\ {\rm kPa}\) gauge
+         </li>
+         <li>
+          Horizontal bend; neglect weight
+         </li>
+        </ul>
+        <p class="fragment">
+         <b>
+          Find the force exerted by the fluid on the bend.
+         </b>
+        </p>
+       </div>
+       <div>
+        
+         <img src="./assets/Lecture_3_1/bend_pipe.png"
+                alt="Water discharging from a tank"
+                class="slide-image">
+       </div>
+      </div>
+      <aside class="notes">
+       Choose +x to the right and +y upward. First find the force of the bend on the fluid, then reverse it to obtain the fluid load on the bend.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       90° bend · Step 1: continuity
+      </h2>
+      <div class="equation-box">
+       $$A_1=\frac{\pi D_1^2}{4}=7.854\times10^{-3}\ {\rm m^2}$$
+      </div>
+      <div class="equation-box fragment">
+       $$A_2=\frac{\pi D_2^2}{4}=1.963\times10^{-3}\ {\rm m^2}$$
+      </div>
+      <div class="two-column compact fragment">
+       <div>
+        <div class="equation-box">
+         $$V_1=\frac{Q}{A_1}=2.55\ {\rm m/s}$$
+        </div>
+       </div>
+       <div>
+        <div class="equation-box">
+         $$V_2=\frac{Q}{A_2}=10.19\ {\rm m/s}$$
+        </div>
+       </div>
+      </div>
+      <p class="fragment question">
+       The smaller outlet area produces the larger velocity.
+      </p>
+      <aside class="notes">
+       The outlet diameter is half the inlet diameter, so its area is one quarter. At the same flow rate, its speed is four times larger.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       90° bend · Step 2: momentum flux
+      </h2>
+      <div class="equation-box">
+       $$\dot m=\rho Q=20\ {\rm kg/s}$$
+      </div>
+      <div class="two-column compact">
+       <div class="fragment">
+        <div class="equation-box">
+         $$\mathbf V_1=2.55\,\mathbf i$$
+        </div>
+       </div>
+       <div class="fragment">
+        <div class="equation-box">
+         $$\mathbf V_2=10.19\,\mathbf j$$
+        </div>
+       </div>
+       <div>
+        <img src="./assets/Lecture_3_1/bend_pipe.png"
+                alt="Water discharging from a tank"
+                class="slide-image">
+       </div>
+      </div>
+      <div class="equation-box fragment">
+       $$
+\dot m(\mathbf V_2-\mathbf V_1)
+=
+-50.9\,\mathbf i+203.8\,\mathbf j\ {\rm N}
+$$
+      </div>
+
+      <aside class="notes">
+       Inlet momentum points along +x; outlet momentum along +y. Subtract the inlet vector from the outlet vector.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       90° bend · Step 3: free-body diagram
+      </h2>
+     
+        <div>
+           <img src="./assets/Lecture_3_1/bend_example.png"
+                alt="Water discharging from a tank"
+                class="slide-image">
+        </div>
+ <ul class="compact">
+       <li class="fragment">
+        Inlet pressure force: \(F_{p1} = +p_1A_1\,\mathbf i\)
+       </li>
+       <li class="fragment">
+        Outlet pressure force: \(-p_2A_2\,\mathbf j\)
+       </li>
+       <li class="fragment">
+        Bend/support force on the fluid:
+    \(\mathbf R=F_x\mathbf i+F_y\mathbf j\)
+       </li>
+       <li class="fragment">
+        Weight neglected
+       </li>
+      </ul>
+
+      <p class="fragment question">
+       Draw the force directions first; assign signs from the axes second.
+      </p>
+      <aside class="notes">
+       Inlet pressure pushes right; outlet pressure pushes down. The unknown reaction is the force of the bend on the fluid.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       90° bend · Step 4: linear-momentum
+      </h2>
+       $$
+      \boxed{
+      \sum\mathbf F_{\rm ext}
+      =
+      \sum_{\rm out}\dot m\mathbf V
+      -
+      \sum_{\rm in}\dot m\mathbf V
+      }
+    $$
+      <div class="two-column">
+        <div>
+          <p>x-direction</p>
+          <div class="equation-box">
+            $$p_1A_1+F_x=-\dot mV_1$$
+          </div>
+          <div class=" fragment">
+                  $$
+            F_x=-(20)(2.55)-(200000)(7.854\times10^{-3})
+            $$
+          </div>
+          <div class="result-box fragment">
+            <b>
+              \(F_x=-1622\ {\rm N}\)
+            </b>
+          </div>
+          <p class="fragment">
+          The bend pushes the fluid toward \(-x\).
+          </p>
+        </div>
+        <div>
+          <p>y-direction</p>
+          <div class="equation-box fragment">
+            $$F_y-p_2A_2=\dot mV_2$$
+          </div>
+          <div class=" fragment">
+                  $$
+            F_y=(20)(10.19)+(100000)(1.963\times10^{-3})
+            $$
+          </div>
+          <div class="result-box fragment">
+            <b>
+              \(R_y=+400\ {\rm N}\)
+            </b>
+          </div>
+          <p class="fragment">
+          The bend pushes the fluid toward \(+y\).
+          </p>
+        </div>
+      </div>
+     
+      <aside class="notes">
+       The bend removes x-momentum and adds y-momentum. Its force on the fluid points left and upward. The upward reaction also opposes the outlet pressure force.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       90° bend · Step 5: load on the bend
+      </h2>
+     
+      <div class="two-column compact fragment">
+       <div>
+         <p>
+       Force of the bend on the fluid:
+      </p>
+      <div class="equation-box">
+       $$\mathbf R=-1622\,\mathbf i+400\,\mathbf j\ {\rm N}$$
+      </div>
+      <p class="fragment">
+       Therefore, by Newton's third law:
+      </p>
+      <div class="result-box fragment">
+       $$
+\boxed{\mathbf F_{\rm fluid\to bend}=+1622\,\mathbf i-400\,\mathbf j\ {\rm N}}
+$$
+      </div>
+       </div>
+       <div>
+        <img src="./assets/Lecture_3_1/bend_solution.png"
+                alt="Water discharging from a tank"
+                class="slide-image fragment">
+       </div>
+      </div>
+       
+      <aside class="notes">
+       Reverse the reaction to get the fluid force on the bend. The support must balance that load, together with any other loads on the pipe.
+      </aside>
+     </section>
+     <section>
+      <h1>
+       3 · Energy
+      </h1>
+      <aside class="notes">
+       About 20–25 min. Use the first law to reach the familiar pipe-flow energy balance.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Energy is another control-volume balance
+      </h2>
+      <p>
+       The first law for a system:
+      </p>
+      <div class="equation-box fragment">
+       $$
+      \frac{dE_{\rm sys}}{dt}=\dot Q-\dot W
+    $$
+      </div>
+      <p class="fragment">
+       with total specific energy
+      </p>
+      <div class="equation-box fragment">
+       $$
+      e=e_{\rm int}+\frac{V^2}{2}+gz
+    $$
+      </div>
+      <p class="fragment">\(\dot Q\) is the heat added to the system, and \(\dot W\) is the work done by the system.</p>
+      <p class="fragment">both \(\dot Q\) and \(\dot W\) are rate of energy transfer (power), measured in watts (W).</p>
+      <p class="fragment">
+       RTT converts the system statement to a control-volume statement.
+      </p>
+      <aside class="notes">
+       Specific total energy contains internal, kinetic and gravitational potential energy. Apply RTT with b = e.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Control-volume energy equation
+      </h2>
+      <div class="equation-box compact">
+      $$
+        \frac{dE_{CV}}{dt}
+        +
+        \int_{CS}\rho
+        \left(
+        e+\frac{p}{\rho}
+        \right)
+        (\mathbf V\cdot\mathbf n)\,dA
+        =
+        \dot Q-\dot W_s
+      $$
+      </div>
+      <p class="fragment">
+       The term \(p/\rho\) represents
+       <b>
+        flow work
+       </b>, it represents the work done by the fluid to push itself into or out of the control volume.
+       It technically belong to the work term, but it is convenient to move it to the energy flux term. \(\dot W_s\) is now the work at the shafts.
+      <p class="fragment">
+       Define \(h=e_{\rm int}+p/\rho\) →
+       <b>
+        enthalpy
+       </b>
+       .
+      </p>
+      <div class="equation-box fragment">
+        $$e+\frac{p}{\rho}=e_{\rm int}+\frac{p}{\rho}+\frac{V^2}{2}+gz=h+\frac{V^2}{2}+gz $$     
+      </div>
+      <aside class="notes">
+       Pressure does work as fluid crosses a section. Combine this flow work with internal energy to form enthalpy: h = e_int + p/rho. Shaft work stays separate.
+      </aside>
+     </section>
+
+     <section>
+      <h2>
+       Steady-flow engineering energy equation
+      </h2>
+      Starting from the steady-flow energy equation for one inlet and one outlet, assuming uniform h and z at each section, we have
+      <div class="compact">
+      
+        $$ \dot Q-\dot W_s = \dot m \left[ \left(h_2+\alpha^*_2\frac{V_2^2}{2}+gz_2\right) - \left(h_1+\alpha_1\frac{V_1^2}{2}+gz_1\right) \right]. $$
+
+      </div>
+      <p class="fragment">
+       Divide by \(\dot m\) we have:
+$$ q-w_s = (h_2-h_1) + \alpha_2\frac{V_2^2}{2} - \alpha_1\frac{V_1^2}{2} + g(z_2-z_1) = (e_{2, \rm int}-e_{1, \rm int}) + \frac{p_2-p_1}{\rho} + \alpha_2\frac{V_2^2}{2} - \alpha_1\frac{V_1^2}{2} + g(z_2-z_1) $$
+      </p>
+       <div class="two-column">
+        <div class="fragment">
+          The shaft work is often split into pump and turbine contributions:
+          $$ -w_s = w_p - w_t $$
+        </div>
+        <div class="fragment">
+          The heat transfer and the variation of internal energy are combined into a single term:
+          $$ q - (e_{2, \rm int}-e_{1, \rm int})= -e_L$$
+        </div>
+       </div>
+      
+      <p></p>
+      <br><br>
+      <div class="footnote" style="position: absolute; bottom: 0; left: 0; font-size: 0.5em; opacity: 0.7;">
+        <br><br>
+        <p><sup>*</sup> \(\alpha\) represents the kinetic energy correction factor, because the velocity is not uniform across the cross-section. 1 for uniform flow. 2 for laminar flow.</p>
+      </div>
+      <aside class="notes">
+       For steady flow, divide by mass flow rate to obtain energy per unit mass. Use constant density for the pressure difference term. Alpha corrects the kinetic-energy flux for the velocity profile.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Engineering energy equation
+      </h2>
+      <p>
+       Dividing the steady-flow energy equation by \(g\), we obtain the head form of the extended Bernoulli equation with losses and machinery:
+      </p>
+      <div class="equation-box fragment">
+       $$
+\boxed{
+\frac{p_1}{\rho g}
++\alpha_1\frac{V_1^2}{2g}
++z_1
++h_p-h_t-h_L
+=
+\frac{p_2}{\rho g}
++\alpha_2\frac{V_2^2}{2g}
++z_2
+}
+$$
+      </div>
+      <div class="three-column compact fragment">
+       <div class="card">
+        <b>
+         \(h_p = w_p/g [m]\)
+        </b>
+        <br/>
+        pump adds energy
+       </div>
+       <div class="card">
+        <b>
+         \(h_t = w_t/g [m]\)
+        </b>
+        <br/>
+        turbine removes energy
+       </div>
+       <div class="card">
+        <b>
+         \(h_L = e_L/g [m]\)
+        </b>
+        <br/>
+        mechanical losses
+       </div>
+      </div>
+      <aside class="notes">
+       Divide energy per unit mass by g to obtain head in metres. Pumps add head; turbines remove it; losses reduce mechanical energy. Alpha is 1 for uniform flow and 2 for fully developed laminar flow in a circular pipe.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Why is Bernoulli a special case?
+      </h2>
+      <p>
+       Start from the engineering energy equation and impose the Bernoulli assumptions:
+      </p>
+      <ul class="compact">
+       <li class="fragment">
+        steady flow;
+       </li>
+       <li class="fragment">
+        incompressible fluid;
+       </li>
+       <li class="fragment">
+        no pump or turbine: \(h_p=h_t=0\);
+       </li>
+       <li class="fragment">
+        no mechanical losses: \(h_L=0\);
+       </li>
+       <li class="fragment">
+        \(\alpha\approx1\).
+       </li>
+      </ul>
+      <div class="equation-box fragment">
+       $$
+\boxed{\frac{p}{\rho g}+\frac{V^2}{2g}+z=\text{constant}}
+$$
+      </div>
+      <p class="fragment question">
+       <b>
+        Bernoulli is an energy conservation law
+       </b>
+       , applied to ideal fluids under specific assumptions.
+      </p>
+      <aside class="notes">
+       Remove pumps, turbines and losses to recover ideal Bernoulli. The local streamline equation uses local speed; the section balance needs alpha when the velocity profile is nonuniform.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Control-volume method: a repeatable workflow
+      </h2>
+      <ol class="compact">
+       <li class="fragment">
+        <b>
+         Choose
+        </b>
+        the control volume.
+       </li>
+       <li class="fragment">
+        <b>
+         Define
+        </b>
+        inlet/outlet sections and coordinate axes.
+       </li>
+       <li class="fragment">
+        <b>
+         Sketch
+        </b>
+        velocities, pressures and external forces.
+       </li>
+       <li class="fragment">
+        <b>
+         Select
+        </b>
+        mass, momentum or energy balance.
+       </li>
+       <li class="fragment">
+        <b>
+         Simplify
+        </b>
+        using steady/incompressible/1-D assumptions.
+       </li>
+       <li class="fragment">
+        <b>
+         Solve
+        </b>
+        and check dimensions + physical direction.
+       </li>
+      </ol>
+      <aside class="notes">
+       Choose the volume and axes. Draw velocities and forces. Select the balance, state the assumptions, then calculate and check units and signs.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Short pause / check
+      </h2>
+      <div class="question">
+       <p>
+        <b>
+         1.
+        </b>
+        What is the difference between a system and a control volume?
+       </p>
+       <p class="fragment">
+        <b>
+         2.
+        </b>
+        Why can an inlet contribute a negative mass flux?
+       </p>
+       <p class="fragment">
+        <b>
+         3.
+        </b>
+        Why does momentum require a vector equation?
+       </p>
+       <p class="fragment">
+        <b>
+         4.
+        </b>
+        When is Bernoulli insufficient?
+       </p>
+      </div>
+      <aside class="notes">
+       Allow 3–5 min. Answers: same particles versus chosen region; inlet velocity opposes the outward normal; momentum has direction; pumps, losses or significant unsteadiness require more than steady ideal Bernoulli.
+      </aside>
+     </section>
+    </section>
+
+
+
+<!-- ========================================================= -->
+<!-- POTENTIAL FLOW                                            -->
+<!-- ========================================================= -->
+    <section>
+     <section>
+      <h1>
+       Potential Flow
+      </h1>
+      <p>
+       From conservation laws to an idealised velocity field
+      </p>
+      <aside class="notes">
+       About 30 min for potential flow.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Why is potential flow useful to engineers?
+      </h2>
+      <ul>
+       <li class="fragment">
+        A full viscous field solution may be too expensive or unnecessary for a first estimate (viscous term \(\mu \nabla^2\mathbf V\)).
+       </li>
+       <li class="fragment">
+        Away from boundary layers and wakes, some flows can be approximated as nearly inviscid.
+       </li>
+       <li class="fragment">
+        If the modeled region is also irrotational, velocity can be described using a scalar potential.
+       </li>
+       <li class="fragment">
+        We can obtain
+        <b>
+         velocity, streamlines and pressure trends
+        </b>
+        from relatively simple mathematics.
+       </li>
+       <li class="fragment">
+        Elementary solutions can be combined to create useful idealised flow patterns around bodies.
+       </li>
+      </ul>
+     <img src="./assets/Lecture_3_2/streamline_body.png"
+alt="Water discharging from a tank"
+class="slide-image" height="700px">
+      <aside class="notes">
+       Useful for the outer flow away from strong viscous effects. It predicts velocity and pressure, but not wall shear or viscous wake losses.
+      </aside>
+     </section>
+     <section>
+      <h2>Potential flow: the role of each assumption</h2>
+      <ul>
+       <li class="fragment"><b>Irrotational:</b> \(\nabla\times\mathbf V=0\). A scalar potential describes velocity: \(\mathbf V=\nabla\phi\).</li>
+       <li class="fragment"><b>Incompressible:</b> \(\nabla\cdot\mathbf V=0\). Substituting the potential gives \(\nabla^2\phi=0\).</li>
+       <li class="fragment"><b>Inviscid:</b> neglect viscous stresses in the momentum equation. Bernoulli then relates the potential to pressure.</li>
+      </ul>
+      <p class="equation-box fragment">Irrotationality + incompressibility give Laplace's equation. Inviscid flow relate the potential to pressure.</p>
+      <aside class="notes">
+       Irrotationality gives a velocity potential. Incompressibility gives Laplace’s equation. The inviscid assumption enters the Bernoulli pressure relation. Laplace also applies to unsteady flow.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Incompressible flow
+      </h2>
+      <div class="two-column">
+        <div>
+           <p>
+              Recall divergence:
+              </p>
+              <div class="equation-box fragment">
+              $$
+              \nabla\cdot\mathbf V
+            $$
+              </div>
+              <p class="fragment">
+              An incompressible flow satisfies
+              </p>
+              <div class="equation-box fragment">
+              $$
+                \boxed{\nabla\cdot\mathbf V=0}
+              $$
+              </div>
+          </div>
+        <div>
+           <img src="./assets/Lecture_3_2/slide_005_1.png"
+alt="Water discharging from a tank"
+class="slide-image fragment" height="200px">
+        </div>
+      </div>
+      <p class="fragment">
+       Zero divergence means that for a given volume, the net flow into the volume equals the net flow out of the volume. This is a local statement of mass conservation for an incompressible fluid. 
+      </p>
+      <aside class="notes">
+       An incompressible fluid element keeps its volume. Any stretching in one direction must be offset in the others, so divergence is zero. Velocity can still vary with position.
+      </aside>
+     </section>
+      <section>
+      <h2>
+       Irrotational flow
+      </h2>
+      <div class="two-column">
+        <div>
+           <p>
+              Recall vorticity:
+              </p>
+              <div class="equation-box fragment">
+              $$
+              \boldsymbol\omega=\nabla\times\mathbf V
+            $$
+              </div>
+              <p class="fragment">
+              An irrotational flow satisfies
+              </p>
+              <div class="equation-box fragment">
+              $$
+                \boxed{\nabla\times\mathbf V=0}
+              $$
+              </div>
+          </div>
+        <div>
+           <img src="./assets/Lecture_3_2/irrotational_flow"
+alt="Water discharging from a tank"
+class="slide-image fragment" height="200px">
+        </div>
+      </div>
+      <p class="fragment">
+       Zero curl makes the line integral of velocity locally path-independent. We can therefore define a scalar \(\phi\) whose spatial gradient gives \(\mathbf V\).
+      </p>
+      <aside class="notes">
+       Zero vorticity allows a potential locally. A smooth curl-free field has a single-valued potential throughout a simply connected region. Inviscid flow need not be irrotational.
+      </aside>
+     </section>
+
+     <section>
+      <h2>
+       Velocity potential
+      </h2>
+      <div class="two-column">
+        <div>
+          <p>
+            Define a velocity potential \(\phi\) such that:
+          </p>
+          <div class="equation-box fragment">
+              $$
+              \mathbf V=\nabla\phi
+            $$
+          </div>
+          <p class="fragment">
+            In Cartesian coordinates:
+          </p>
+          <div class="equation-box fragment">
+              $$
+              u=\frac{\partial\phi}{\partial x},\qquad
+              v=\frac{\partial\phi}{\partial y},\qquad
+              w=\frac{\partial\phi}{\partial z}
+            $$
+          </div>
+        </div>
+        <div class="fragment">
+          $$
+            \nabla\times\mathbf V=0
+          $$
+          Consider the x-direction:
+          $$
+            \frac{\partial w}{\partial y}-\frac{\partial v}{\partial z}
+            =
+            \frac{\partial^2\phi}{\partial y\partial z}-\frac{\partial^2\phi}{\partial z\partial y}
+            =0
+          $$
+          Clairaut's (or Schwarz's) theorem states that the order of differentiation does not matter for a smooth function. The same argument applies to the y- and z-directions.
+        </div>
+      </div>
+
+  
+      <p class="fragment">
+       Any potential \(\phi\) gives an irrotational velocity field because \(\nabla\times\nabla\phi=0\).
+      </p>
+      <aside class="notes">
+       We use V = grad(phi). Differentiate phi in each coordinate direction to obtain the corresponding velocity component.
+      </aside>
+     </section>
+
+     <section>
+      <h2>Incompressibility + Irrotational → Laplace's equation</h2>
+
+      <div class="two-column compact">
+       <div class="card fragment">
+        <h3>
+         Incompressible
+        </h3>
+        <p>
+         $$
+            \nabla\cdot\mathbf V=0 \\
+            $$ $$
+            \underbrace{ \frac{\partial u}{\partial x} +\frac{\partial v}{\partial y}=0 }_{\text{Incompressible flow}}
+          $$
+        </p>
+       </div>
+       
+       <div class="card fragment">
+        <h3>
+         Irrotational
+        </h3>
+        <p>
+         $$
+            \nabla\times\mathbf V=0 \Longrightarrow \mathbf V=\nabla\phi \\
+            $$ $$
+            \underbrace{ u=\frac{\partial\phi}{\partial x}, \qquad v=\frac{\partial\phi}{\partial y} }_{\text{Irrotational flow}}
+          $$
+        </p>
+        <p>
+         $$
+            
+          $$
+        </p>
+       </div>
+      </div>
+
+      
+      
+
+      <p class="fragment">Substituting gives the Laplace Equation</p>
+      
+      <div class="equation-box fragment">
+       $$\nabla\cdot(\nabla\phi)= \frac{\partial^2\phi}{\partial x^2} +\frac{\partial^2\phi}{\partial y^2} =\nabla^2\phi =0$$
+      </div>
+      <aside class="notes">
+       Substitute u = phi_x and v = phi_y into continuity. The result is phi_xx + phi_yy = 0. Neither steadiness nor the inviscid assumption is needed for this step.
+      </aside>
+     </section>
+
+     <section>
+      <h2>Laplace Equation</h2>
+      
+      <div class="equation-box">
+       $$\nabla^2\phi=0$$
+      </div>
+      <p class="fragment">Laplace's equation it is a mathematical constraint. It requires boundary conditions to determine the unique solution.</p>
+
+
+      <div class="two-column compact">
+       <div class="card fragment">
+        <h3>
+         Boundary conditions: fixed impermeable wall
+        </h3>
+        <p>
+         $$
+            \mathbf V\cdot\mathbf n=0 \Longrightarrow \nabla\phi\cdot\mathbf n=0 \Longrightarrow \frac{\partial\phi}{\partial n}=0
+          $$
+        </p>
+       </div>
+       
+       <div class="card fragment">
+        <h3>
+         Boundary conditions: Inlet with prescribed velocity
+        </h3>
+        <p>
+         $$
+            \mathbf V\cdot\mathbf n=V_n \Longrightarrow \nabla\phi\cdot\mathbf n=V_n \Longrightarrow \frac{\partial\phi}{\partial n}=V_n
+          $$
+        </p>
+       </div>
+      </div>
+
+      <p class="fragment">Once the boundary conditions are specified for each boundary, the solution to Laplace's equation is unique.</p>
+      <aside class="notes">
+       A fixed wall has zero normal velocity. At an inlet, prescribe the normal velocity using the outward normal. With only normal-velocity conditions, compatible fluxes determine phi up to an arbitrary constant; velocity is unaffected.
+      </aside>
+     </section>
+
+
+<section>
+  <h2>2-D potential flow: from potential to velocity</h2>
+
+  <p>
+    For flow in the \(x,y\) plane, \(w=0\) and nothing varies
+    with \(z\). Laplace's equation becomes:
+  </p>
+
+  <div class="equation-box fragment">
+    $$
+      \boxed{
+        \frac{\partial^2\phi}{\partial x^2}
+        +
+        \frac{\partial^2\phi}{\partial y^2}=0
+      }
+    $$
+  </div>
+
+  <p class="fragment">
+    After finding \(\phi(x,y)\) using the boundary conditions,
+    differentiate it to obtain the velocity:
+  </p>
+
+  <div class="equation-box fragment">
+    $$
+      \boxed{
+        u=\frac{\partial\phi}{\partial x},
+        \qquad
+        v=\frac{\partial\phi}{\partial y}
+      }
+    $$
+  </div>
+
+  <ul>
+    <li class="fragment">
+      <b>Equipotential lines:</b> lines where
+      \(\phi=\text{constant}\).
+    </li>
+    <li class="fragment">
+      <b>Streamlines:</b> curves tangent to the local velocity.
+      Since \(\mathbf V=\nabla\phi\), they cross equipotential
+      lines at right angles.
+    </li>
+  </ul>
+
+  <p class="fragment equation-box">
+    How can we describe and draw these streamlines?
+  </p>
+
+  <aside class="notes">
+       Solve for phi, then differentiate to obtain velocity. A gradient is perpendicular to constant-value lines, so streamlines cross equipotentials at right angles wherever velocity is nonzero.
+      </aside>
+</section>
+
+<section>
+  <h2>Stream function: a way to draw the flow</h2>
+
+  <p>
+    For 2-D incompressible flow, introduce a second scalar function
+    \(\psi(x,y)\) describing the <b>same velocity field</b>:
+  </p>
+
+  <div class="equation-box fragment">
+    $$
+      \boxed{
+        u=\frac{\partial\psi}{\partial y},
+        \qquad
+        v=-\frac{\partial\psi}{\partial x}
+      }
+    $$
+  </div>
+
+  <p class="fragment">
+    Along a streamline, the displacement \((dx,dy)\) follows
+    the velocity, so 
+    $$ \frac{dy}{dx}=\frac{v}{u} \quad\Longrightarrow\quad u\,dy-v\,dx=0. $$
+    Therefore:
+  </p>
+
+  <div class="equation-box fragment">
+    $$
+      d\psi
+      =
+      \frac{\partial\psi}{\partial x}\,dx
+      +
+      \frac{\partial\psi}{\partial y}\,dy
+      =
+      -v\,dx+u\,dy=0
+    $$
+  </div>
+
+  <p class="fragment equation-box">
+    Streamlines are curves where \(\boxed{\psi=\text{constant}}\).
+  </p>
+
+  <p class="fragment">
+    The elementary flows that follow can be described using
+    \(\phi\) to calculate velocity and \(\psi\) to plot streamlines.
+  </p>
+
+  <aside class="notes">
+       Phi and psi describe the same velocity field. Along a streamline, u dy − v dx = 0, so dpsi = 0. For uniform flow, phi = Ux and psi = Uy: equipotentials are vertical and streamlines horizontal.
+      </aside>
+</section>
+     <section>
+      <h2>
+       Elementary potential flows
+      </h2>
+      <div class="three-column compact">
+       <div class="card fragment" data-fragment-index="0">
+        <h3>
+         Uniform flow
+        </h3>
+        <p>
+         Constant velocity
+        </p>
+        <div class="equation-box">
+         $$\phi=Ux$$
+        </div>
+       </div>
+       <div class="card fragment" data-fragment-index="1">
+        <h3>
+         Source / sink
+        </h3>
+        <p>
+         Radial flow from/to a point
+        </p>
+        <div class="equation-box">
+         $$\phi\propto\ln r$$
+        </div>
+       </div>
+       <div class="card fragment" data-fragment-index="2">
+        <h3>
+         Vortex
+        </h3>
+        <p>
+         Circular velocity field
+        </p>
+        <div class="equation-box">
+         $$V_\theta\propto\frac1r$$
+        </div>
+       </div>
+      </div>
+      <p class="fragment">
+       Because Laplace's equation is linear, solutions can be
+       <b>
+        superposed
+       </b>
+       .
+      </p>
+      <div class="three-column compact">
+       <div class="card fragment" data-fragment-index="0">
+        <img src="./assets/Lecture_3_2/Uniform Flow.png"
+                alt="Water discharging from a tank"
+                class="slide-image" height="600px">
+        
+       </div>
+       <div class="card fragment" data-fragment-index="1">
+        <img src="./assets/Lecture_3_2/Sink Flow.png"
+                alt="Water discharging from a tank"
+                class="slide-image" height="600px">
+       </div>
+       <div class="card fragment" data-fragment-index="2">
+        <img src="./assets/Lecture_3_2/Vortex Flow.png"
+                alt="Water discharging from a tank"
+                class="slide-image" height="600px">
+       </div>
+      </div>
+      <aside class="notes">
+       Uniform flow, sources and vortices provide simple building blocks. Source and vortex centres are singular points; the ideal equations apply away from them.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Superposition: the real power of potential flow
+      </h2>
+      <div class="equation-box">
+       $$
+      \phi=\phi_1+\phi_2+\cdots+\phi_n
+    $$
+      </div>
+      <p class="fragment">
+       If each \(\phi_i\) satisfies Laplace's equation, their sum also satisfies it.
+      </p>
+      <p class="fragment">
+       Examples:
+      </p>
+      <ul>
+       <li class="fragment">
+        Uniform flow + source → flow around a body-like streamline pattern
+       </li>
+       <li class="fragment">
+        Uniform flow + doublet → idealised flow around a cylinder
+       </li>
+       <li class="fragment">
+        Additional singularities can model more complex idealised patterns
+       </li>
+      </ul>
+      <aside class="notes">
+       Laplace is linear, so potentials and their velocities can be added. The combined solution must still satisfy the required boundary conditions.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Example · build a half-body
+      </h2>
+      <p>
+       Begin with a
+       <b>
+        uniform flow
+       </b>
+       .
+      </p>
+      <div class="equation-box fragment">
+       $$\phi_U=Ux$$
+      </div>
+      <div class="image-placeholder fragment">
+        <img src="./assets/Lecture_3_2/Uniform Flow Horiz.png"
+                alt="Water discharging from a tank"
+                class="slide-image" height="600px">
+      </div>
+      <p class="fragment question">
+       Every streamline is straight and parallel: there is no body yet.
+      </p>
+      <aside class="notes">
+       Uniform flow alone gives straight, parallel streamlines. Adding a source will bend them outward.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Half-body · add a source
+      </h2>
+      <p>
+       A <b>source</b> produces radial outward flow.
+      </p>
+      <div class="equation-box fragment">
+       $$\phi_S=\frac{m}{2\pi}\ln r$$
+      </div>
+      <div class="image-placeholder fragment">
+        <img src="./assets/Lecture_3_2/Source Flow Horiz.png"
+                alt="Water discharging from a tank"
+                class="slide-image" height="600px">
+      </div>
+      <p class="fragment">
+       Because Laplace's equation is linear, we can add the two velocity potentials.
+      </p>
+      <aside class="notes">
+       The source pushes fluid radially outward. Its strength m is the volume flow rate per unit depth. Add its velocity to the uniform flow.
+      </aside>
+     </section>
+
+     <section>
+      <h2>
+       Half-body · combine the two flows
+      </h2>
+      <div class="equation-box">
+       $$\phi=\phi_U+\phi_S$$
+      </div>
+      <div class="image-placeholder">
+         <img src="./assets/Lecture_3_2/Rankine Half-Body.png"
+                alt="Water discharging from a tank"
+                class="slide-image" height="600px">
+      </div>
+      
+      <aside class="notes">
+       Locate the upstream stagnation point. The dividing streamline through it can represent a solid boundary because no fluid crosses it.
+      </aside>
+     </section>
+
+     <section>
+      <h2>
+       Rankine Half-body · combine the two flows
+      </h2>
+      <p>For a 2-D Rankine half-body, with uniform velocity \(U\) along \(+x\) and a source of strength \(m\) at the origin.</p>
+      <div class="two-column compact">
+        <div class="card fragment">
+          <ul class="">
+            <li>
+              A stagnation point appears upstream of the source.
+            </li>
+            <li>
+              A dividing streamline separates two regions of the flow.
+            </li>
+            <li>
+              That dividing streamline can be interpreted as the surface of an idealised
+              <b>
+              Rankine half-body
+              </b>
+              and it is the specific streamline that pass for the stagnation point.
+              \[ \mathbf V \cdot \mathbf n = 0 \rightarrow \frac{\partial \phi}{\partial n} = 0\]
+            </li>
+          </ul>
+        </div>
+        <div class="card fragment">
+          $$ \psi(r,\theta)=Ur\sin\theta+\frac{m}{2\pi}\theta. $$
+          The stagnation point lies at
+          $$ r_s=\frac{m}{2\pi U},\qquad \theta_s=\pi, $$
+          so \(\psi_s=m/2\).
+        </div>
+      </div>
+
+      <div class="image-placeholder">
+         <img src="./assets/Lecture_3_2/Rankine Half-Body.png"
+                alt="Water discharging from a tank"
+                class="slide-image" height="400px">
+      </div>
+      
+
+      
+      <aside class="notes">
+       At the stagnation point, the source cancels the uniform flow. Follow the upper dividing streamline at psi = m/2 and reflect it about the x-axis. Its value depends on the chosen constant and angle branch; the wall condition is zero normal velocity.
+      </aside>
+     </section>
+     <section>
+      <h2>Potential flow and Bernoulli</h2>
+      <p>For <b>steady, inviscid flow of constant density</b>, with gravity:</p>
+      <div class="equation-box fragment">
+       $$\frac{p}{\rho}+\frac{V^2}{2}+gz=C$$
+      </div>
+      <p class="fragment">Irrotationality makes \(C\) the same throughout a connected flow region.</p>
+      <p class="fragment">Once \(\phi\) is known, calculate \(\mathbf V=\nabla\phi\) and use a known pressure at a reference point \(R\):</p>
+      <div class="equation-box fragment">
+       $$\boxed{p=p_R+\frac{\rho}{2}\left(V_R^2-|\nabla\phi|^2\right)
+       +\rho g(z_R-z)}$$
+      </div>
+      <aside class="notes">
+       Differentiate phi to obtain local speed, then use a known reference pressure in Bernoulli. Irrotationality gives the same Bernoulli constant across the connected region.
+      </aside>
+     </section>
+     <section>
+      <h2>Pressure from potential flow: example</h2>
+      <p>Assume steady, inviscid water flow in a horizontal plane, with \(\rho=1000\,\mathrm{kg/m^3}\) and potential</p>
+      <div class="two-column">
+        <div>
+          <div class="equation-box fragment">
+          $$\phi=\frac{a}{2}(x^2-y^2),\qquad a=1\,\mathrm{s^{-1}}
+          \quad\Longrightarrow\quad (u,v)=(ax,-ay)$$
+          </div>
+          <p class="fragment">At \(R=(1,0)\,\mathrm m\): \(V_R=1\,\mathrm{m/s}\), \(p_R=100\,\mathrm{kPa}\).<br>
+          At \(P=(2,0)\,\mathrm m\): \(V_P=2\,\mathrm{m/s}\), with \(z_P=z_R\).</p>
+          <div class="equation-box fragment">
+          $$p_P=100000+\frac{1000}{2}(1^2-2^2)
+          =\boxed{98500\,\mathrm{Pa}=98.5\,\mathrm{kPa}}$$
+          </div>
+          <p class="fragment">The higher speed corresponds to a pressure drop of \(1.5\,\mathrm{kPa}\).</p>
+        </div>
+        <div>
+           <img src="./assets/Lecture_3_2/Potential_pressure_field.png"
+                alt="Water discharging from a tank"
+                class="slide-image" height="400px">
+
+            <img src="./assets/Lecture_3_2/Potential_pressure.png"
+                alt="Water discharging from a tank"
+                class="slide-image fragment" height="400px">
+        </div>
+      </div>
+
+      
+      
+      <aside class="notes">
+       Check that phi_xx + phi_yy = 0. At the two points, the speeds are 1 and 2 m/s. Equal elevations give a pressure drop of 1.5 kPa, leaving 98.5 kPa at P.
+      </aside>
+     </section>
+     <section>
+      <h2>Unsteady potential flow and Bernoulli</h2>
+      <p>For constant-density, irrotational flow, the potential can vary with time:</p>
+      <div class="equation-box fragment">
+       $$\mathbf V=\nabla\phi(\mathbf x,t),\qquad \nabla^2\phi=0
+       \quad\text{at each instant}$$
+      </div>
+      <p class="fragment">For inviscid flow with gravity, Euler's equation gives</p>
+      <div class="equation-box fragment">
+       $$\nabla\!\left(\frac{\partial\phi}{\partial t}
+       +\frac{|\nabla\phi|^2}{2}+\frac{p}{\rho}+gz\right)=0$$
+      </div>
+      <div class="equation-box fragment">
+       $$\boxed{\frac{\partial\phi}{\partial t}
+       +\frac{|\nabla\phi|^2}{2}+\frac{p}{\rho}+gz=C(t)}$$
+      </div>
+      <p class="fragment">\(\partial\phi/\partial t\) adds the unsteady pressure contribution. A pressure reference fixes \(C(t)\) for the chosen potential.</p>
+      <aside class="notes">
+       Laplace holds at each instant. The additional time derivative of phi accounts for unsteady pressure. C(t) is uniform in space and is fixed by a pressure reference for the chosen potential. Present this result here; the momentum-equation derivation comes later.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       What potential flow does — and does not — capture
+      </h2>
+      <div class="two-column compact">
+       <div>
+        <h3>
+         Can describe
+        </h3>
+        <ul>
+         <li class="fragment">
+          Outer flow away from strong viscous effects
+         </li>
+         <li class="fragment">
+          Velocity distributions
+         </li>
+         <li class="fragment">
+          Pressure distributions via Bernoulli
+         </li>
+         <li class="fragment">
+          Flow topology and superposition
+         </li>
+        </ul>
+       </div>
+       <div>
+        <h3>
+         Cannot by itself describe
+        </h3>
+        <ul>
+         <li class="fragment">
+          Viscous shear stresses
+         </li>
+         <li class="fragment">
+          Boundary-layer losses
+         </li>
+         <li class="fragment">
+          Most separated-flow behaviour
+         </li>
+         <li class="fragment">
+          Real wake dissipation
+         </li>
+        </ul>
+       </div>
+      </div>
+      <p class="fragment equation-box">
+       Potential flow is a useful idealisation, but it does not capture viscous effects. It can be used to estimate outer-flow velocity and pressure patterns, but it cannot predict boundary-layer growth, separation or wake dissipation.
+      </p>
+      <aside class="notes">
+       Potential flow captures ideal velocity and pressure fields. Wall shear, boundary layers and viscous losses need a model that includes viscosity.
+      </aside>
+     </section>
+    </section>
+
+
+<!-- ========================================================= -->
+<!-- POTENTIAL FLOW                                            -->
+<!-- ========================================================= -->
+    <!-- ========================================================= -->
+    <!-- FINAL CONNECTION / SUMMARY                                -->
+    <!-- ========================================================= -->
+    <section>
+     <section>
+      <h2>
+       Putting the course together
+      </h2>
+      <svg height="55%" viewBox="0 0 1000 550" width="95%">
+       <rect fill="none" height="70" rx="12" stroke="#333" stroke-width="3" width="180" x="35" y="50">
+       </rect>
+       <text font-size="25" text-anchor="middle" x="125" y="93">
+        Fluid properties
+       </text>
+       <rect fill="none" height="70" rx="12" stroke="#333" stroke-width="3" width="180" x="270" y="50">
+       </rect>
+       <text font-size="25" text-anchor="middle" x="360" y="93">
+        Static
+       </text>
+       <rect fill="none" height="70" rx="12" stroke="#333" stroke-width="3" width="180" x="505" y="50">
+       </rect>
+       <text font-size="25" text-anchor="middle" x="595" y="93">
+        Dimensional
+       </text>
+       <rect fill="none" height="70" rx="12" stroke="#333" stroke-width="3" width="180" x="740" y="50">
+       </rect>
+       <text font-size="25" text-anchor="middle" x="830" y="93">
+        Kinematics
+       </text>
+       <rect fill="none" height="80" rx="12" stroke="#333" stroke-width="3" width="210" x="160" y="235">
+       </rect>
+       <text font-size="25" text-anchor="middle" x="265" y="270">
+        Bernoulli /
+       </text>
+       <text font-size="25" text-anchor="middle" x="265" y="300">
+        energy
+       </text>
+       <rect fill="none" height="80" rx="12" stroke="#333" stroke-width="3" width="210" x="450" y="235">
+       </rect>
+       <text font-size="25" text-anchor="middle" x="555" y="270">
+        Control-volume
+       </text>
+       <text font-size="25" text-anchor="middle" x="555" y="300">
+        analysis
+       </text>
+       <rect fill="#e8eef5" height="80" rx="12" stroke="#333" stroke-width="4" width="210" x="740" y="235">
+       </rect>
+       <text font-size="25" font-weight="bold" text-anchor="middle" x="845" y="270">
+        Potential
+       </text>
+       <text font-size="25" font-weight="bold" text-anchor="middle" x="845" y="300">
+        flow
+       </text>
+       <line stroke="#333" stroke-width="3" x1="215" x2="270" y1="85" y2="85">
+       </line>
+       <line stroke="#333" stroke-width="3" x1="450" x2="505" y1="85" y2="85">
+       </line>
+       <line stroke="#333" stroke-width="3" x1="685" x2="740" y1="85" y2="85">
+       </line>
+       <line stroke="#333" stroke-width="3" x1="830" x2="830" y1="120" y2="160">
+       </line>
+        <line stroke="#333" stroke-width="3" x1="830" x2="265" y1="160" y2="160">
+       </line>
+        <line stroke="#333" stroke-width="3" x1="265" x2="265" y1="160" y2="235">
+       </line>
+
+       
+       <line stroke="#333" stroke-width="3" x1="370" x2="450" y1="275" y2="275">
+       </line>
+       <line stroke="#333" stroke-width="3" x1="660" x2="740" y1="275" y2="275">
+       </line>
+       <text font-size="22" font-weight="bold" text-anchor="middle" x="845" y="220">
+        Reached today
+       </text>
+       <path d="M 845 315 V 350 H 500 V 390" fill="none" stroke="#333" stroke-width="3"></path>
+       <path d="M 493 379 L 500 390 L 507 379" fill="none" stroke="#333" stroke-width="3"></path>
+       <rect fill="none" height="90" rx="12" stroke="#333" stroke-width="3" width="580" x="210" y="390"></rect>
+       <text font-size="27" font-weight="bold" text-anchor="middle" x="500" y="425">
+        Next: internal viscous flow
+       </text>
+       <text font-size="24" text-anchor="middle" x="500" y="460">
+        Simple solutions of the Navier–Stokes equations
+       </text>
+       <text font-size="23" text-anchor="middle" x="500" y="525">
+        Velocity profiles, wall shear and pressure drop in channels and pipes
+       </text>
+      </svg>
+      <aside class="notes">
+       We have reached potential flow. Next: internal viscous flow, using simple Navier–Stokes solutions to relate pressure gradient, wall shear and velocity profiles in channels and pipes.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Today’s key equations
+      </h2>
+      <div class="three-column compact">
+       <div class="card">
+        <h3>
+         Mass
+        </h3>
+        <div class="equation-box">
+         $$
+    \frac{\partial}{\partial t}\int_{CV}\rho\,dV+
+    \int_{CS}\rho\mathbf V\cdot\mathbf n\,dA=0
+    $$
+        </div>
+       </div>
+       <div class="card">
+        <h3>
+         Momentum
+        </h3>
+        <div class="equation-box">
+         $$
+    \sum\mathbf F=
+    \frac{\partial}{\partial t}\int_{CV}\rho\mathbf V\,dV+
+    \int_{CS}\rho\mathbf V(\mathbf V\cdot\mathbf n)\,dA
+    $$
+        </div>
+       </div>
+       <div class="card">
+        <h3>
+         Potential flow
+        </h3>
+        <div class="equation-box">
+         $$
+    \mathbf V=\nabla\phi,\qquad \nabla^2\phi=0
+    $$
+        </div>
+       </div>
+      </div>
+      <p class="fragment equation-box">
+       Moving CV: replace \(\mathbf V\cdot\mathbf n\) in the transport term by \((\mathbf V-\mathbf V_{CS})\cdot\mathbf n\).
+      </p>
+      <aside class="notes">
+       Recap the equations without repeating the derivations. For a moving boundary, use relative velocity in the transport flux; momentum still uses the fluid’s absolute velocity in the chosen inertial frame.
+      </aside>
+     </section>
+     <section>
+      <h2>
+       Takeaway
+      </h2>
+      <ul>
+       <li class="fragment">
+        <b>
+         Control volumes
+        </b>
+        give quantitative engineering balances without tracking individual fluid particles.
+       </li>
+       <li class="fragment">
+        <b>
+         RTT
+        </b>
+        translates system conservation laws into control-volume form.
+       </li>
+       <li class="fragment">
+        <b>
+         Momentum
+        </b>
+        connects changes in momentum flux to forces — as in bends and hoses.
+       </li>
+       <li class="fragment">
+        <b>
+         Energy
+        </b>
+        contains Bernoulli as an ideal special case.
+       </li>
+       <li class="fragment">
+        <b>
+         Potential flow
+        </b>
+        gives an idealised velocity field when inviscid/irrotational assumptions are appropriate.
+       </li>
+       <li class="fragment">
+        <b>
+         Superposition
+        </b>
+        lets simple solutions generate useful body-like flow patterns.
+       </li>
+      </ul>
+      <aside class="notes">
+       Control volumes give overall balances. Potential flow gives an ideal local field. Next we include viscosity to describe internal velocity profiles and pressure drops.
+      </aside>
+     </section>
+
+    </section>
+   </div>
+  </div>
+  <script src="../../main.js" type="module">
+  </script>
+ </body>
+</html>
